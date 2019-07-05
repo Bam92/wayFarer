@@ -1,0 +1,8 @@
+* {
+    box-sizing: border-box;
+  }
+#container {
+    display: grid;
+    grid-template-columns: 10% repeat(3, 25%) 10%;
+    
+}
