@@ -5,8 +5,11 @@ Title: [Persona name] should (not) be able to [overarching action]
 _Business/User Value:_ As [persona] I want to [action by user] so that [value or need met]
 
 _Acceptance Criteria_
+
 GIVEN [necessary context and preconditions for story]
+
 WHEN [action]
+
 THEN [reaction]
 
 **DEV NOTES**
