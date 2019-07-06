@@ -1,8 +1,82 @@
 * {
     box-sizing: border-box;
-  }
-#container {
-    display: grid;
-    grid-template-columns: 10% repeat(3, 25%) 10%;
+}
+
+.container {
+    margin-left: 10%;
+    margin-right: 10%;
     
+}
+
+#cover {
+    background-image: url("../images/background.jpg");
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80vh;
+}
+
+header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+header a {grid-column: 1;}
+header nav {grid-column: 2;}
+
+.main {
+    text-align: center;
+    color: #ffffff;
+    
+}
+
+#quick-booking {
+    background-color: #5dd167 !important;
+    max-width: none;
+}
+
+.quick-booking {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 2;
+    grid-gap: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.quick-booking h2 {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+    color: #ffffff;
+}
+
+.quick-booking #all-trip {
+    grid-row: 1;
+    grid-column: span 2;
+}
+
+.quick-booking #quick-booking1 {
+    grid-row: 2;
+    grid-column: 1 / 2;
+}
+
+.quick-booking #quick-booking2 {
+    grid-row: 2;
+    grid-column: 2 / 3;
+}
+
+.quick-booking #quick-booking3 {
+    grid-row: 2;
+    grid-column: 3 / 4;
+}
+
+.footer {
+    text-align: center;
+}
+
+.footer-background {
+    background-color: #ededed;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 0px;
 }
