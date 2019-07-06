@@ -59,7 +59,7 @@ header nav {grid-column: 2;}
     color: #ffffff;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    align-items: center;
+    place-items: center;
 
     background-image: url("../images/background.jpg");
     background-position: center bottom;
