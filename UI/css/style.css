@@ -1,4 +1,4 @@
-/* Typography imported from Google Fonts */
+/* Typography imported from Google */
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display|Source+Sans+Pro:200,400');
 
 h1, h2, h3, h4, h5, h6 {
@@ -27,6 +27,22 @@ h1 {
     padding-bottom: 1rem;
 }
 
+
+a:hover {
+    opacity: .6;
+  }
+
+  /*------ header ------*/
+header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+header a {grid-column: 1;}
+header nav {grid-column: 2;}
+
 .main p {
     font-size: 1.5rem;
     font-weight: 200;
@@ -39,62 +55,37 @@ h1 {
     border-radius: 5px;
     background: #00AFF5;
 }
-
-a:hover {
-    opacity: .6;
-  }
-
-header {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-
-header a {grid-column: 1;}
-header nav {grid-column: 2;}
-
 .main {
-    /*text-align: center;*/
     color: #ffffff;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     align-items: center;
-
     background-image: url("../images/background.jpg");
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: cover;
     padding: 4rem 2rem;
     height: 80vh;
-
     
 }
 
 .quick-booking {
     background-color: #5dd167 !important;
-    /*display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));;
-    /*grid-template-rows: 2;
-    grid-gap: 1rem;
-    padding: 4rem 2rem;
-    color: white;
-    align-items: center;*/
+    /*margin-left: 0;
+    margin-right: 0;*/
 }
 
 .quick-booking article {
    
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));;
-    /*grid-template-rows: 2;*/
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     grid-gap: 1rem;
     padding: 4rem 2rem;
     color: white;
-    /*align-items: center;*/
     place-items: center;
 }
 
-.quick-booking article a {
+.quick-booking article p a {
     text-align: center;
     margin-top: .75rem;   
     border-radius: 5px;
@@ -102,32 +93,12 @@ header nav {grid-column: 2;}
     padding: 1rem;
 }
 
-/*.quick-booking h2 {
-    grid-row: 1;
-    grid-column: 1 / span 2;
-    color: #ffffff;
+#browse-trips a {
+    display: block;
+    text-align: center;
 }
 
-.quick-booking #all-trip {
-    grid-row: 1;
-    grid-column: span 2;
-}
-
-.quick-booking #quick-booking1 {
-    grid-row: 2;
-    grid-column: 1 / 2;
-}
-
-.quick-booking #quick-booking2 {
-    grid-row: 2;
-    grid-column: 2 / 3;
-}
-
-.quick-booking #quick-booking3 {
-    grid-row: 2;
-    grid-column: 3 / 4;
-}*/
-
+/*-------- FOOTER ------*/
 .footer {
     text-align: center;
 }
@@ -138,46 +109,3 @@ header nav {grid-column: 2;}
     padding-top: 10px;
     margin-bottom: 0px;
 }
-
-/*
-@media (max-width: 576px) { 
-    .main {
-        display: block;
-        
-    }
-
-    #cover {
-        height: 50vh;
-    }
-
-    .quick-booking {
-        display: grid;
-        grid-template-columns: 1;
-        grid-template-rows: 5;
-        grid-gap: 5px;
-        padding-bottom: 5px;
-        padding-top: 5px;
-        text-align: center;
-    }
-
-    .quick-booking h2 {
-        grid-row: 1;
-     
-    }
-    
-    .quick-booking #all-trip {
-        grid-row: 6;
-    }
-    
-    .quick-booking #quick-booking1 {
-        grid-row: 2;
-    }
-    
-    .quick-booking #quick-booking2 {
-        grid-row: 3;
-    }
-    
-    .quick-booking #quick-booking3 {
-        grid-row: 4;
-    }
- }*/
