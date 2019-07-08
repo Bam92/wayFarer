@@ -73,3 +73,10 @@ if (form) {
       }
    });
 }
+
+// User Dashboard
+document.getElementById('menu__user').addEventListener('click', () => {
+   const sub = document.getElementById('sub__menu')
+   if ( sub.classList.contains('menu__hide') ) sub.classList.remove('menu__hide');
+   else sub.classList.add('menu__hide');
+});
