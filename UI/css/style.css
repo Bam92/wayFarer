@@ -55,6 +55,7 @@ header nav {grid-column: 2;}
     border-radius: 5px;
     background: #00AFF5;
 }
+
 .main {
     color: #ffffff;
     display: grid;
@@ -71,6 +72,7 @@ header nav {grid-column: 2;}
 
 .quick-booking {
     background-color: #5dd167 !important;
+    padding: 4rem 2rem;
 }
 
 .quick-booking article {
@@ -78,22 +80,35 @@ header nav {grid-column: 2;}
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     grid-gap: 1rem;
-    padding: 4rem 2rem;
+   
     color: white;
     place-items: center;
 }
 
-.quick-booking article p a {
+.list__trips li  {
     text-align: center;
     margin-top: .75rem;   
     border-radius: 5px;
     background: #fff;
     padding: 1rem;
+    list-style-type: none;
+    
 }
 
 #browse-trips a {
     display: block;
     text-align: center;
+}
+
+.list__trips {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px,1fr));
+    grid-gap: 1rem;
+    place-items: stretch center;
+}
+
+.trips__all {
+    display: none;
 }
 
 /*-------- FOOTER ------*/
