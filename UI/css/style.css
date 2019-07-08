@@ -1,0 +1,124 @@
+/* Typography imported from Google */
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Source+Sans+Pro:200,400');
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+p, a {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* Generic styles */
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 4rem;
+    padding-bottom: 1rem;
+}
+
+
+a:hover {
+    opacity: .6;
+  }
+
+  /*------ header ------*/
+header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+header a {grid-column: 1;}
+header nav {grid-column: 2;}
+
+.main p {
+    font-size: 1.5rem;
+    font-weight: 200;
+}
+
+.main a {
+    padding: 1rem;
+    margin-top: .75rem;
+    color: #ffffff;
+    border-radius: 5px;
+    background: #00AFF5;
+}
+
+.main {
+    color: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: center;
+    background-image: url("../images/background.jpg");
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 4rem 2rem;
+    height: 80vh;
+    
+}
+
+.quick-booking {
+    background-color: #5dd167 !important;
+    padding: 4rem 2rem;
+}
+
+.quick-booking article {
+   
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 1rem;
+   
+    color: white;
+    place-items: center;
+}
+
+.list__trips li  {
+    text-align: center;
+    margin-top: .75rem;   
+    border-radius: 5px;
+    background: #fff;
+    padding: 1rem;
+    list-style-type: none;
+    
+}
+
+#browse-trips a {
+    display: block;
+    text-align: center;
+}
+
+.list__trips {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px,1fr));
+    grid-gap: 1rem;
+    place-items: stretch center;
+}
+
+.trips__all {
+    display: none;
+}
+
+/*-------- FOOTER ------*/
+.footer {
+    text-align: center;
+}
+
+.footer-background {
+    background-color: #ededed;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 0px;
+}
