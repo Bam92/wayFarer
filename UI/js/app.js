@@ -75,8 +75,21 @@ if (form) {
 }
 
 // User Dashboard
-document.getElementById('menu__user').addEventListener('click', () => {
+/*document.getElementById('menu__user').addEventListener('click', () => {
    const sub = document.getElementById('sub__menu')
    if ( sub.classList.contains('menu__hide') ) sub.classList.remove('menu__hide');
    else sub.classList.add('menu__hide');
+});*/
+
+// View trips
+document.getElementById('trips__show').addEventListener('click', () => {
+   console.log('done!')
+   const elts = document.getElementsByClassName('trips__all')
+   console.log(elts.length)
+   while (elts[0]) elts[0].classList.remove('trips__all')
+   /*for (let i = 0; i < moreTrips.length; i ++) {
+      moreTrips[i].classList.remove('trips__all')
+   }*/
+   /*if ( sub.classList.contains('menu__hide') ) sub.classList.remove('menu__hide');
+   else sub.classList.add('menu__hide');*/
 });
