@@ -48,10 +48,12 @@ if (form) {
    form.addEventListener('submit', (e) => {
       const login = form.elements.email.value;
       const password = form.elements.password.value;
+      const first = form.elements.firstName.value
+      const last = form.elements.lastName
 
-      if (login !== null && password !== null) {
+      if (login !== null && password !== null && first !== null  && last !== null) {
             e.preventDefault();
-            window.location.replace('./templates/dashboard.html');
+            window.location.replace('./dashboard.html');
             return false;
       }
    });
