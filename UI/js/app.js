@@ -59,3 +59,42 @@ if (form) {
    });
 }
 
+// User Dashboard
+const userMenu = document.getElementById('menu__user')
+if (userMenu) {
+userMenu.addEventListener('click', () => {
+   const sub = document.getElementById('sub__menu')
+   if ( sub.classList.contains('menu__hide') ) sub.classList.remove('menu__hide');
+   else sub.classList.add('menu__hide');
+});
+}
+// View trips
+const show = document.getElementById('trips__show')
+if (show) {
+show.addEventListener('click', () => {
+   const elts = document.getElementsByClassName('trips__all')
+
+   while (elts[0]) {
+      elts[0].classList.remove('trips__all')
+   }
+
+   show.id = 'trips__hide'
+   show.innerHTML = 'View less trips'
+});
+}
+
+const hide = document.getElementById('trips__hide')
+if (hide) {
+hide.addEventListener('click', () => {
+   console.log('ok')
+   const elts = document.getElementsByClassName('list__toggle')
+   console.log(elts.length)
+   
+   while (elts[0]) {
+      elts[0].classList.add('trips__all')
+   }
+
+   hide.id = 'trips__show'
+   hide.innerHTML = 'View all trips'
+});
+}
