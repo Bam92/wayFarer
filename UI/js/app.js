@@ -56,8 +56,6 @@ if (form) {
    form.addEventListener('submit', (e) => {
       const login = form.elements.email.value;
       const password = form.elements.password.value;
-      const usrCategoy = form.elements.usrLogin.value;
-      //console.log(usrCategoy);
 
       if (login !== null && password !== null && usrCategoy !== null) {
          if (usrCategoy === 'User') {
@@ -82,14 +80,30 @@ if (form) {
 });*/
 
 // View trips
-document.getElementById('trips__show').addEventListener('click', () => {
-   console.log('done!')
+const show = document.getElementById('trips__show')
+show.addEventListener('click', () => {
    const elts = document.getElementsByClassName('trips__all')
-   console.log(elts.length)
-   while (elts[0]) elts[0].classList.remove('trips__all')
-   /*for (let i = 0; i < moreTrips.length; i ++) {
-      moreTrips[i].classList.remove('trips__all')
-   }*/
-   /*if ( sub.classList.contains('menu__hide') ) sub.classList.remove('menu__hide');
-   else sub.classList.add('menu__hide');*/
+
+   while (elts[0]) {
+      elts[0].classList.remove('trips__all')
+   }
+
+   show.id = 'trips__hide'
+   show.innerHTML = 'View less trips'
 });
+
+const hide = document.getElementById('trips__hide')
+if (hide) {
+hide.addEventListener('click', () => {
+   console.log('ok')
+   const elts = document.getElementsByClassName('list__toggle')
+   console.log(elts.length)
+   
+   while (elts[0]) {
+      elts[0].classList.add('trips__all')
+   }
+
+   hide.id = 'trips__show'
+   hide.innerHTML = 'View all trips'
+});
+}
