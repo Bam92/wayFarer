@@ -120,7 +120,7 @@ header nav {grid-column: 2;}
     place-items: stretch center;
 }
 
-.trips__all {
+.trips__all, .trips__all__hide  {
     display: none;
 }
 
@@ -135,6 +135,7 @@ header nav {grid-column: 2;}
     padding-top: 10px;
     margin-bottom: 0px;
 }
+
 
 /*------------- Sign up page ---------*/
 input {
@@ -182,3 +183,30 @@ input, input::placeholder {
 .menu__hide {
     display: none;
 }
+/*---------- Responsive -------------*/
+@media (max-width: 284px) { 
+    .list__trips {
+        grid-template-columns: 1fr;
+        place-items: center;
+        grid-gap: 0rem;
+    }
+
+    .quick-booking, .main {
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+
+    .main {
+        height: fit-content;
+    }
+
+    .main p {
+        font-size: 1.2rem;
+        font-weight: 150;
+    }
+
+    h1 {
+        font-size: 2rem;
+        padding-bottom: .5rem;
+    }
+ }
