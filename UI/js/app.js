@@ -10,13 +10,15 @@
 
       if (e.target.value === '') firstNameHelp.textContent = "Field cannot be empty";      
       if (e.target.value.length === 1) firstNameHelp.textContent = "Field must contain at least 2 letters";
+      else if (e.target.value.length > 1) firstNameHelp.textContent = ""
    });
    
    lastName.addEventListener("blur", function(e) {
-      const firstNameHelp = document.getElementById("helpLastName");
+      const lastNameHelp = document.getElementById("helpLastName");
    
-      if (e.target.value === "") firstNameHelp.textContent = "Field cannot be empty";      
-      if (e.target.value.length === 1) firstNameHelp.textContent = "Field must contain at least 2 letters";
+      if (e.target.value === "") lastNameHelp.textContent = "Field cannot be empty";      
+      if (e.target.value.length === 1) lastNameHelp.textContent = "Field must contain at least 2 letters";
+      else if (e.target.value.length > 1) lastNameHelp.textContent = ""
    });
    
    email.addEventListener("blur", function(e) {
@@ -26,14 +28,15 @@
       
       if (e.target.value === '') emailHelp.textContent = "Field cannot be empty"; 
       else if (!regEmail.test(e.target.value)) emailHelp.textContent = "Invalid email address";
+      else if (regEmail.test(e.target.value)) emailHelp.textContent = "";
    });
    
    password.addEventListener("blur", function(e) {
       const passwordHelp = document.getElementById("helpPassword");
-      const regPassword = /.+@.+\..+/;
       
       if (e.target.value === '') passwordHelp.textContent = "Field cannot be empty"; 
       else if (e.target.value.length < 9) passwordHelp.textContent = "Field must contain at least 9 charactors";
+      else if (e.target.value.length >= 9) passwordHelp.textContent = "";
    });
    }
 
@@ -46,9 +49,52 @@ if (form) {
       const password = form.elements.password.value;
 
       if (login !== null && password !== null) {
+      const first = form.elements.firstName.value
+      const last = form.elements.lastName
+
+      if (login !== null && password !== null && first !== null  && last !== null) {
             e.preventDefault();
             window.location.replace('./dashboard.html');
             return false;
       }
    });
+}
+
+// User Dashboard
+const userMenu = document.getElementById('menu__user')
+if (userMenu) {
+userMenu.addEventListener('click', () => {
+   const sub = document.getElementById('sub__menu')
+   if ( sub.classList.contains('menu__hide') ) sub.classList.remove('menu__hide');
+   else sub.classList.add('menu__hide');
+});
+}
+  
+// View trips
+const show = document.getElementById('trips__show')
+if (show) {
+show.addEventListener('click', () => {
+   const elts = document.getElementsByClassName('trips__all')
+
+   while (elts[0]) elts[0].classList.remove('trips__all')
+  
+   show.id = 'trips__hide'
+   show.innerHTML = 'View less trips'
+});
+}
+
+const hide = document.getElementById('trips__hide')
+if (hide) {
+hide.addEventListener('click', () => {
+   console.log('ok')
+   const elts = document.getElementsByClassName('list__toggle')
+   console.log(elts.length)
+   
+   while (elts[0]) {
+      elts[0].classList.add('trips__all')
+   }
+
+   hide.id = 'trips__show'
+   hide.innerHTML = 'View all trips'
+});
 }
