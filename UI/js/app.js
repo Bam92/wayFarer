@@ -32,7 +32,6 @@
    });
    
    password.addEventListener("blur", function(e) {
-
       const passwordHelp = document.getElementById("helpPassword");
       
       if (e.target.value === '') passwordHelp.textContent = "Field cannot be empty"; 
@@ -48,8 +47,11 @@ if (form) {
    form.addEventListener('submit', (e) => {
       const login = form.elements.email.value;
       const password = form.elements.password.value;
+
+      if (login !== null && password !== null) {
       const first = form.elements.firstName.value
       const last = form.elements.lastName
+      }
 
       if (login !== null && password !== null && first !== null  && last !== null) {
             e.preventDefault();
@@ -58,6 +60,7 @@ if (form) {
       }
    });
 }
+
 
 // User Dashboard
 const userMenu = document.getElementById('menu__user')
@@ -68,16 +71,15 @@ userMenu.addEventListener('click', () => {
    else sub.classList.add('menu__hide');
 });
 }
+  
 // View trips
 const show = document.getElementById('trips__show')
 if (show) {
 show.addEventListener('click', () => {
    const elts = document.getElementsByClassName('trips__all')
 
-   while (elts[0]) {
-      elts[0].classList.remove('trips__all')
-   }
-
+   while (elts[0]) elts[0].classList.remove('trips__all')
+  
    show.id = 'trips__hide'
    show.innerHTML = 'View less trips'
 });
