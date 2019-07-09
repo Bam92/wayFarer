@@ -29,24 +29,12 @@
    });
    
    password.addEventListener("blur", function(e) {
-      // must be a string as this you@domain.com
       const passwordHelp = document.getElementById("helpPassword");
       const regPassword = /.+@.+\..+/;
       
       if (e.target.value === '') passwordHelp.textContent = "Field cannot be empty"; 
       else if (e.target.value.length < 9) passwordHelp.textContent = "Field must contain at least 9 charactors";
    });
-   }
-
-   const userCategory = document.getElementsByName('usr-login');
-   
-   for(let i = 0; i < userCategory.length; i += 1) {
-  userCategory[i].addEventListener('change', (e) => {
-         console.log(e.target.value);
-    if (e.target.value === 'Admin') window.location.replace('./templates/adminDash.html');
-         else if (e.target.value === 'User') window.location.replace('./templates/usrAccount.html');
-      });
-
    }
 
 /* Form submission */
@@ -56,20 +44,11 @@ if (form) {
    form.addEventListener('submit', (e) => {
       const login = form.elements.email.value;
       const password = form.elements.password.value;
-      const usrCategoy = form.elements.usrLogin.value;
-      //console.log(usrCategoy);
 
-      if (login !== null && password !== null && usrCategoy !== null) {
-         if (usrCategoy === 'User') {
+      if (login !== null && password !== null) {
             e.preventDefault();
-            window.location.replace('./templates/usrAccount.html');
+            window.location.replace('./dashboard.html');
             return false;
-
-         } else if (usrCategoy === 'Admin') {
-            e.preventDefault();
-            window.location.replace('./adminDash.html');
-            return false;
-         }
       }
    });
 }
