@@ -99,6 +99,21 @@ The description of the PR should contain the following headings and correspondin
 
 ![](https://github.com/andela/bestpractices/raw/master/img/git-naming.png)
 
+```md
+#### What does this PR do?
+Have a dashboard for a connected user
+#### Description of Task to be completed?
+Have the following URL reachable
+GET /templates/dashboard.html
+#### How should this be manually tested?
+* Using the login form: complete the form and hit login button
+* Using the sign up form: complete the form and hit sign up button
+#### Any background context you want to provide?
+The dashboard does not have any useful content yet
+#### What are the relevant pivotal tracker stories?
+#167119506
+```
+
 ### Commits
 
 Atomic commits should be made with the format:

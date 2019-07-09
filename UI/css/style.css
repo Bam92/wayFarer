@@ -27,8 +27,7 @@ h1 {
     padding-bottom: 1rem;
 }
 
-
-a:hover {
+a:hover, input[type="submit"]:hover {
     opacity: .6;
   }
 
@@ -60,7 +59,7 @@ header nav {grid-column: 2;}
     color: #ffffff;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    align-items: center;
+    place-items: center;
     background-image: url("../images/background.jpg");
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -68,6 +67,21 @@ header nav {grid-column: 2;}
     padding: 4rem 2rem;
     height: 80vh;
     
+}
+
+.main p {
+    font-size: 1.5rem;
+    font-weight: 200;
+}
+
+.main a, input[type="submit"] {
+    padding: 1rem;
+    margin-top: .75rem;
+    color: #ffffff;
+    border-radius: 5px;
+    background: #00AFF5;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
 }
 
 .quick-booking {
@@ -79,7 +93,7 @@ header nav {grid-column: 2;}
    
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    grid-gap: 1rem;
+    grid-gap: 1rem;   
     color: white;
     place-items: center;
 }
@@ -122,6 +136,53 @@ header nav {grid-column: 2;}
     margin-bottom: 0px;
 }
 
+
+/*------------- Sign up page ---------*/
+input {
+    width: 80vh;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: .75rem;
+}
+
+input, input::placeholder {
+  text-align: center;
+}
+
+.inputError {
+    color: red;
+}
+
+/*---------- User Dashboard --------------*/
+.user__avatar__small {
+    width: 37px;
+    height: 37px;
+    
+}
+
+.user__avatar {
+    width: 50px;
+    height: 50px;
+    
+}
+
+.user__avatar img, .user__avatar__small img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.navigation__list {
+    display: flex;
+    flex-direction: row;
+}
+
+.navigation__item {
+    list-style: none;
+}
+
+.menu__hide {
+    display: none;
+}
 /*---------- Responsive -------------*/
 @media (max-width: 284px) { 
     .list__trips {
