@@ -183,6 +183,63 @@ input, input::placeholder {
 .menu__hide {
     display: none;
 }
+
+/*---------- Trip detail ------------*/
+.trip-detail {
+    width: 50%;
+    display: grid;
+    /*grid-template-columns: 1;*/
+    /*place-items: center;*/
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+#num-trips {text-align: center;}
+
+.trip-detail article {
+    /*border: 2px solid red;*/
+    border-radius: 16px;
+    box-shadow: 0 1pt 4pt rgba(0,0,0,0.16), 0 2pt 8pt rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    display: grid;
+    grid-template-columns: 20% 40% 50%;
+    /*grid-template-rows: repeat(3, 1f);*/
+    /*grid-gap: 15px;*/
+    place-items: center;
+    width: 100%;
+}
+
+/* ===== trip detail: 1st row =====*/
+.time-go, .trip-or, .seat-av {
+    grid-row: 1 / 2;
+}
+
+/* ===== trip detail: 2nd row =====*/
+.time-ar, .trip-de {
+    grid-row: 2 / 3;
+}
+
+/* ===== trip detail: 3rd row =====*/
+.bus-im, .bus-na {
+    grid-row: 3 / 4;
+}
+
+.time-go, .time-ar, .bus-im {
+    grid-column: 1 / 2;
+    
+}
+
+.trip-or, .trip-de, .bus-na {
+    grid-column: 2 / 3;
+    
+}
+
+.seat-av {
+    grid-column: 3 / 4;
+    text-align: center;
+}
+
 /*---------- Responsive -------------*/
 @media (max-width: 284px) { 
     .list__trips {
