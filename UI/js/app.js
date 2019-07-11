@@ -81,11 +81,13 @@ show.addEventListener('click', () => {
    while (elts[0]) elts[0].classList.remove('trips__all')
   
    show.id = 'trips__hide'
-   show.innerHTML = 'View less trips'
+   show.innerHTML = 'View less trips (3)'
 });
 }
 
 const hide = document.getElementById('trips__hide')
+
+console.log('test')
 if (hide) {
 hide.addEventListener('click', () => {
    console.log('ok')

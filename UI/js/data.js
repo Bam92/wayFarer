@@ -47,11 +47,12 @@ const getAllTrips = () => {
        const li = document.createElement('li')
        li.id = `quick-booking${i + 1}`
 
-       if (trips[i].id > 3) li.className = 'trips__all'
+       if (trips[i].id > 3) li.className += 'trips__all list__toggle'
 
        // Create a elt
        const a = document.createElement('a')
-       a.href = `trip${trips[i].id}`
+       a.href = /*`trip${trips[i].id}`*/'templates/trip.html'
+       a.id = trips[i].id
        li.appendChild(a)
        
        document.getElementById('list__trips').appendChild(li);
@@ -95,3 +96,11 @@ const getDetail = (id) => {
 
 // Return total of trips
 document.getElementById('trips__total').innerHTML = trips.length
+
+if (document.getElementById('1'))
+{
+    //console.log('ok')
+    document.getElementById('1').addEventListener('click', () => {
+        document.getElementById('test__trip').innerHTML = trips[1].bus_name
+    console.log(trips[1].bus_name)
+})}
