@@ -10,13 +10,15 @@
 
       if (e.target.value === '') firstNameHelp.textContent = "Field cannot be empty";      
       if (e.target.value.length === 1) firstNameHelp.textContent = "Field must contain at least 2 letters";
+      else if (e.target.value.length > 1) firstNameHelp.textContent = ""
    });
    
    lastName.addEventListener("blur", function(e) {
-      const firstNameHelp = document.getElementById("helpLastName");
+      const lastNameHelp = document.getElementById("helpLastName");
    
-      if (e.target.value === "") firstNameHelp.textContent = "Field cannot be empty";      
-      if (e.target.value.length === 1) firstNameHelp.textContent = "Field must contain at least 2 letters";
+      if (e.target.value === "") lastNameHelp.textContent = "Field cannot be empty";      
+      if (e.target.value.length === 1) lastNameHelp.textContent = "Field must contain at least 2 letters";
+      else if (e.target.value.length > 1) lastNameHelp.textContent = ""
    });
    
    email.addEventListener("blur", function(e) {
@@ -26,27 +28,16 @@
       
       if (e.target.value === '') emailHelp.textContent = "Field cannot be empty"; 
       else if (!regEmail.test(e.target.value)) emailHelp.textContent = "Invalid email address";
+      else if (regEmail.test(e.target.value)) emailHelp.textContent = "";
    });
    
    password.addEventListener("blur", function(e) {
-      // must be a string as this you@domain.com
       const passwordHelp = document.getElementById("helpPassword");
-      const regPassword = /.+@.+\..+/;
       
       if (e.target.value === '') passwordHelp.textContent = "Field cannot be empty"; 
       else if (e.target.value.length < 9) passwordHelp.textContent = "Field must contain at least 9 charactors";
+      else if (e.target.value.length >= 9) passwordHelp.textContent = "";
    });
-   }
-
-   const userCategory = document.getElementsByName('usr-login');
-   
-   for(let i = 0; i < userCategory.length; i += 1) {
-  userCategory[i].addEventListener('change', (e) => {
-         console.log(e.target.value);
-    if (e.target.value === 'Admin') window.location.replace('./templates/adminDash.html');
-         else if (e.target.value === 'User') window.location.replace('./templates/usrAccount.html');
-      });
-
    }
 
 /* Form submission */
@@ -57,42 +48,46 @@ if (form) {
       const login = form.elements.email.value;
       const password = form.elements.password.value;
 
-      if (login !== null && password !== null && usrCategoy !== null) {
-         if (usrCategoy === 'User') {
-            e.preventDefault();
-            window.location.replace('./templates/usrAccount.html');
-            return false;
+      if (login !== null && password !== null) {
+      const first = form.elements.firstName.value
+      const last = form.elements.lastName
+      }
 
-         } else if (usrCategoy === 'Admin') {
+      if (login !== null && password !== null && first !== null  && last !== null) {
             e.preventDefault();
-            window.location.replace('./adminDash.html');
+            window.location.replace('./dashboard.html');
             return false;
-         }
       }
    });
 }
 
+
 // User Dashboard
-/*document.getElementById('menu__user').addEventListener('click', () => {
+const userMenu = document.getElementById('menu__user')
+if (userMenu) {
+userMenu.addEventListener('click', () => {
    const sub = document.getElementById('sub__menu')
    if ( sub.classList.contains('menu__hide') ) sub.classList.remove('menu__hide');
    else sub.classList.add('menu__hide');
-});*/
-
+});
+}
+  
 // View trips
 const show = document.getElementById('trips__show')
+if (show) {
 show.addEventListener('click', () => {
    const elts = document.getElementsByClassName('trips__all')
 
-   while (elts[0]) {
-      elts[0].classList.remove('trips__all')
-   }
-
+   while (elts[0]) elts[0].classList.remove('trips__all')
+  
    show.id = 'trips__hide'
-   show.innerHTML = 'View less trips'
+   show.innerHTML = 'View less trips (3)'
 });
+}
 
 const hide = document.getElementById('trips__hide')
+
+console.log('test')
 if (hide) {
 hide.addEventListener('click', () => {
    console.log('ok')
