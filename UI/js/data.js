@@ -51,7 +51,7 @@ const getAllTrips = () => {
 
        // Create a elt
        const a = document.createElement('a')
-       a.href = /*`trip${trips[i].id}`*/'templates/trip.html'
+       a.href = 'templates/trip.html'
        a.id = trips[i].id
        li.appendChild(a)
        
