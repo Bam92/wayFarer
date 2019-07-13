@@ -196,16 +196,21 @@ input, input::placeholder {
 .book-now {
     grid-template-columns: 25% 70%;
     grid-gap: 15px;
-    /*place-items: center;*/
     margin-bottom: 15px;
-
     text-align: center;
 }
 
 .book-now aside {
-    border: 2px solid red;
+    border: 1px solid #ddd;
+    border-radius: 3px;
     grid-column: 1 / 2;
+   /* text-align: left;*/
+    
 
+}
+
+.book-now aside div {
+    border-top: 1px solid #ddd;
 }
 
 #num-trips {text-align: center;}
