@@ -16,36 +16,69 @@
    <![endif]-->
 </head>
 <body>
-      <header>
-         <a href="../index.html"><img src="" alt="logo"></a>
-         <nav>
-            <a href="#">Sign up</a>
-            <a href="./login.html">Login</a>
-         </nav>
-      </header>
-  
-      <main role="main" class="main container">
+   <header>
+         <div class="top-header">
+            <div class="container">
+               <div class="top-header-content">
+                  <div class="top-header-lt">
+                     <ul class="plain-list">
+                        <li><a href="#"><i class="fa fa-phone"></i> (+243)-000-000-152</a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i> contact@wayfarer.cd</a></li>
+                     </ul>
+                  </div>
+                  <div class="top-header-rt">
+                     <ul class="plain-list">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="main-nav">
+            <div class="container">
+               <div class="nav-content">
+                  <div class="nav-lt">
+                     <a href="../index.html">
+                        <span id="logo-txt-lt"></span>way</span><i class="fa fa-bus"></i><span id="logo-bckgnd"><span id="logo-txt-rt">Farer</span></span>
+                     </a>
+                  </div>
+                  
+                  <nav class="nav-rt">
+                     <a href="./register.html">Register</a>
+                     <a href="./login.html">Login</a>
+                  </nav>
+               </div>
+            </div>
+         </div>
+   </header>
+   <div>
+      <div class="container">
+         <main role="main" class="main">
+               
+            <h1>Create your account</h1>
+            <form action="#" id="sign-up">
+               <input type="email" placeholder="you@domaine.com" id="email" required>
+               <div id="helpEmail" class="inputError"></div>
+               <input type="text" placeholder="First name" id="firstName" required>
+               <div id="helpFirstName" class="inputError"></div>
+               <input type="text" placeholder="Last name" id="lastName" required>
+               <div id="helpLastName" class="inputError"></div>
+               <input type="password" placeholder="password" id="password">
+               <div id="helpPassword" class="inputError"></div>
+               
+               <input type="submit" value="Sign Up">                  
+            </form>
             
-         <h1>Create your account</h1>
-         <form action="#" id="sign-up">
-            <input type="email" placeholder="you@domaine.com" id="email" required>
-            <div id="helpEmail" class="inputError"></div>
-            <input type="text" placeholder="First name" id="firstName" required>
-            <div id="helpFirstName" class="inputError"></div>
-            <input type="text" placeholder="Last name" id="lastName" required>
-            <div id="helpLastName" class="inputError"></div>
-            <input type="password" placeholder="password" id="password">
-            <div id="helpPassword" class="inputError"></div>
-            
-            <input type="submit" value="Sign Up">                  
-         </form>
-       
-      </main>
-      
-      <!-- Footer -->
-      <footer class="footer container">
-         <p>&copy; 2019 Code and design with ❤ by <a href="www.abelmbula.com">Abel</a></p>
-      </footer>   
+         </main>
+      </div>
+   </div>
+   
+   <!-- Footer -->
+   <footer class="footer container">
+      <p>&copy; 2019 Code and design with ❤ by <a href="www.abelmbula.com">Abel</a></p>
+   </footer>   
 
   <script src="../js/app.js"></script>
 </body>

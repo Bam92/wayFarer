@@ -21,6 +21,15 @@ body {
     height: 100%;
 }
 
+#logo-txt-rt {
+    color: #fff;
+    padding: 5px;
+}
+
+#logo-bckgnd {
+    background: #00AFF5;
+}
+
 a {
     text-decoration: none;
 }
@@ -85,6 +94,7 @@ header {
 .nav-rt a {color: #00AFF5;}
 .main-nav {
     grid-row: 2;
+    border-bottom: 2px solid #00AFF5;
 }
 
 header a {grid-column: 1;}
@@ -103,18 +113,20 @@ header nav {grid-column: 2;}
     background: #00AFF5;
 }
 
-.main {
-    color: #ffffff;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    place-items: center;
+#main-entry-bckgrnd {
     background-image: url("../images/background.jpg");
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 4rem 2rem;
     height: 80vh;
-    
+}
+
+.main {
+    color: #ffffff;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    place-items: center;
 }
 
 .main p {
@@ -231,7 +243,7 @@ input, input::placeholder {
 }
 
 .trip-detail {
-    width: 50%;
+    width: 60%;
     display: grid;
     margin-left: auto;
     margin-right: auto;
