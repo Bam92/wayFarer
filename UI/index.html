@@ -17,37 +17,78 @@
 </head>
 <body>
       <header>
-         <a href="#"><img src="" alt="logo"></a>
-         <nav>
-            <a href="./templates/register.html">Sign up</a>
-            <a href="./templates/login.html">Login</a>
-         </nav>
+         <div class="top-header">
+            <div class="container">
+               <div class="top-header-content">
+                  <div class="top-header-lt">
+                     <ul class="plain-list">
+                        <li><a href="#"><i class="fa fa-phone"></i> (+243)-000-000-152</a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i> contact@wayfarer.cd</a></li>
+                     </ul>
+                  </div>
+                  <div class="top-header-rt">
+                     <ul class="plain-list">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="main-nav">
+            <div class="container">
+               <div class="nav-content">
+                  <div class="nav-lt">
+                     <a href="#">
+                        <span id="logo-txt-lt"></span>way</span><i class="fa fa-bus"></i><span id="logo-bckgnd"><span id="logo-txt-rt">Farer</span></span>
+                     </a>
+                  </div>
+                  
+                  <nav class="nav-rt">
+                     <a href="./templates/register.html">Register</a>
+                     <a href="./templates/login.html">Login</a>
+                  </nav>
+               </div>
+            </div>
+         </div>
       </header>
 
-      <main role="main" class="main container">
-            <h1>Do you want to plan your trip?</h1>
-            <article>
-               <p>
-                  <strong>Way Farer</strong> is a new and modern platform to book bus ticket in Kisangani city. We are the biggist bus transportation
-                  netwok that offer comftable buses to move in the whole city. Don't wait, plan your trip with us; it's easy and fun as playing music.
-               </p>
-               <a href="#browse-trips " type="button">Book now</a>
-            </article>
-       
-      </main>
+      <div id="main-entry-bckgrnd">
+         <div class="container">
+            <main role="main" class="main">
+               <h1>Do you want to plan your trip?</h1>
+               <article>
+                  <p>
+                     <strong>Way Farer</strong> is a new and modern platform to book bus ticket in Kisangani city. We are the biggist bus transportation
+                     netwok that offer comftable buses to move in the whole city. Don't wait, plan your trip with us; it's easy and fun as playing music.
+                  </p>
+                  <a href="#browse-trips" type="button">Book now</a>
+               </article>       
+            </main>
+         </div>
+
+      </div>
       <section class="quick-booking">
-         <article>
-         
-            <div id="browse-trips">
-               <h2>Where do you want to go?</h2><a href="#quick-booking1" id="trips__show">View all trips (<span id="trips__total"></span>)</a>
-            </div>
-            <ul class="list__trips" id="list__trips"></ul>
-         </article>     
+         <div class="container">
+            <article>
+               
+                  <h2>Where do you want to go?</h2>
+               
+               <div>
+                  <div id="browse-trips">
+                     <a href="#quick-booking1" id="trips__show">View all trips (<span id="trips__total"></span>)</a>
+                  </div>
+                  <ul class="list__trips" id="list__trips"></ul>
+               </div>
+               
+            </article>
+         </div>     
       </section>
 
       <!-- Footer -->
       <footer class="footer container">
-         <p>&copy; 2019 Code and design width ❤ by <a href="www.abelmbula.com">Abel</a></p>
+         <p>&copy; 2019 Code and design with ❤ by <a href="www.abelmbula.com">Abel</a></p>
       </footer> 
  
   <script src="js/data.js"></script>
