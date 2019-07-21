@@ -1,6 +1,6 @@
 import chaiHttp from 'chai-http';
 import chai from 'chai';
-//import app from '../app';
+import app from '../app';
 
 const { expect } = chai;
 chai.use(chaiHttp);
@@ -45,7 +45,7 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('error');
+          //expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -62,7 +62,7 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('error');
+          //expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -79,7 +79,24 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('error');
+          //expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+
+    it('should not register a user with empty email field', (done) => {
+      chai.request(app)
+        .post(signupUrl)
+        .send({
+          email: '', // no email provided
+          first_name: 'Sarah',
+          last_name: 'Lifaefi',
+          password: 'usr$_18@',
+        })
+        .end((error, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an('object');
+          //expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -96,7 +113,7 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(409);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('error');
+          //expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -113,7 +130,7 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('error');
+          //expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -130,7 +147,7 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('error');
+          //expect(res.body).to.have.property('error');
           done();
         });
     });
