@@ -23,7 +23,7 @@ describe('AUTH CONTROLLER', () => {
           expect(res).to.have.status(201);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('data');
-          expect(res.body.data).to.have.property('user_id');
+          expect(res.body.data).to.have.property('id');
           expect(res.body.data).to.have.property('first_name');
           expect(res.body.data).to.have.property('last_name');
           expect(res.body.data).to.have.property('email');
@@ -57,6 +57,23 @@ describe('AUTH CONTROLLER', () => {
           email: 'sarah@gmail.com',
           first_name: 'Sarah',
           last_name: '*Lifaefi$#', // invalid name
+          password: 'usr$_18@',
+        })
+        .end((error, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an('object');
+          //expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+
+    it('should not register a user with short first_name or last_name', (done) => {
+      chai.request(app)
+        .post(signupUrl)
+        .send({
+          email: 'sarah@gmail.com',
+          first_name: 'Sarah',
+          last_name: 'L', // name must be at least 2 ccharactors
           password: 'usr$_18@',
         })
         .end((error, res) => {

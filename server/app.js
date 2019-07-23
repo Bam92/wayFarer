@@ -19,10 +19,42 @@ app.post(`${baseUrl}auth/signup`, (req, res) => {
     });
   }
 
+  const email = /.+@.+\..+/;
+  if (!email.test(req.body.email)) {
+    return res.status(400).send({
+      success: false,
+      message: 'email is invalid',
+    });
+  }
+
+  if (req.body.email === data.email) {
+    console.log(data.email)
+    return res.status(409).send({
+      success: false,
+      message: 'email exists already',
+
+    });
+  }
+
   if (!req.body.first_name || !req.body.last_name) {
     return res.status(400).send({
       success: false,
       message: 'first name or last name is required',
+    });
+  }
+
+  const letters = /^[0-9a-zA-Z]+$/; // names must only contain alphanumeric char
+  if (!letters.test(req.body.first_name) || !letters.test(req.body.last_name)) {
+    return res.status(400).send({
+      success: false,
+      message: 'first name or last name contains invalid charactor(s)',
+    });
+  }
+
+  if (req.body.first_name.length < 2 || req.body.last_name.length < 2) {
+    return res.status(400).send({
+      success: false,
+      message: 'first name or last name must contain at 2 charactors',
     });
   }
 
@@ -33,7 +65,7 @@ app.post(`${baseUrl}auth/signup`, (req, res) => {
     });
   }
 
-  if (!req.body.password.length < 8) {
+  if (req.body.password.length < 8) {
     return res.status(400).send({
       success: false,
       message: 'Minimum passord length is 8',
@@ -48,27 +80,27 @@ app.post(`${baseUrl}auth/signup`, (req, res) => {
     });
   }
 
+  const user = {
+    id: data.length + 1,
+    email: 'sarah@gmail.com',
+    fist_name: 'Sarah',
+    last_name: 'Lifaefi Masika',
+    password: 'usr$_18@',
+    is_admin: false,
+  };
 
-  const letters = /^[0-9a-zA-Z]+$/; // names must only contain alphanumeric char
-  if (!(letters.test(req.body.first_name)) || !(letters.test(req.body.last_name))) {
-    return res.status(400).send({
-      success: false,
-      message: 'first name or last name contains invalid charactor(s)',
-    });
-  }
-
-  if ((req.body.email).indexOf('@') === -1) {
-    return res.status(400).send({
-      success: false,
-      message: 'email is invalid',
-    });
-  }
+  data.push(user);
+  return res.status(201).send({
+    success: true,
+    message: 'user registered successfully',
+    data,
+  });
 });
 
 const PORT = 5000;
 
 app.listen(PORT, () => {
-  console.log(`The server running on port ${PORT}`);
+  //console.log(`The server running on port ${PORT}`);
 });
 
 export default app;
