@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import data from './db/data';
+import user from './src/models/user.model';
 
 // set up the express app
 const app = express();
@@ -43,45 +44,45 @@ app.post(`${baseUrl}auth/signup`, (req, res) => {
 
   if (!req.body.first_name || !req.body.last_name) {
     return res.status(400).send({
-      success: false,
-      message: 'first name or last name is required',
+      status: error,
+      error: 'first name or last name is required',
     });
   }
 
   const letters = /^[0-9a-zA-Z]+$/; // names must only contain alphanumeric char
   if (!letters.test(req.body.first_name) || !letters.test(req.body.last_name)) {
     return res.status(400).send({
-      success: false,
-      message: 'first name or last name contains invalid charactor(s)',
+      status: error,
+      error: 'first name or last name contains invalid charactor(s)',
     });
   }
 
   if (req.body.first_name.length < 2 || req.body.last_name.length < 2) {
     return res.status(400).send({
-      success: false,
-      message: 'first name or last name must contain at 2 charactors',
+      status: error,
+      error: 'first name or last name must contain at 2 charactors',
     });
   }
 
   if (!req.body.password) {
     return res.status(400).send({
-      success: false,
-      message: 'passord is required',
+      status: error,
+      error: 'passord is required',
     });
   }
 
   if (req.body.password.length < 8) {
     return res.status(400).send({
-      success: false,
-      message: 'Minimum passord length is 8',
+      status: error,
+      error: 'Minimum passord length is 8',
     });
   }
 
   const abc = /^[a-zA-Z]$/;
   if (abc.test(req.body.password)) {
     return res.status(400).send({
-      success: false,
-      message: 'invalid password. must contain at least 1 special charactor',
+      status: error,
+      error: 'invalid password. must contain at least 1 special charactor',
     });
   }
 
@@ -130,13 +131,12 @@ app.post(`${baseUrl}auth/signin`, (req, res) => {
     });
   }
 
-  const findUserByEmail = (email) => data.find(user => user.email === email);
-  const foundUser = findUserByEmail(req.body.email);
+  const foundUser = user.findUserByEmail(req.body.email, req.body.password);
 
   if (!foundUser) {
     return res.status(404).send({
       status: 'error',
-      error: 'user does not exist, register first',
+      error: 'user with login/pass does not exist, register first',
     });
   }
 
@@ -146,12 +146,6 @@ app.post(`${baseUrl}auth/signin`, (req, res) => {
       data: foundUser,
     });
   }
-});
-
-const port = 5000;
-
-app.listen(port, () => {
-  // console.log(`The server running on port ${PORT}`);
 });
 
 export default app;
