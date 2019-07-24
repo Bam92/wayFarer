@@ -19,57 +19,38 @@ const baseUrl = '/api/v1/';
 app.post(`${baseUrl}auth/signin`, (req, res) => {
   if (!req.body.email) {
     return res.status(400).send({
-      success: false,
-      message: 'email is required',
+      status: 'error',
+      error: 'email is required',
     });
   }
 
   const email = /.+@.+\..+/;
   if (!email.test(req.body.email)) {
     return res.status(400).send({
-      success: false,
-      message: 'email is invalid',
+      status: 'error',
+      error: 'email is invalid',
     });
   }
 
-
-
-  /*if (findUserByEmail(req.body.email)) {
-    return res.status(409).send({
-      success: false,
-      message: 'email already exists',
-      //findUserByEmail(req.body.email)
-      //data,
-
-    });
-  }*/
-
   if (!req.body.first_name || !req.body.last_name) {
     return res.status(400).send({
-      success: false,
-      message: 'first name or last name is required',
+      status: 'error',
+      error: 'first name or last name is required',
     });
   }
 
   const letters = /^[0-9a-zA-Z]+$/; // names must only contain alphanumeric char
   if (!letters.test(req.body.first_name) || !letters.test(req.body.last_name)) {
     return res.status(400).send({
-      success: false,
-      message: 'first name or last name contains invalid charactor(s)',
-    });
-  }
-
-  if (req.body.first_name.length < 2 || req.body.last_name.length < 2) {
-    return res.status(400).send({
-      success: false,
-      message: 'first name or last name must contain at 2 charactors',
+      status: 'error',
+      error: 'first name or last name contains invalid charactor(s)',
     });
   }
 
   if (!req.body.password) {
     return res.status(400).send({
-      success: false,
-      message: 'passord is required',
+      status: 'error',
+      error: 'passord is required',
     });
   }
 
@@ -77,8 +58,8 @@ app.post(`${baseUrl}auth/signin`, (req, res) => {
   //let foundUser = findUserByEmail(req.body.email);
   if (!findUserByEmail(req.body.email)) {
     return res.status(404).send({
-      status: false,
-      message: 'user does not exist, register first',
+      status: 'error',
+      error: 'user does not exist, register first',
     });
   }
 
