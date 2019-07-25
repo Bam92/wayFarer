@@ -43,21 +43,27 @@
 /* Form submission */
 const form = document.querySelector('form');
 
+// login user
+const loginUser = (login, pass) => {
+  if (login && pass && login !== '' && pass !== '') window.location.replace('./dashboard.html');
+}
+
+// register user
+const RegisterUser = (login, first, last, pass) => {
+  if (login && pass && first && last && login !== '' && pass !== '' && first !== '' && last !== '') window.location.replace('./dashboard.html');
+}
+
 if (form) {
    form.addEventListener('submit', (e) => {
       const login = form.elements.email.value;
       const password = form.elements.password.value;
+      if (form.elements.length > 3) {
+      const first = form.elements.firstName.value;
+      const last = form.elements.lastName.value;}
+      e.preventDefault();
 
-      if (login !== null && password !== null) {
-      const first = form.elements.firstName.value
-      const last = form.elements.lastName
-      }
-
-      if (login !== null && password !== null && first !== null  && last !== null) {
-            e.preventDefault();
-            window.location.replace('./dashboard.html');
-            return false;
-      }
+      loginUser(login, password);
+      if (first && last) RegisterUser(login, first, last, password);
    });
 }
 
