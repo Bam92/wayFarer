@@ -108,3 +108,4 @@ hide.addEventListener('click', () => {
    hide.innerHTML = 'View all trips'
 });
 }
+
