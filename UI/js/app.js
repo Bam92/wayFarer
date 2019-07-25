@@ -45,10 +45,52 @@ if (form) {
       const login = form.elements.email.value;
       const password = form.elements.password.value;
 
+      if (login !== null && password !== null && usrCategoy !== null) {
+         if (usrCategoy === 'User') {
+            e.preventDefault();
+            window.location.replace('./templates/usrAccount.html');
+            return false;
+
       if (login !== null && password !== null) {
             e.preventDefault();
             window.location.replace('./dashboard.html');
             return false;
       }
    });
+}
+
+// User Dashboard
+/*document.getElementById('menu__user').addEventListener('click', () => {
+   const sub = document.getElementById('sub__menu')
+   if ( sub.classList.contains('menu__hide') ) sub.classList.remove('menu__hide');
+   else sub.classList.add('menu__hide');
+});*/
+
+// View trips
+const show = document.getElementById('trips__show')
+show.addEventListener('click', () => {
+   const elts = document.getElementsByClassName('trips__all')
+
+   while (elts[0]) {
+      elts[0].classList.remove('trips__all')
+   }
+
+   show.id = 'trips__hide'
+   show.innerHTML = 'View less trips'
+});
+
+const hide = document.getElementById('trips__hide')
+if (hide) {
+hide.addEventListener('click', () => {
+   console.log('ok')
+   const elts = document.getElementsByClassName('list__toggle')
+   console.log(elts.length)
+   
+   while (elts[0]) {
+      elts[0].classList.add('trips__all')
+   }
+
+   hide.id = 'trips__show'
+   hide.innerHTML = 'View all trips'
+});
 }
