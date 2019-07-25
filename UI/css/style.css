@@ -94,7 +94,7 @@ header {
 .nav-rt a {color: #00AFF5;}
 .main-nav {
     grid-row: 2;
-    border-bottom: 2px solid #00AFF5;
+    box-shadow: 0 1pt 4pt rgba(0,0,0,0.16), 0 2pt 8pt rgba(0,0,0,0.08);
 }
 
 header a {grid-column: 1;}
