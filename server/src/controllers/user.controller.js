@@ -1,4 +1,5 @@
 import user from '../models/user.model';
+import trips from '../models/trip.model';
 
 class UserController {
 /**
@@ -6,19 +7,19 @@ class UserController {
  * @param {object} req
  * @param {object} res
  */
-  signUpUser (req, res) {
+  signUpUser(req, res) {
     if (!req.body.email) {
       return res.status(400).send({
-        success: false,
-        message: 'email is required',
+        status: 'error',
+        error: 'email is required',
       });
     }
 
     const email = /.+@.+\..+/;
     if (!email.test(req.body.email)) {
       return res.status(400).send({
-        success: false,
-        message: 'email is invalid',
+        status: 'error',
+        error: 'email is invalid',
       });
     }
 
@@ -76,12 +77,12 @@ class UserController {
     });}
   }
 
-/**
+  /**
  * Sign in a user
  * @param {object} req
  * @param {object} res
  */
-  logInUser (req, res) {
+  logInUser(req, res) {
     if (!req.body.email) {
       return res.status(400).send({
         status: 'error',
@@ -111,9 +112,17 @@ class UserController {
         data: foundUser,
       });
     }
-  };
+  }
 
+  getTrips(req, res) {
+    return res.status(201).send({
+      status: 'success',
+      data: trips.findAllTrips(),
+    });
+  }
 }
+
+
 
 const userController = new UserController();
 export default userController;

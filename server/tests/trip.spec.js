@@ -5,10 +5,10 @@ import app from '../app';
 const { expect } = chai;
 chai.use(chaiHttp);
 
-const baseUrl = '/api/v1/auth/';
+const baseUrl = '/api/v1/';
 
 describe ('/GET TRIPS', () => {
-  it('should retunr all trips', (done) => {
+  it('should return all trips', (done) => {
     chai.request(app)
       .get(`${baseUrl}trips`)
       .end((err, res) => {
@@ -16,7 +16,7 @@ describe ('/GET TRIPS', () => {
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('status');
         expect(res.body).to.have.property('data');
-        expect(res.body.data).to.have.property('trip_id');
+        expect(res.body.data).to.have.property('id');
         expect(res.body.data).to.have.property('seating_capacity');
         expect(res.body.data).to.have.property('origine');
         expect(res.body.data).to.have.property('destination');
