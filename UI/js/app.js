@@ -76,8 +76,13 @@ const userMenu = document.getElementById('menu__user');
 if (userMenu) {
   userMenu.addEventListener('click', () => {
     const sub = document.getElementById('sub__menu');
-    if (sub.classList.contains('menu__hide')) sub.classList.remove('menu__hide');
-    else sub.classList.add('menu__hide');
+    if (sub.classList.contains('menu__hide')) {
+      sub.classList.remove('menu__hide');
+      document.getElementById('popover__menu').style.display = 'block';
+    } else {
+      sub.classList.add('menu__hide');
+      document.getElementById('popover__menu').style.display = 'none';
+    }
   });
 }
 

@@ -40,42 +40,47 @@
             <div class="container">
                <div class="nav-content">
                   <div class="nav-lt">
-                     <a href="./dashboard.html">
+                     <a href="./admin.html">
                         <span id="logo-txt-lt"></span>way</span><i class="fa fa-bus"></i><span id="logo-bckgnd"><span id="logo-txt-rt">Farer</span></span>
                      </a>
                   </div>
 
                   <nav class="nav-rt menu__main">
-                        <ul class="navigation__list">
-                              <!--li class="navigation__item"><a href="./book.html">Book</a></li-->
-                              <li class="navigation__item" id="menu__user">
-                                 <a href="#">
-                                    <div class="user__avatar__small"><img src="../images/abel-profil.png" alt="User avatar"></div>
-                                 </a>
-                                 <ul class="menu__sub menu__hide" id="sub__menu">
-                                       <li>
-                                          <div class="profile__user">
-                                             <div class="user__avatar "><img src="../images/abel-profil.png" alt="User avatar"></div>
-                                             <div>
-                                                <div><a href="#">Patience Kavira</a></div>
-                                                <div><a href="#">patikav@gmail.com</a></div>
-                                             </div>
-                                          </div>
-                                       </li>
-                                       <li><a href="./dashboard.html">Dashboard</a></li>
-                                       <li><a href="./book.html">New booking</a></li>
-                                       <li><a href="#">Dashboard</a></li>
-                                       <li><a href="../index.html">Log out</a></li>
-                                    </ul>
-                              </li>
-                           </ul>
-                  </nav>
+                      <ul class="navigation__list">
+                            <li class="navigation__item"><a href="./book.html">New Trip</a></li>
+                            <li class="navigation__item" id="menu__user">
+                               <a href="#">
+                                  <div class="user__avatar__small"><img src="../images/abel-profil.png" alt="User avatar"></div>
+                               </a>
+                               <div class="popover__menu" id="popover__menu" aria-label="sub__menu" aria-hidden="true">
+                                  <div class="menu__sub__wrapper">
+                                      <ul class="menu__sub menu__hide" id="sub__menu">
+                                          <li class="popoger__menu__item">
+                                            <div class="profile__user">
+                                                <div class="user__avatar "><img src="../images/abel-profil.png" alt="User avatar"></div>
+                                                <div>
+                                                  <div><a href="#">Patience Kavira</a></div>
+                                                  <div><a href="#">patikav@gmail.com</a></div>
+                                                  <div><p>admin</p></div>
+                                                </div>
+                                            </div>
+                                          </li>
+                                          <li class="popoger__menu__item"><a href="./dashboard.html">Dashboard</a></li>
+                                          <li class="popoger__menu__item"><a href="./book.html">New Trip</a></li>
+                                          <li class="popoger__menu__item"><a href="#">Manage users</a></li>
+                                          <li class="popoger__menu__item"><i class="fa fa-youtube"></i><a href="../index.html">Log out</a></li>
+                                      </ul>
+                                  </div>
+                               </div>
+                            </li>
+                         </ul>
+                </nav>
                </div>
             </div>
          </div>
    </header>
 
-   <div>
+   <div id="main-entry-bckgrnd">
          <div class="container">
 
             <main role="main" class="main">
