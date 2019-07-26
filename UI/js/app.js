@@ -48,12 +48,20 @@ if (form) {
     const login = form.elements.email.value;
     const password = form.elements.password.value;
 
-    if (login !== null && password !== null) {
+    if (form.elements.length > 3) {
       const first = form.elements.firstName.value;
       const last = form.elements.lastName;
     }
 
-    if (login !== null && password !== null && first !== null && last !== null) {
+    // admin login
+    if (login === 'admin@wayfarer.com' && password === 'admin123@') {
+      e.preventDefault();
+      window.location.replace('./admin.html');
+
+      return false;
+    }
+
+    if (login !== '' && password !== '' && first !== '' && last !== '') {
       e.preventDefault();
       window.location.replace('./dashboard.html');
 
