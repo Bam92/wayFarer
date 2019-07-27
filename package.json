@@ -1,0 +1,42 @@
+{
+  "name": "wayfarer",
+  "version": "1.0.0",
+  "description": "WayFarer is a public bus transportation booking service.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "mocha --timeout 10000 --require babel-core/register ./server/tests",
+    "start": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bam92/wayFarer.git"
+  },
+  "author": "Abel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bam92/wayFarer/issues"
+  },
+  "homepage": "https://github.com/Bam92/wayFarer#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "babel-core": "^6.26.3",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
