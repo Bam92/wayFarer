@@ -48,12 +48,20 @@ if (form) {
     const login = form.elements.email.value;
     const password = form.elements.password.value;
 
-    if (login !== null && password !== null) {
+    if (form.elements.length > 3) {
       const first = form.elements.firstName.value;
       const last = form.elements.lastName;
     }
 
-    if (login !== null && password !== null && first !== null && last !== null) {
+    // admin login
+    if (login === 'admin@wayfarer.com' && password === 'admin123@') {
+      e.preventDefault();
+      window.location.replace('./admin.html');
+
+      return false;
+    }
+
+    if (login !== '' && password !== '' && first !== '' && last !== '') {
       e.preventDefault();
       window.location.replace('./dashboard.html');
 
@@ -68,8 +76,13 @@ const userMenu = document.getElementById('menu__user');
 if (userMenu) {
   userMenu.addEventListener('click', () => {
     const sub = document.getElementById('sub__menu');
-    if (sub.classList.contains('menu__hide')) sub.classList.remove('menu__hide');
-    else sub.classList.add('menu__hide');
+    if (sub.classList.contains('menu__hide')) {
+      sub.classList.remove('menu__hide');
+      document.getElementById('popover__menu').style.display = 'block';
+    } else {
+      sub.classList.add('menu__hide');
+      document.getElementById('popover__menu').style.display = 'none';
+    }
   });
 }
 
