@@ -43,6 +43,16 @@ if (document.getElementById('firstName', 'lastName', 'email', 'password') != nul
 /* Form submission */
 const form = document.querySelector('form');
 
+// login user
+const loginUser = (login, pass) => {
+  if (login && pass && login !== '' && pass !== '') window.location.replace('./dashboard.html');
+}
+
+// register user
+const RegisterUser = (login, first, last, pass) => {
+  if (login && pass && first && last && login !== '' && pass !== '' && first !== '' && last !== '') window.location.replace('./dashboard.html');
+}
+
 if (form) {
   form.addEventListener('submit', (e) => {
     const login = form.elements.email.value;
@@ -113,3 +123,4 @@ if (hide) {
     hide.innerHTML = 'View all trips';
   });
 }
+

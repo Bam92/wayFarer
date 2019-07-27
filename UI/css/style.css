@@ -80,6 +80,7 @@ header {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding: 10px 15px;
+    align-items: center;
 }
 
 .top-header-lt, .nav-lt {
@@ -92,9 +93,19 @@ header {
 }
 
 .nav-rt a {color: #00AFF5;}
+
+#sub__menu {
+  list-style-type: none;
+}
+
+.profile__user {
+  display: flex;
+  flex-direction: row;
+}
+
 .main-nav {
     grid-row: 2;
-    border-bottom: 2px solid #00AFF5;
+    box-shadow: 0 1pt 4pt rgba(0,0,0,0.16), 0 2pt 8pt rgba(0,0,0,0.08);
 }
 
 header a {grid-column: 1;}
