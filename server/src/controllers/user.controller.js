@@ -1,5 +1,4 @@
 import user from '../models/user.model';
-import trips from '../models/trip.model';
 
 class UserController {
 /**
@@ -112,13 +111,6 @@ class UserController {
         data: foundUser,
       });
     }
-  }
-
-  getTrips(req, res) {
-    return res.status(201).send({
-      status: 'success',
-      data: trips.findAllTrips(),
-    });
   }
 }
 

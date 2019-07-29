@@ -17,8 +17,7 @@ const save = (email, first, last, pass) => {
   return true;
 }
 
-const findAll = () => {return data;}
-
+const findAll = () => data;
 
 export default {
   findUserByEmail,

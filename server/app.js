@@ -15,5 +15,6 @@ const baseUrl = '/api/v1/';
 app.post(`${baseUrl}auth/signup`, UserController.signUpUser);
 app.post(`${baseUrl}auth/signin`, UserController.logInUser);
 app.get(`${baseUrl}trips`, TripController.getTrips);
+app.get(`${baseUrl}trips/:id`, TripController.getTrip);
 
 export default app;
