@@ -307,6 +307,7 @@ input, input::placeholder {
     grid-template-columns: 25% 70%;
     grid-gap: 15px;
     margin-bottom: 15px;
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -325,7 +326,7 @@ input, input::placeholder {
     border-top: 1px solid #ddd;
 }
 
-#num-trips {text-align: center;}
+.title-center {text-align: center;}
 
 .trip-detail article {
     border-radius: 16px;
