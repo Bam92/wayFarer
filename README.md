@@ -1,7 +1,7 @@
-![logo](way-farer-logo.png "logo")
 # Way Farer
 a quick and easy public bus transportation booking service in [Kisangani](https://fr.wikipedia.org/wiki/Kisangani) city
 
+[![Build Status](https://travis-ci.com/Bam92/wayFarer.svg?branch=develop)](https://travis-ci.com/Bam92/wayFarer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Versioning
