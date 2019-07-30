@@ -6,19 +6,19 @@ class UserController {
  * @param {object} req
  * @param {object} res
  */
-  signUpUser (req, res) {
+  signUpUser(req, res) {
     if (!req.body.email) {
       return res.status(400).send({
-        success: false,
-        message: 'email is required',
+        status: 'error',
+        error: 'email is required',
       });
     }
 
     const email = /.+@.+\..+/;
     if (!email.test(req.body.email)) {
       return res.status(400).send({
-        success: false,
-        message: 'email is invalid',
+        status: 'error',
+        error: 'email is invalid',
       });
     }
 
@@ -76,12 +76,12 @@ class UserController {
     });}
   }
 
-/**
+  /**
  * Sign in a user
  * @param {object} req
  * @param {object} res
  */
-  logInUser (req, res) {
+  logInUser(req, res) {
     if (!req.body.email) {
       return res.status(400).send({
         status: 'error',
@@ -111,9 +111,10 @@ class UserController {
         data: foundUser,
       });
     }
-  };
-
+  }
 }
+
+
 
 const userController = new UserController();
 export default userController;

@@ -17,6 +17,17 @@ const data = [
     is_admin: false,
 
   },
+  {
+    id: 3,
+    email: 'admin@gmail.com',
+    fist_name: 'bam',
+    last_name: 'sarah',
+    password: 'usr$_18@',
+    is_admin: true,
+
+  },
 ];
 
-export default data;
+export default {
+  data,
+};
