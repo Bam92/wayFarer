@@ -22,18 +22,27 @@ class TripController {
 
   getTrip(req, res) {
     const id = parseInt(req.params.id);
-    console.log(typeof id)
+    console.log('id: ' ,id)
     if (!Number.isInteger(id) || id === undefined) {
       return res.status(404).send({
         status: 'error',
         error: 'Not found',
       });
     }
-    console.log(`list ${  tripModel.findTrip(req.params.id)  } et typeof ${  req.params.id}`);
-    return res.status(201).send({
+
+   if (tripModel.findTrip(id))
+   {
+     return res.status(201).send({
       status: 'success',
       data: tripModel.findTrip(id),
     });
+  }
+  if (!tripModel.findTrip(id)) {
+    return res.status(404).send({
+      status: 'error',
+      error: 'ID does not exist',
+    });
+    }
   }
 }
 
