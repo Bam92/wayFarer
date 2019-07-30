@@ -5,25 +5,51 @@ import app from '../app';
 const { expect } = chai;
 chai.use(chaiHttp);
 
-const baseUrl = '/api/v1/auth/';
+const baseUrl = '/api/v1/';
 
 describe ('/GET TRIPS', () => {
-  it('should retunr all trips', (done) => {
+  it('getTrips() should respond with 201 and return a list of all trips', (done) => {
     chai.request(app)
       .get(`${baseUrl}trips`)
       .end((err, res) => {
+        expect('Content-Type', /json/);
         expect(res).to.have.status(201);
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('status');
         expect(res.body).to.have.property('data');
-        expect(res.body.data).to.have.property('trip_id');
-        expect(res.body.data).to.have.property('seating_capacity');
-        expect(res.body.data).to.have.property('origine');
-        expect(res.body.data).to.have.property('destination');
-        expect(res.body.data).to.have.property('trip_date');
-        expect(res.body.data).to.have.property('fare');
-        expect(res.body.data).to.have.property('status');
-        (done)
+        expect(res.body.data[0]).to.have.property('id');
+        expect(res.body.data[0]).to.have.property('seating_capacity');
+        expect(res.body.data[0]).to.have.property('origin');
+        expect(res.body.data[0]).to.have.property('destination');
+        expect(res.body.data[0]).to.have.property('trip_date');
+        expect(res.body.data[0]).to.have.property('fare');
+        expect(res.body.data[0]).to.have.property('status');
+        done();
+      });
+  });
+  it('getTrip() should respond with 201 and return detail of a given trip', (done) => {
+    chai.request(app)
+      .get(`${baseUrl}trips/1`)
+      .end((err, res) => {
+        expect('Content-Type', /json/);
+        expect(res).to.have.status(201);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('status');
+        expect(res.body).to.have.property('data');
+        expect(res.body.data).to.be.an('object')
+          .that.includes.all.keys(['id', 'seating_capacity', 'origin', 'destination', 'trip_date', 'fare', 'status']);
+        done();
+      });
+  });
+  it('getTrip() should respond with 404 and return an error message if :id !== integer', (done) => {
+    chai.request(app)
+      .get(`${baseUrl}trips/nonExistingId`)
+      .end((err, res) => {
+        expect('Content-Type', /json/);
+        expect(res).to.have.status(404);
+        expect('Trip not found');
+        if (err) return done(err);
+        done();
       });
   });
 });

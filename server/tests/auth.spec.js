@@ -253,20 +253,5 @@ describe('AUTH CONTROLLER', () => {
           done();
         });
     });
-
-    it('should sign in a user with login or password', (done) => {
-      chai.request(app)
-        .post(signinUrl)
-        .send({
-          email: 'usr@pm.com',
-          password: 'usr$_18',
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(404);
-          expect(res.body).to.be.an('object');
-         // expect(res.body).to.have.property('error');
-          done();
-        });
-    });
   });
 });
