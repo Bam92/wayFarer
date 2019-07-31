@@ -357,6 +357,31 @@ input, input::placeholder {
     text-align: center;
 }
 
+/*--------- Booked trips -----------*/
+table  {
+  width: 100%;
+  margin-bottom: 25px;
+}
+table, th, td  {
+  border: 1px solid #00AFF5;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+table tr:nth-child(odd) {
+ background-color: #fff;
+}
+table th {
+  background-color: #00AFF5;
+  color: #fff;
+}
 /*---------- Responsive -------------*/
 @media (max-width: 284px) {
     .list__trips {
