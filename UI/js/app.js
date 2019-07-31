@@ -45,13 +45,13 @@ const form = document.querySelector('form');
 
 // login user
 const loginUser = (login, pass) => {
-  if (login && pass && login !== '' && pass !== '') window.location.replace('./dashboard.html');
+  if (login && pass && login !== '' && pass !== '') window.location.replace('./book.html');
   if (login && pass && login === 'admin@wayfarer.cd' && pass === 'admin123@') window.location.replace('./admin.html');
 };
 
 // register user
 const RegisterUser = (login, first, last, pass) => {
-  if (login && pass && first && last && login !== '' && pass !== '' && first !== '' && last !== '') window.location.replace('./dashboard.html');
+  if (login && pass && first && last && login !== '' && pass !== '' && first !== '' && last !== '') window.location.replace('./book.html');
 };
 
 if (form) {
@@ -111,4 +111,3 @@ if (hide) {
     hide.innerHTML = 'View all trips';
   });
 }
-
