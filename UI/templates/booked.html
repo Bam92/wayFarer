@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+   <meta charset="UTF-8">
+   <title>Way Farer | The modern bus booking service</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <meta name="description" content="Andela Way Farer Project">
+   <meta name="author" content="Abel Lifaefi Mbula">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+   <link rel="stylesheet" href="../css/style.css">
+
+   <!--[if lt IE 9]>
+        <script src="js/html5shim.js"></script>
+   <![endif]-->
+</head>
+<body>
+   <header>
+         <div class="top-header">
+            <div class="container">
+               <div class="top-header-content">
+                  <div class="top-header-lt">
+                     <ul class="plain-list">
+                        <li><a href="#"><i class="fa fa-phone"></i>&nbsp; (+243)-000-000-152</a></li>&nbsp; &nbsp;
+                        <li><a href="#"><i class="fa fa-envelope"></i>&nbsp;  contact@wayfarer.cd</a></li>
+                     </ul>
+                  </div>
+                  <div class="top-header-rt">
+                     <ul class="plain-list">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>&nbsp; &nbsp;
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>&nbsp; &nbsp;
+                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>&nbsp; &nbsp;
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="main-nav">
+            <div class="container">
+               <div class="nav-content">
+                  <div class="nav-lt">
+                     <a href="./booked.html">
+                        <span id="logo-txt-lt"></span>way</span><i class="fa fa-bus"></i><span id="logo-bckgnd"><span id="logo-txt-rt">Farer</span></span>
+                     </a>
+                  </div>
+
+                  <nav class="nav-rt menu__main">
+                        <ul class="navigation__list">
+                              <li class="navigation__item"><a href="./book.html">Book</a></li>&nbsp; &nbsp;
+                              <li class="navigation__item" id="menu__user">
+                                 <a href="#">
+                                    <div class="user__avatar__small"><img src="../images/abel-profil.png" alt="User avatar"></div>
+                                 </a>
+                                 <div class="popover__menu" id="popover__menu" aria-label="sub__menu" aria-hidden="true">
+                                    <div class="menu__sub__wrapper">
+                                        <ul class="menu__sub menu__hide" id="sub__menu">
+                                            <li class="popoger__menu__item">
+                                              <div class="profile__user">
+                                                  <div class="user__avatar "><img src="../images/abel-profil.png" alt="User avatar"></div>&nbsp; &nbsp;
+                                                  <div>
+                                                    <div><a href="#">Patience Kavira</a></div>
+                                                    <div><a href="#">patikav@gmail.com</a></div>
+                                                  </div>
+                                              </div>
+                                            </li>
+                                            <li class="popoger__menu__item"><i class="fa fa-home"></i>&nbsp; &nbsp;<a href="./book.html">Dashboard</a></li>
+                                            <li class="popoger__menu__item"><i class="fa fa-plus-circle"></i>&nbsp; &nbsp;<a href="./book.html">New booking</a></li>
+                                            <li class="popoger__menu__item"><i class="fa fa-bus"></i>&nbsp; &nbsp;<a href="./booked.html">Trips booked</a></li>
+                                            <li class="popoger__menu__item"><i class="fa fa-user-circle"></i>&nbsp; &nbsp;<a href="#">Profil</a></li>
+                                            <li class="popoger__menu__item"><i class="fa fa-power-off"></i>&nbsp; &nbsp;<a href="../index.html">Log out</a></li>
+                                        </ul>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                  </nav>
+               </div>
+            </div>
+
+         </div>
+   </header>
+
+   <div>
+        <div class="container">
+          <div class="wrapper trip-detail">
+            <div class="title-center">
+                <h1>Trips booked</h1>
+            </div>
+            <section>
+              <table>
+                <thead>
+                  <th>#</th><th>Trip</th><th>Detail</th><th>Action</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Kisangani » Makiso</td>
+                    <td>
+                      <ul>
+                        <li>Date: 11/02/2019 </li>
+                        <li>Hour: 07:56</li>
+                        <li>Hour: 08:15</li>
+                      </ul>
+                    </td>
+                    <td deleteBooking>Delete</td>
+                  </tr>
+                  <tr>
+                      <td>2</td>
+                      <td>Kisangani » Makiso</td>
+                      <td>
+                        <ul>
+                          <li>Date: 11/02/2019 </li>
+                          <li>Hour: 07:56</li>
+                          <li>Hour: 08:15</li>
+                        </ul>
+                      </td>
+                      <td deleteBooking>Delete</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Kisangani » Makiso</td>
+                        <td>
+                          <ul>
+                            <li>Date: 11/02/2019 </li>
+                            <li>Hour: 07:56</li>
+                            <li>Hour: 08:15</li>
+                          </ul>
+                        </td>
+                        <td deleteBooking>Delete</td>
+                      </tr>
+                </tbody>
+              </table>
+
+            </section>
+
+          </div>
+        </div>
+   </div>
+
+   <!-- Footer -->
+   <footer class="footer container">
+      <p>&copy; 2019 Code and design with ❤ by <a href="www.abelmbula.com">Abel</a></p>
+   </footer>
+
+   <script src="../js/app.js"></script>
+</body>
+</html>

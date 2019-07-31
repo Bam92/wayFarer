@@ -43,33 +43,53 @@ if (document.getElementById('firstName', 'lastName', 'email', 'password') != nul
 /* Form submission */
 const form = document.querySelector('form');
 
+// login user
+const loginUser = (login, pass) => {
+  if (login && pass && login !== '' && pass !== '') window.location.replace('./book.html');
+  if (login && pass && login === 'admin@wayfarer.cd' && pass === 'admin123@') window.location.replace('./admin-trips.html');
+};
+
+// register user
+const RegisterUser = (login, first, last, pass) => {
+  if (login && pass && first && last && login !== '' && pass !== '' && first !== '' && last !== '') window.location.replace('./book.html');
+};
+
 if (form) {
   form.addEventListener('submit', (e) => {
     const login = form.elements.email.value;
     const password = form.elements.password.value;
-
-    if (login !== null && password !== null) {
+    if (form.elements.length > 3) {
       const first = form.elements.firstName.value;
-      const last = form.elements.lastName;
+      const last = form.elements.lastName.value;
     }
+    e.preventDefault();
 
-    if (login !== null && password !== null && first !== null && last !== null) {
-      e.preventDefault();
-      window.location.replace('./dashboard.html');
-
-      return false;
-    }
+    loginUser(login, password);
+    if (first && last) RegisterUser(login, first, last, password);
   });
 }
-
 
 // User Dashboard
 const userMenu = document.getElementById('menu__user');
 if (userMenu) {
   userMenu.addEventListener('click', () => {
     const sub = document.getElementById('sub__menu');
-    if (sub.classList.contains('menu__hide')) sub.classList.remove('menu__hide');
-    else sub.classList.add('menu__hide');
+    if (sub.classList.contains('menu__hide')) {
+      sub.classList.remove('menu__hide');
+      document.getElementById('popover__menu').style.display = 'block';
+    } else {
+      sub.classList.add('menu__hide');
+      document.getElementById('popover__menu').style.display = 'none';
+    }
+  });
+}
+
+// Confirm deletion
+const deleteButton = document.querySelector('[deleteBooking]');
+if (deleteButton) {
+  deleteButton.addEventListener('click', () => {
+    alert('Are you sure you want to delete this booking');
+    //document.write('Booking deleted');
   });
 }
 
