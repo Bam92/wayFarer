@@ -84,6 +84,15 @@ if (userMenu) {
   });
 }
 
+// Confirm deletion
+const deleteButton = document.getElementById('deleteBooking');
+if (deleteButton) {
+  deleteButton.addEventListener('click', () => {
+    alert('Are you sure you want to delete this booking');
+    //document.write('Booking deleted');
+  });
+}
+
 // View trips
 const show = document.getElementById('trips__show');
 if (show) {
