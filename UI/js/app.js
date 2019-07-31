@@ -46,7 +46,7 @@ const form = document.querySelector('form');
 // login user
 const loginUser = (login, pass) => {
   if (login && pass && login !== '' && pass !== '') window.location.replace('./book.html');
-  if (login && pass && login === 'admin@wayfarer.cd' && pass === 'admin123@') window.location.replace('./admin.html');
+  if (login && pass && login === 'admin@wayfarer.cd' && pass === 'admin123@') window.location.replace('./admin-trips.html');
 };
 
 // register user
