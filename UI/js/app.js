@@ -85,7 +85,7 @@ if (userMenu) {
 }
 
 // Confirm deletion
-const deleteButton = document.getElementById('deleteBooking');
+const deleteButton = document.querySelector('[deleteBooking]');
 if (deleteButton) {
   deleteButton.addEventListener('click', () => {
     alert('Are you sure you want to delete this booking');
