@@ -110,25 +110,16 @@ class UserController {
     if (foundUser) {
       const UserToken = token(foundUser);
       foundUser.token = UserToken;
-      return res.status(200).send({          
+      return res.status(200).send({
         status: 'success',
         data: foundUser
-      });    
+      });
     }
   }
 
-/*generateToken(req, res) {
-  if (req.body.email) return ;
-  const token = jwt.sign({req.body.email, req.bdoy.password}, 'secretkey', { expiresIn: '1d' }, (err, token) => {
-    res.json({
-      token
-    });
-  })
-}*/
-
   // FORMAT OF TOKEN
   // Authorization: Andela <access_token>
-  
+
   // Verify Token
  verifyToken(req, res, next) {
     // Get auth header value
@@ -147,7 +138,7 @@ class UserController {
       // Forbidden
       res.sendStatus(403);
     }
-  
+
   }
 }
 
