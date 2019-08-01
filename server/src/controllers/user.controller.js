@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+import token from '../middleware/middlewares';
 import user from '../models/user.model';
 
 class UserController {
@@ -106,11 +108,46 @@ class UserController {
     }
 
     if (foundUser) {
-      return res.status(200).send({
+      const UserToken = token(foundUser);
+      foundUser.token = UserToken;
+      return res.status(200).send({          
         status: 'success',
-        data: foundUser,
-      });
+        data: foundUser
+      });    
     }
+  }
+
+/*generateToken(req, res) {
+  if (req.body.email) return ;
+  const token = jwt.sign({req.body.email, req.bdoy.password}, 'secretkey', { expiresIn: '1d' }, (err, token) => {
+    res.json({
+      token
+    });
+  })
+}*/
+
+  // FORMAT OF TOKEN
+  // Authorization: Andela <access_token>
+  
+  // Verify Token
+ verifyToken(req, res, next) {
+    // Get auth header value
+    const bearerHeader = req.headers['authorization'];
+    // Check if bearer is undefined
+    if(typeof bearerHeader !== 'undefined') {
+      // Split at the space
+      const bearer = bearerHeader.split(' ');
+      // Get token from array
+      const bearerToken = bearer[1];
+      // Set the token
+      req.token = bearerToken;
+      // Next middleware
+      next();
+    } else {
+      // Forbidden
+      res.sendStatus(403);
+    }
+  
   }
 }
 
