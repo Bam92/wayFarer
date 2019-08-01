@@ -108,7 +108,7 @@ class UserController {
     }
 
     if (foundUser) {
-      const UserToken = token(foundUser);
+      const UserToken = token.generateToken(foundUser);
       foundUser.token = UserToken;
       return res.status(200).send({
         status: 'success',
