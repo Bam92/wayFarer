@@ -185,7 +185,7 @@ describe('AUTH CONTROLLER', () => {
           expect(res).to.be.an('object');
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.be.an('object');
-         // expect(res.body.data).to.have.property('token');
+          expect(res.body.data).to.have.property('token');
           /*expect(res.body.data).to.have.property('id');
           expect(res.body.data).to.have.property('first_name');
           expect(res.body.data).to.have.property('last_name');
