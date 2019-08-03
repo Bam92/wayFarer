@@ -27,6 +27,28 @@ class TripController {
     });
   }
 
+   /**
+ * Get all trips
+ * @param {object} req
+ * @param {object} res
+ */
+
+createTrip(req, res) {
+  req.token = token.verifyToken(req, res);
+  jwt.verify(req.token, privateKey, (err) => {
+    if (err) {
+      res.json({
+        status: 'error',
+        error: 'No token provided or token expired',
+      });
+    } else {
+      res.json({
+        status: 'success',
+        data: tripModel.findAllTrips(),
+      });
+    }
+  });
+}
   /**
  * Get one trip
  * @param {object} req

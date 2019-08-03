@@ -17,6 +17,15 @@ const data = [
     is_admin: false,
 
   },
+  {
+    id: 3,
+    email: 'admin@wayfarer.cd',
+    fist_name: 'Kelavos',
+    last_name: 'Lav',
+    password: 'usr$_18@',
+    is_admin: true,
+
+  },
 ];
 
 export default data;
