@@ -1,8 +1,7 @@
-import jwt from 'jsonwebtoken';
-import token from '../middleware/middlewares';
-import user from '../models/user.model';
-import role from '../middleware/role';
 import bcrypt from 'bcrypt';
+import { generateToken } from '../middleware/middlewares';
+import user from '../models/user.model';
+
 
 class UserController {
 /**
@@ -65,17 +64,26 @@ class UserController {
     const abc = /^[a-zA-Z]$/;
     if (abc.test(req.body.password)) {
       return res.status(400).send({
-        status: error,
+        status: 'error',
         error: 'invalid password. must contain at least 1 special charactor',
       });
     }
 
     const hashedPassWord = bcrypt.hashSync(req.body.password, 8);
 
+    if (user.findUserByEmail(req.body.email)) {
+      return res.status(409).send({
+        status: 'error',
+        error: 'user exists already',
+      });
+    }
+
     const saveUser = user.save(req.body.email, req.body.first_name, req.body.last_name, hashedPassWord)
 
     if (saveUser) {
-   delete saveUser.password;
+      const UserToken = generateToken({ id: saveUser.id });
+      saveUser.token = UserToken;
+   //delete saveUser.password;
     return res.status(201).send({
       status: 'success',
       message: 'user registered successfully',
@@ -103,49 +111,34 @@ class UserController {
       });
     }
 
-    const foundUser = user.findUserByEmail(req.body.email, req.body.password);
+    const foundUser = user.findUserByEmail(req.body.email);
+    console.log('user email', user.findUserByEmail(req.body.email))
 
     if (!foundUser) {
       return res.status(404).send({
         status: 'error',
-        error: 'user with login/pass does not exist, register first',
+        error: 'user with this login does not exist, register first',
       });
     }
 
-    if (foundUser) {
+    //if (foundUser) {
+      if (bcrypt.compareSync(req.body.password, foundUser.password)) {
       console.log(foundUser.is_admin)
-      const UserToken = token.generateToken(foundUser);
+      const UserToken = generateToken({ id: foundUser.id });
       foundUser.token = UserToken;
+      delete foundUser.password;
       return res.status(200).send({
         status: 'success',
         data: foundUser
-      });
-    }
+      });} else {
+        return res.status(400).send({
+          status: 'Password not correct',
+          //data: foundUser
+        })
+      }
+    //}
   }
 
-  // FORMAT OF TOKEN
-  // Authorization: Andela <access_token>
-
-  // Verify Token
-  verifyToken(req, res, next) {
-    // Get auth header value
-    const bearerHeader = req.headers['authorization'];
-    // Check if bearer is undefined
-    if(typeof bearerHeader !== 'undefined') {
-      // Split at the space
-      const bearer = bearerHeader.split(' ');
-      // Get token from array
-      const bearerToken = bearer[1];
-      // Set the token
-      req.token = bearerToken;
-      // Next middleware
-      next();
-    } else {
-      // Forbidden
-      res.sendStatus(403);
-    }
-
-  }
 }
 
 const userController = new UserController();

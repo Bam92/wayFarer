@@ -10,26 +10,27 @@ const baseUrl = '/api/v1/auth/';
 describe('AUTH CONTROLLER', () => {
   describe('/POST SIGN UP', () => {
     const signupUrl = `${baseUrl}signup`;
-    it('should register a user with POST signupUrl', (done) => {
+    it('should register a new user with POST signupUrl', (done) => {
       chai.request(app)
         .post(signupUrl)
         .send({
-          id: 4,
-          email: 'sarah@gmail.com',
+          //id: 4,
+          email: 'xyz@gmail.com',
           first_name: 'Sarah',
           last_name: 'Lifaefi',
           password: 'usr$_18@',
         })
         .end((error, res) => {
+          //console.log('test ',res.body);
           expect(res).to.have.status(201);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('data');
-         /* expect(res.body.data).to.have.property('id');
+          expect(res.body.data).to.have.property('id');
           expect(res.body.data).to.have.property('first_name');
           expect(res.body.data).to.have.property('last_name');
           expect(res.body.data).to.have.property('email');
-          //expect(res.body.data).to.have.property('token');
-          expect(res.body.data).to.have.property('is_admin');*/
+          expect(res.body.data).to.have.property('token');
+          expect(res.body.data).to.have.property('is_admin');
           done();
         });
     });
@@ -119,7 +120,7 @@ describe('AUTH CONTROLLER', () => {
         });
     });
 
-   /* it('should not register a user with same email twice', (done) => {
+    it('should not register a user with same email twice', (done) => {
       chai.request(app)
         .post(signupUrl)
         .send({
@@ -134,7 +135,7 @@ describe('AUTH CONTROLLER', () => {
           //expect(res.body).to.have.property('error');
           done();
         });
-    });*/
+    });
 
     it('should not register a user with password less than 8 characters', (done) => {
       chai.request(app)

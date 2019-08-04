@@ -1,14 +1,13 @@
+import uid from 'uid';
 import data from '../db/data';
 
-const findUserByEmail = (email, pass) => data.find(user => user.email === email && user.password === pass);
-
+const findUserByEmail = email => data.find(user => user.email === email);
+const findUserById = id => data.find(user => user.id === id);
 const save = (email, first, last, pass) => {
-  console.log('hashpaa', pass)
-  //if (findUserByEmail) user should not be registered twice
   const newUser = {
-    id: data.length + 1,
+    id: uid(10),
     email,
-    fist_name: first,
+    first_name: first,
     last_name: last,
     password: pass,
     is_admin: false,
@@ -16,7 +15,7 @@ const save = (email, first, last, pass) => {
 
   data.push(newUser);
   return newUser;
-}
+};
 
 const findAll = () => data;
 
@@ -24,4 +23,5 @@ export default {
   findUserByEmail,
   save,
   findAll,
+  findUserById,
 };

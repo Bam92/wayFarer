@@ -1,24 +1,44 @@
 import jwt from 'jsonwebtoken';
 import privateKey from '../config';
+import user from '../models/user.model';
 
-const generateToken = playload => jwt.sign({
-  data: playload,
-}, privateKey, { expiresIn: '1h' });
+export const generateToken = playload => jwt.sign(playload, privateKey);
 
 // FORMAT OF TOKEN
 // Authorization: Andela <access_token>
 
-const verifyToken = (req, res) => {
-  const getHeader = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
-  if (typeof getHeader !== 'undefined') {
-    const header = getHeader.split(' ');
-    const headerToken = header[1];
-    req.token = headerToken;
-    return req.token;
-    //next();
-  } else {
-    res.sendStatus(403);
+export const verifyToken = (req, res, next) => {
+  const { authorization = '' } = req.headers;
+  const headerToken = authorization.split(' ')[1] || '';
+  if (!headerToken) {
+    return res.status(403).json({
+      status: 'error',
+      error: 'No token provided',
+    });
   }
+  jwt.verify(headerToken, privateKey, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({
+        status: 'error',
+        error: err.message || 'Invalid token or token expired',
+      });
+    }
+    const currentUser = user.findUserById(decoded.id);
+    console.log('test: ', decoded)
+    req.currentUser = currentUser;
+    return next();
+  });
 };
 
-export default { generateToken, verifyToken };
+export const verifyAdmin = (req, res, next) => {
+  const { currentUser } = req;
+
+  if (!currentUser.is_admin) {
+    return res.status(403).json({
+      status: 'error',
+      error: 'Only admin',
+    });
+  }
+
+  next();
+};
