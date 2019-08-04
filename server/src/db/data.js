@@ -4,7 +4,7 @@ const data = [
     email: 'sarah@gmail.com',
     fist_name: 'Sarah',
     last_name: 'Lifaefi Masika',
-    password: 'usr$_18@',
+    password: '$2b$08$Hygd5sB3MDRvrWMEvStr/uV08SR5b0YUCfIhs7bP.S3weIlfuPha6',
     is_admin: false,
 
   },
@@ -13,7 +13,7 @@ const data = [
     email: 'dklf@gmail.com',
     fist_name: 'Kelavos',
     last_name: 'Lav',
-    password: 'usr$_18@',
+    password: '$2b$08$Hygd5sB3MDRvrWMEvStr/uV08SR5b0YUCfIhs7bP.S3weIlfuPha6',
     is_admin: false,
 
   },
@@ -22,7 +22,7 @@ const data = [
     email: 'admin@wayfarer.cd',
     fist_name: 'Kelavos',
     last_name: 'Lav',
-    password: 'usr$_18@',
+    password: '$2b$08$Hygd5sB3MDRvrWMEvStr/uV08SR5b0YUCfIhs7bP.S3weIlfuPha6' /*usr$_18@'*/,
     is_admin: true,
 
   },

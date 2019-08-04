@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import token from '../middleware/middlewares';
 import user from '../models/user.model';
+import role from '../middleware/role';
+import bcrypt from 'bcrypt';
 
 class UserController {
 /**
@@ -68,13 +70,16 @@ class UserController {
       });
     }
 
-    const saveUser = user.save(req.body.email, req.body.first_name, req.body.last_name, req.body.password)
+    const hashedPassWord = bcrypt.hashSync(req.body.password, 8);
+
+    const saveUser = user.save(req.body.email, req.body.first_name, req.body.last_name, hashedPassWord)
 
     if (saveUser) {
+   delete saveUser.password;
     return res.status(201).send({
       status: 'success',
       message: 'user registered successfully',
-      data: user.findAll(),
+      data: saveUser,
     });}
   }
 
@@ -108,6 +113,7 @@ class UserController {
     }
 
     if (foundUser) {
+      console.log(foundUser.is_admin)
       const UserToken = token.generateToken(foundUser);
       foundUser.token = UserToken;
       return res.status(200).send({
@@ -121,7 +127,7 @@ class UserController {
   // Authorization: Andela <access_token>
 
   // Verify Token
- verifyToken(req, res, next) {
+  verifyToken(req, res, next) {
     // Get auth header value
     const bearerHeader = req.headers['authorization'];
     // Check if bearer is undefined

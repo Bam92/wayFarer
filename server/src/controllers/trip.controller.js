@@ -12,6 +12,8 @@ class TripController {
 
   getTrips(req, res) {
     req.token = token.verifyToken(req, res);
+    const decoded = jwt.verify(req.token, privateKey);
+    console.log('admin:', decoded.is_admin)
     jwt.verify(req.token, privateKey, (err) => {
       if (err) {
         res.json({
@@ -35,7 +37,9 @@ class TripController {
 
 createTrip(req, res) {
   req.token = token.verifyToken(req, res);
-  jwt.verify(req.token, privateKey, (err) => {
+  const decoded = jwt.verify(req.token, privateKey);
+    console.log(decoded.is_admin)
+  /*jwt.verify(req.token, privateKey, (err) => {
     if (err) {
       res.json({
         status: 'error',
@@ -47,7 +51,7 @@ createTrip(req, res) {
         data: tripModel.findAllTrips(),
       });
     }
-  });
+  });*/
 }
   /**
  * Get one trip

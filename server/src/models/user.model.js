@@ -3,6 +3,7 @@ import data from '../db/data';
 const findUserByEmail = (email, pass) => data.find(user => user.email === email && user.password === pass);
 
 const save = (email, first, last, pass) => {
+  console.log('hashpaa', pass)
   //if (findUserByEmail) user should not be registered twice
   const newUser = {
     id: data.length + 1,
@@ -14,7 +15,7 @@ const save = (email, first, last, pass) => {
   };
 
   data.push(newUser);
-  return true;
+  return newUser;
 }
 
 const findAll = () => data;
