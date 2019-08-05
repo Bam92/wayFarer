@@ -175,14 +175,14 @@ nav a:first-child {margin-right: 25px;}
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 80vh;
+  display: grid;
+  align-items: center;
 }
 
 .main {
   color: #ffffff;
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  place-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .main a, input[type="submit"] {
@@ -195,22 +195,24 @@ nav a:first-child {margin-right: 25px;}
   text-transform: uppercase;
 }
 
-.quick-booking {
-    background-color: #5dd167 !important;
-}
-
-.quick-booking article {
+.auth__wrapper {
+  background: hsla(0,0%,100%,.3);
+  /*padding: 50px 44px 0;*/
+  border: 1px solid #00AFF5;
+  border-radius: 4px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-gap: 1rem;
-  color: white;
-  place-items: center;
+  align-items: center;
+  width: 80vh;
+  margin: auto;
 }
 
-#browse-trips {
-    display: block;
-    text-align: right;
+.auth__content {
+  /*margin: auto;*/
+  padding: 15px;
+  text-align: center;
 }
+
+.auth__content h2 {color: #fff;}
 
 .list__trips {
     display: grid;
@@ -241,7 +243,7 @@ nav a:first-child {margin-right: 25px;}
 
 /*------------- Sign up page ---------*/
 input {
-    width: 80vh;
+    width: 70vh;
     border-radius: 5px;
     padding: 1rem;
     margin-top: .75rem;
