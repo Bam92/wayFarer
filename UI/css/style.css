@@ -62,9 +62,9 @@ a:hover, input[type="submit"]:hover {
 .plain-list a {color: #fff;}
 
 header {
+  background: #00AFF5;
+  height: 6rem;
   display: grid;
- /* grid: inherit;
-  grid-template-rows: repeat(2, 1fr);*/
   align-items: center;
 }
 
@@ -73,11 +73,24 @@ header {
   background: #00AFF5;
 }
 
-.top-header-content, .nav-content {
+.main-nav {
+  /*grid-row: 2;*/
+  box-shadow: 0 1pt 4pt rgba(0,0,0,0.16), 0 2pt 8pt rgba(0,0,0,0.08);
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background: #00AFF5;
+}
+
+.nav-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding: 10px 15px;
-    align-items: center;
+    font-size: 1.5rem;
+}
+
+.nav-rt {
+  grid-column: 2;
 }
 
 .top-header-lt, .nav-lt {
@@ -89,7 +102,9 @@ header {
     justify-self: end;
 }
 
-.nav-rt a {color: #00AFF5;}
+.nav-rt a, .nav-lf >a {color: #fff;}
+
+nav a:first-child {margin-right: 25px;}
 
 #sub__menu {
   list-style-type: none;
@@ -133,15 +148,6 @@ header {
 .popoger__menu__item {
   margin-bottom: 10px;
 }
-
-.main-nav {
-  grid-row: 2;
-  box-shadow: 0 1pt 4pt rgba(0,0,0,0.16), 0 2pt 8pt rgba(0,0,0,0.08);
-}
-
-/*header a {grid-column: 1;}
-header nav {grid-column: 2;}*/
-
 
 .menu__sub__wrapper {
   height: 205px;
