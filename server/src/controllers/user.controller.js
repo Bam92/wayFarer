@@ -83,11 +83,17 @@ class UserController {
     if (saveUser) {
       const UserToken = generateToken({ id: saveUser.id });
       saveUser.token = UserToken;
-   //delete saveUser.password;
+      const status = 201;
     return res.status(201).send({
-      status: 'success',
       message: 'user registered successfully',
-      data: saveUser,
+      status: status,
+      data: {
+        token: saveUser.token,
+        id: saveUser.id,
+        first_name: saveUser.first_name,
+        last_name: saveUser.last_name,
+        is_admin: saveUser.is_admin
+      },
     });}
   }
 

@@ -1,6 +1,5 @@
-import jwt from 'jsonwebtoken';
-import privateKey from '../config';
 import tripModel from '../models/trip.model';
+import { stat } from 'fs';
 
 class TripController {
   /**
@@ -10,14 +9,16 @@ class TripController {
  */
 
   getTrips(req, res) {
-    res.json({
-      status: 'success',
+    const status = 201;
+    res.status(status).send({
+      status,
+      message: 'Well done. You can see all trips',
       data: tripModel.findAllTrips(),
     });
   }
 
-   /**
- * Get all trips
+  /**
+ * Create a new trips
  * @param {object} req
  * @param {object} res
  */
@@ -28,20 +29,71 @@ createTrip(req, res) {
     origin: req.body.origin,
     destination: req.body.destination,
     date: req.body.trip_date,
-    fare: req.body.fare
+    fare: req.body.fare,
   };
+
+  const id = req.id;
+
+  if (tripModel.findTrip(id)) {
+    const status = 401;
+    return res.status(status).send({
+      status,
+      message: 'Trip already exists!'
+    });
+  }
 
   const createdTrip = tripModel.addTrip(trip);
 
   if (createdTrip) {
+    const status = 201;
     return res.status(201).send({
-      status: 'Trip successfully added',
+      status,
+      message: 'Trip successfully added',
       data: createdTrip
     })
+  } else {
+    return res.status(400).send({
+      message: 'error',
+    });
+  }
+}
+
+  /**
+ * Cancel a trip
+ * @param {object} req
+ * @param {object} res
+ */
+
+cancelTrip(req, res) {
+  const id = req.params.id;
+
+  const trip = tripModel.findTrip(parseInt(id))
+
+  if (!trip) {
+    const status = 404;
+      return res.status(status).send({
+        status,
+        message:'The trip does not exist',
+      });
   }
 
+  if (trip) {
+    if (trip.status !== 'active') {
+      const status = 400;
+      return res.status(status).send({
+        status,
+        message:'The trip is already cancelled!'
+      });
+    }
 
-
+    const status = 201;
+    trip.status = 'cancelled';
+    return res.status(status).send({
+      status,
+      message:'Trip cancelled!',
+      data: trip,
+    });
+  }
 }
   /**
  * Get one trip
@@ -49,38 +101,25 @@ createTrip(req, res) {
  * @param {object} res
  */
 
-  getTrip(req, res) {
-    const id = parseInt(req.params.id);
-    if (!Number.isInteger(id) || id === undefined) {
-      return res.status(404).send({
-        status: 'error',
-        error: 'Not found',
+getTrip(req, res) {
+  const id = req.params.id;
+  const trip = tripModel.findTrip(parseInt(id))
+
+console.log('tttt', tripModel.findTrip(id), 'id: ', id);
+
+  if (!trip) {
+    const status = 404;
+    return res.status(status).send({
+      status,
+      message: 'This trip does not exist',
       });
     }
-
-   if (tripModel.findTrip(id))
-   {
-    req.token = token.verifyToken(req, res);
-    jwt.verify(req.token, privateKey, (err) => {
-      if (err) {
-        res.json({
-          status: 'error',
-          error: 'No token provided or token expired',
-        });
-      } else {
-        res.json({
-          status: 'success',
-          data: tripModel.findTrip(id),
-        });
-      }
-    });
-  }
-  if (!tripModel.findTrip(id)) {
-    return res.status(404).send({
-      status: 'error',
-      error: 'ID does not exist',
-    });
-    }
+  const status = 201;
+  return res.status(status).send({
+    status,
+    message: 'Well done. You can see the trip',
+    data: trip,
+  });
   }
 }
 

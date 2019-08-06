@@ -17,6 +17,7 @@ app.post(`${baseUrl}auth/signup`, UserController.signUpUser);
 app.post(`${baseUrl}auth/signin`, UserController.logInUser);
 app.get(`${baseUrl}trips`, verifyToken, TripController.getTrips);
 app.post(`${baseUrl}trip`, verifyToken, verifyAdmin, TripController.createTrip);
-app.get(`${baseUrl}trips/:id`, TripController.getTrip);
+app.patch(`${baseUrl}trips/:id/cancel`, verifyToken, verifyAdmin, TripController.cancelTrip);
+app.get(`${baseUrl}trips/:id`, verifyToken, TripController.getTrip);
 
 export default app;
