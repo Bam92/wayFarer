@@ -120,3 +120,14 @@ if (hide) {
     hide.innerHTML = 'View all trips';
   });
 }
+
+const getTripCards = document.querySelectorAll('.card__trip__bloc1');
+if (getTripCards) {
+  console.log(getTripCards.length)
+  for (let i = 1; i <= getTripCards.length; i +=1 ) {
+    getTripCards[i].style.background = `url("../images/trips/${i}.jpg")`;
+    getTripCards[i].style.backgroundSize = 'cover';
+    getTripCards[i].style.backgroundPosition = 'center';
+    getTripCards[i].style.backgroundRepeat = 'no-repeat';
+  }
+}
