@@ -9,136 +9,224 @@
    <meta name="author" content="Abel Lifaefi Mbula">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
-   <link rel="stylesheet" href="../css/style.css">
+   <link rel="stylesheet" href="../css/style.css" type="text/css">
 
    <!--[if lt IE 9]>
         <script src="js/html5shim.js"></script>
    <![endif]-->
 </head>
 <body>
-   <header>
-         <div class="top-header">
-            <div class="container">
-               <div class="top-header-content">
-                  <div class="top-header-lt">
-                     <ul class="plain-list">
-                        <li><a href="#"><i class="fa fa-phone"></i>&nbsp; (+243)-000-000-152</a></li>&nbsp; &nbsp;
-                        <li><a href="#"><i class="fa fa-envelope"></i>&nbsp;  contact@wayfarer.cd</a></li>
-                     </ul>
-                  </div>
-                  <div class="top-header-rt">
-                     <ul class="plain-list">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>&nbsp; &nbsp;
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>&nbsp; &nbsp;
-                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>&nbsp; &nbsp;
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="main-nav">
-            <div class="container">
-               <div class="nav-content">
-                  <div class="nav-lt">
-                     <a href="./booked.html">
-                        <span id="logo-txt-lt"></span>way</span><i class="fa fa-bus"></i><span id="logo-bckgnd"><span id="logo-txt-rt">Farer</span></span>
-                     </a>
-                  </div>
 
-                  <nav class="nav-rt menu__main">
-                        <ul class="navigation__list">
-                              <li class="navigation__item"><a href="">New Trip</a></li>&nbsp; &nbsp;
-                              <li class="navigation__item" id="menu__user">
-                                 <a href="#">
-                                    <div class="user__avatar__small"><img src="../images/abel-profil.png" alt="User avatar"></div>
-                                 </a>
-                                 <div class="popover__menu" id="popover__menu" aria-label="sub__menu" aria-hidden="true">
-                                    <div class="menu__sub__wrapper">
-                                        <ul class="menu__sub menu__hide" id="sub__menu">
-                                            <li class="popoger__menu__item">
-                                              <div class="profile__user">
-                                                  <div class="user__avatar "><img src="../images/abel-profil.png" alt="User avatar"></div>&nbsp; &nbsp;
-                                                  <div>
-                                                    <div><a href="#">Patience Kavira</a></div>
-                                                    <div><a href="#">patikav@gmail.com</a></div>
-                                                    <div><p>admin</p></div>
-                                                  </div>
-                                              </div>
-                                            </li>
-                                            <li class="popoger__menu__item"><i class="fa fa-home"></i>&nbsp; &nbsp;<a href="./admin-trips.html">Dashboard</a></li>
-                                            <li class="popoger__menu__item"><i class="fa fa-plus-circle"></i>&nbsp; &nbsp;<a href="./book.html">New Trip</a></li>
-                                            <li class="popoger__menu__item"><i class="fa fa-bus"></i>&nbsp; &nbsp;<a href="./admin-booked.html">Trips booked</a></li>
-                                            <li class="popoger__menu__item"><i class="fa fa-user-circle"></i>&nbsp; &nbsp;<a href="#">Profil</a></li>
-                                            <li class="popoger__menu__item"><i class="fa fa-power-off"></i>&nbsp; &nbsp;<a href="../index.html">Log out</a></li>
-                                        </ul>
-                                    </div>
-                                 </div>
-                              </li>
-                           </ul>
-                  </nav>
-               </div>
-            </div>
-
-         </div>
-   </header>
-
-   <div>
-        <div class="container">
-          <div class="wrapper trip-detail">
-            <div class="title-center">
-                <h1>Available trips</h1>
-            </div>
-            <section>
-              <table>
-                <thead>
-                  <th>#</th><th>Trip</th><th>Detail</th><th>Action</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td><a href="">Kisangani » Makiso</a></td>
-                    <td>
-                      <ul>
-                        <li>Date: 11/02/2019 </li>
-                        <li>Hour: 07:56</li>
-                        <li>Hour: 08:15</li>
-                      </ul>
-                    </td>
-                    <td cancelTrip>Cancel</td>
-                  </tr>
-                  <tr>
-                      <td>2</td>
-                      <td>Kisangani » Makiso</td>
-                      <td>
-                        <ul>
-                          <li>Date: 11/02/2019 </li>
-                          <li>Hour: 07:56</li>
-                          <li>Hour: 08:15</li>
+  <header>
+  <div class="container">
+    <div class="nav-content">
+      <div class="nav-lt">
+          <a href="../index.html" id="txt__logo">
+            <i class="fa fa-bus"></i> &nbsp; way Farer
+          </a>
+      </div>
+      <nav class="nav-rt">
+        <ul class="navigation__list">
+              <li class="navigation__item"><a href="./book.html">Book</a></li>&nbsp; &nbsp;
+              <li class="navigation__item" id="menu__user">
+                  <a href="#">
+                    <div class="user__avatar__small"><img src="../images/abel-profil.png" alt="User avatar"></div>
+                  </a>
+                  <div class="popover__menu" id="popover__menu" aria-label="sub__menu" aria-hidden="true">
+                    <div class="menu__sub__wrapper">
+                        <ul class="menu__sub menu__hide" id="sub__menu">
+                            <li class="popoger__menu__item">
+                              <div class="profile__user">
+                                  <div class="user__avatar "><img src="../images/abel-profil.png" alt="User avatar"></div>&nbsp; &nbsp;
+                                  <div>
+                                    <div><a href="#">Patience Kavira</a></div>
+                                    <div><a href="#">patikav@gmail.com</a></div>
+                                    <div><p>admin</p></div>
+                                  </div>
+                              </div>
+                            </li>
+                            <li class="popoger__menu__item"><i class="fa fa-home"></i>&nbsp; &nbsp;<a href="./book.html">Dashboard</a></li>
+                              <li class="popoger__menu__item"><i class="fa fa-plus-circle"></i>&nbsp; &nbsp;<a href="./book.html">New booking</a></li>
+                              <li class="popoger__menu__item"><i class="fa fa-bus"></i>&nbsp; &nbsp;<a href="./admin-booked.html">Trips booked</a></li>
+                              <li class="popoger__menu__item"><i class="fa fa-user-circle"></i>&nbsp; &nbsp;<a href="#">Profil</a></li>
+                              <li class="popoger__menu__item"><i class="fa fa-power-off"></i>&nbsp; &nbsp;<a href="../index.html">Log out</a></li>
                         </ul>
-                      </td>
-                      <td cancelTrip>Cancel</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Kisangani » Makiso</td>
-                        <td>
-                          <ul>
-                            <li>Date: 11/02/2019 </li>
-                            <li>Hour: 07:56</li>
-                            <li>Hour: 08:15</li>
-                          </ul>
-                        </td>
-                        <td cancelTrip>Cancel</td>
-                      </tr>
-                </tbody>
-              </table>
+                    </div>
+                  </div>
+              </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  </header>
+<div class="trip__entry">
+  <div class="container">
+      <h2 class="title__trip">see our trips</h2>
+      <div class="wrapper__trip">
+        <aside>
+          <h3>Check out our newest and most popular trips</h3>
+          <p>With our growing catalog of over 50 destinations from remote areas to city center,
+            you're sure to find one that fits your need</p>
+        </aside>
+        <section>
+            <div class="card__trip">
+              <div class="card__trip__bloc1"></div>
+              <div class="card__trip__bloc2">
+                <p class="card__trip__txt">Today <br>Mangobo » Makiso</p>
+                <p class="card__trip__txt" type="button" id="modal__call1">Detail » </p>
+              </div>
+            </div>
+            <!-- Modal area for detail-->
+            <div id="modal" class="modal">
+              <div class="modal-content">
+                  <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Detail of the trip</h2>
+                  </div>
+                  <div class="modal-body">
+                      <p class="trip-de">Date: May 5&nbsp;&nbsp; Status: active</p>
+                      <p class="time-go"><i class="fa fa-clock"></i>&nbsp; 15:00 &nbsp;&nbsp; Mangobo</p>
+                      <p class="time-ar"><i class="fa fa-clock"></i>&nbsp; 16:00 &nbsp;&nbsp; Kisangani</p>
 
-            </section>
+                      <p class="bus-im"><i class="fa fa-bus"></i>&nbsp; AAAAC &nbsp;&nbsp; 20 seats available</p>
+                      <p class="card__trip__txt" type="button"><a href="#">Cancel</a></p>
+                  </div>
 
-          </div>
-        </div>
+              </div>
+            </div>
+
+            <div class="card__trip">
+                <div class="card__trip__bloc1"></div>
+                <div class="card__trip__bloc2">
+                    <p class="card__trip__txt">Today <br>Kisangani » Makiso</p>
+                    <p class="card__trip__txt" type="button" id="modal__call2">Detail</p>
+                  </div>
+            </div>
+            <div class="card__trip">
+                <div class="card__trip__bloc1"></div>
+                <div class="card__trip__bloc2">
+                    <div class="card__trip__bloc2">
+                        <p class="card__trip__txt">May, 1 <br>Mangobo » Tshopo</p>
+                        <p class="card__trip__txt" type="button" id="modal__call3">Detail</p>
+                      </div>
+                </div>
+              </div>
+              <div class="card__trip">
+                  <div class="card__trip__bloc1"></div>
+                  <div class="card__trip__bloc2">
+                      <div class="card__trip__bloc2">
+                          <p class="card__trip__txt">May, 2 <br>Lubunga » Makiso</p>
+                          <p class="card__trip__txt" type="button" id="modal__call4">Detail</p>
+                        </div>
+                  </div>
+                </div>
+                <div class="card__trip">
+                    <div class="card__trip__bloc1"></div>
+                    <div class="card__trip__bloc2">
+                        <div class="card__trip__bloc2">
+                            <p class="card__trip__txt">May, 4 <br>Lubunga » Tshopo</p>
+                            <p class="card__trip__txt" type="button" id="modal__call5">Detail</p>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="card__trip">
+                      <div class="card__trip__bloc1"></div>
+                      <div class="card__trip__bloc2">
+                          <div class="card__trip__bloc2">
+                              <p class="card__trip__txt">May, 5 <br>Tshopo » Makiso</p>
+                              <p class="card__trip__txt" type="button" id="modal__call6">Detail</p>
+                            </div>
+                      </div>
+                    </div>
+        </section>
+      </div>
+
+  </div>
+</div>
+<!--
+   <div>
+    <div class="container">
+   <div class="wrapper trip-detail">
+      <div class="title-center">
+         <h1>Mangobo » Kisangani</h1>
+         <p> # trips available from Mangobo to Kisangani</p>
+      </div>
+      <section>
+         <article id="first-trip">
+            <p class="time-go">15:00</p>
+            <p class="time-ar">16:00</p>
+            <p class="trip-or">Mangobo</p>
+            <p class="trip-de">Kisangani</p>
+            <p class="bus-im"><i class="fa fa-bus"></i></p>
+            <p class="bus-na">AAAAC</p>
+            <p class="seat-av">20<br>seats available</p>
+            <p class="book-bu"><a href="./book-now.html">Book now</a></p>
+         </article>
+         <article id="second-trip">
+            <p class="time-go">15:00</p>
+            <p class="time-ar">16:00</p>
+            <p class="trip-or">Mangobo</p>
+            <p class="trip-de">Kisangani</p>
+            <p class="bus-im"><i class="fa fa-bus"></i></p>
+            <p class="bus-na">AAAAC</p>
+            <p class="seat-av">20<br> seats available</p>
+            <p class="book-bu"><a href="./book-now.html">Book now</a></p>
+            </article>
+         <article id="first-trip">
+            <p class="time-go">15:00</p>
+            <p class="time-ar">16:00</p>
+            <p class="trip-or">Mangobo</p>
+            <p class="trip-de">Kisangani</p>
+            <p class="bus-im"><i class="fa fa-bus"></i></p>
+            <p class="bus-na">AAAAC</p>
+            <p class="seat-av">20<br> seats available</p>
+            <p class="book-bu"><a href="./book-now.html">Book now</a></p>
+         </article>
+      </section>
+
    </div>
+   <div class="wrapper trip-detail">
+      <div class="title-center">
+         <h1>Mangobo » Tshopo</h1>
+         <p> # trips available from Mangobo to Kisangani</p>
+      </div>
+      <section>
+         <article id="first-trip">
+            <p class="time-go">15:00</p>
+            <p class="time-ar">16:00</p>
+            <p class="trip-or">Mangobo</p>
+            <p class="trip-de">Kisangani</p>
+            <p class="bus-im"><i class="fa fa-bus"></i></p>
+            <p class="bus-na">AAAAC</p>
+            <p class="seat-av">20<br>seats available</p>
+            <p class="book-bu"><a href="./book-now.html">Book now</a></p>
+         </article>
+         <article id="second-trip">
+            <p class="time-go">15:00</p>
+            <p class="time-ar">16:00</p>
+            <p class="trip-or">Mangobo</p>
+            <p class="trip-de">Kisangani</p>
+            <p class="bus-im"><i class="fa fa-bus"></i></p>
+            <p class="bus-na">AAAAC</p>
+            <p class="seat-av">20<br> seats available</p>
+            <p class="book-bu"><a href="./book-now.html">Book now</a></p>
+         </article>
+         <article id="first-trip">
+            <p class="time-go">15:00</p>
+            <p class="time-ar">16:00</p>
+            <p class="trip-or">Mangobo</p>
+            <p class="trip-de">Kisangani</p>
+            <p class="bus-im"><i class="fa fa-bus"></i></p>
+            <p class="bus-na">AAAAC</p>
+            <p class="seat-av">20<br> seats available</p>
+            <p class="book-bu"><a href="./book-now.html">Book now</a></p>
+         </article>
+      </section>
 
+   </div>
+   </div>
+   </div>
+  -->
    <!-- Footer -->
    <footer class="footer container">
       <p>&copy; 2019 Code and design with ❤ by <a href="www.abelmbula.com">Abel</a></p>

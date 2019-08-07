@@ -8,7 +8,8 @@
    <meta name="description" content="Andela Way Farer Project">
    <meta name="author" content="Abel Lifaefi Mbula">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">   
+   <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+
    <link rel="stylesheet" href="css/style.css">
 
    <!--[if lt IE 9]>
@@ -16,81 +17,44 @@
    <![endif]-->
 </head>
 <body>
-      <header>
-         <div class="top-header">
-            <div class="container">
-               <div class="top-header-content">
-                  <div class="top-header-lt">
-                     <ul class="plain-list">
-                        <li><a href="#"><i class="fa fa-phone"></i>&nbsp; (+243)-000-000-152</a></li>&nbsp; &nbsp; 
-                        <li><a href="#"><i class="fa fa-envelope"></i>&nbsp;  contact@wayfarer.cd</a></li>
-                     </ul>
-                  </div>
-                  <div class="top-header-rt">
-                     <ul class="plain-list">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>&nbsp; &nbsp; 
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>&nbsp; &nbsp; 
-                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>&nbsp; &nbsp; 
-                     </ul>
-                  </div>
-               </div>
+  <header>
+        <div class="container">
+            <div class="nav-content">
+              <div class="nav-lt">
+                  <a href="" id="txt__logo">
+                    <i class="fa fa-bus"></i> &nbsp; way Farer
+                  </a>
+              </div>
+              <nav class="nav-rt">
+                  <a href="./templates/trip.html" title="See available trips">Trips</a>
+                  <a href="./templates/login.html">Login</a>
+                  <a href="./templates/register.html">Register</a>
+              </nav>
             </div>
-         </div>
-         <div class="main-nav">
-            <div class="container">
-               <div class="nav-content">
-                  <div class="nav-lt">
-                     <a href="#">
-                        <span id="logo-txt-lt"></span>way</span><i class="fa fa-bus"></i><span id="logo-bckgnd"><span id="logo-txt-rt">Farer</span></span>
-                     </a>
-                  </div>
-                  
-                  <nav class="nav-rt">
-                     <a href="./templates/register.html">Register</a>
-                     <a href="./templates/login.html">Login</a>
-                  </nav>
-               </div>
-            </div>
-         </div>
-      </header>
+        </div>
 
-      <div id="main-entry-bckgrnd">
-         <div class="container">
-            <main role="main" class="main">
-               <h1>Do you want to plan your trip?</h1>
-               <article>
-                  <p>
-                     <strong>Way Farer</strong> is a new and modern platform to book bus ticket in Kisangani city. We are the biggist bus transportation
-                     netwok that offer comftable buses to move in the whole city. Don't wait, plan your trip with us; it's easy and fun as playing music.
-                  </p>
-                  <a href="#browse-trips" type="button">Book now</a>
-               </article>       
-            </main>
-         </div>
+  </header>
 
-      </div>
-      <section class="quick-booking">
-         <div class="container">
-            <article>
-               
-                  <h2>Where do you want to go?</h2>
-               
-               <div>
-                  <div id="browse-trips">
-                     <a href="#quick-booking1" id="trips__show">View all trips (<span id="trips__total"></span>)</a>
-                  </div>
-                  <ul class="list__trips" id="list__trips"></ul>
-               </div>
-               
-            </article>
-         </div>     
-      </section>
+  <div id="main-entry-bckgrnd">
+    <div class="container">
+      <main role="main" class="main" id="main__landing">
+          <h1>Do you want to plan your trip?</h1>
+          <article>
+            <p>
+              <strong>Way Farer</strong> is a new and modern platform to book bus ticket in Kisangani city. We are the biggist bus transportation
+              netwok that offer comftable buses to move in the whole city. Don't wait, plan your trip with us; it's easy and fun as playing music.
+            </p>
+            <a href="./templates/register.html" type="button">Get started</a>
+          </article>
+      </main>
+    </div>
+  </div>
 
-      <!-- Footer -->
-      <footer class="footer container">
-         <p>&copy; 2019 Code and design with ❤ by <a href="www.abelmbula.com">Abel</a></p>
-      </footer> 
- 
+  <!-- Footer -->
+  <footer class="footer">
+      <p>&copy; 2019 Code and design with ❤ by <a href="www.abelmbula.com">Abel</a></p>
+  </footer>
+
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>

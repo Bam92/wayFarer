@@ -173,6 +173,25 @@ describe('AUTH CONTROLLER', () => {
 
   describe('/POST SIGN IN', () => {
     const signinUrl = `${baseUrl}signin`;
+
+    it('should retrieve the token', (done) => {
+      chai.request(app)
+        .post(signinUrl)
+        .send({
+          email: 'dklf@gmail.com',
+          password: 'usr$_18@',
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.be.an('object');
+          expect(res.body.data).to.have.property('token');
+          expect(res.body.data.token).to.not.be.empty;
+          done();
+        });
+    });
+
     it('should sign in a user with valid credential', (done) => {
       chai.request(app)
         .post(signinUrl)
@@ -185,7 +204,7 @@ describe('AUTH CONTROLLER', () => {
           expect(res).to.be.an('object');
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.be.an('object');
-         // expect(res.body.data).to.have.property('token');
+          expect(res.body.data).to.have.property('token');
           /*expect(res.body.data).to.have.property('id');
           expect(res.body.data).to.have.property('first_name');
           expect(res.body.data).to.have.property('last_name');

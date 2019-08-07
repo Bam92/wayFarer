@@ -1,12 +1,8 @@
 /* Typography imported from Google */
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Source+Sans+Pro:200,400');
+@import url('https://fonts.googleapis.com/css?family=Gothic+A1&display=swap');
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
-}
-
-p, a {
-  font-family: 'Source Sans Pro', sans-serif;
+body {
+  font-family: 'Gothic A1', sans-serif;
 }
 
 /* Generic styles */
@@ -18,15 +14,6 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-}
-
-/*#logo-txt-rt {
-    color: #fff;
-    padding: 5px;
-}*/
-
-#logo-bckgnd {
-  background: #00AFF5;
 }
 
 a {
@@ -49,35 +36,54 @@ a:hover, input[type="submit"]:hover {
 .container {
   padding: 0px 10%;
 }
+
+.trip__container {
+  min-height: 100%;
+}
   /*------ header ------*/
 .plain-list {
-    list-style-type: none;
-    text-decoration: none;
-    margin: 0px;
-    padding: 0px;
-    display: flex;
-    flex-direction: row;
+  list-style-type: none;
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
 }
 
 .plain-list a {color: #fff;}
 
 header {
+  background: #00AFF5;
+  height: 5.6rem;
   display: grid;
- /* grid: inherit;
-  grid-template-rows: repeat(2, 1fr);*/
   align-items: center;
+  color: #fff;
 }
 
-.top-header {
-  /*grid-row: 1;*/
+.main-nav {
+  /*grid-row: 2;*/
+  box-shadow: 0 1pt 4pt rgba(0,0,0,0.16), 0 2pt 8pt rgba(0,0,0,0.08);
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  color: #fff;
   background: #00AFF5;
 }
 
-.top-header-content, .nav-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 10px 15px;
-    align-items: center;
+.nav-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.nav-rt {
+  grid-column: 2;
+}
+
+.nav-rt a {
+  margin-right: .9rem;
 }
 
 .top-header-lt, .nav-lt {
@@ -89,7 +95,7 @@ header {
     justify-self: end;
 }
 
-.nav-rt a {color: #00AFF5;}
+.nav-rt a, #txt__logo {color: #fff;}
 
 #sub__menu {
   list-style-type: none;
@@ -121,31 +127,26 @@ header {
   display: none;
   width: 200px;
   position: absolute;
-  right: 75px;
-  top: 115px;
+  right: 60px;
+  top: 85px;
   background-color: #fff;
   border-color: rgba(0,0,0,.2);
   border: 1px solid #ccc;
   -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.2);
   box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  color: #00AFF5;
+  text-transform: none;
 }
 
 .popoger__menu__item {
   margin-bottom: 10px;
 }
 
-.main-nav {
-  grid-row: 2;
-  box-shadow: 0 1pt 4pt rgba(0,0,0,0.16), 0 2pt 8pt rgba(0,0,0,0.08);
+.popoger__menu__item a {
+  color: #00AFF5;
 }
 
-/*header a {grid-column: 1;}
-header nav {grid-column: 2;}*/
-
-
 .menu__sub__wrapper {
-  height: 205px;
-  overflow-y: auto;
   padding-top: 15px;
   padding-bottom: 15px;
 }
@@ -168,15 +169,20 @@ header nav {grid-column: 2;}*/
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 80vh;
+  min-height: 75vh;
+  display: grid;
+  align-items: center;
 }
 
 .main {
   color: #ffffff;
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  place-items: center;
+  /*display: flex;
+  align-items: center;*/
+
+}
+
+#main__landing {
+  text-align: center;
 }
 
 .main a, input[type="submit"] {
@@ -185,26 +191,27 @@ header nav {grid-column: 2;}*/
   color: #ffffff;
   border-radius: 5px;
   background: #00AFF5;
-  font-family: 'Playfair Display', serif;
   text-transform: uppercase;
 }
 
-.quick-booking {
-    background-color: #5dd167 !important;
-}
-
-.quick-booking article {
+.auth__wrapper {
+  background: hsla(0,0%,100%,.3);
+  /*padding: 50px 44px 0;*/
+  border: 1px solid #00AFF5;
+  border-radius: 4px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-gap: 1rem;
-  color: white;
-  place-items: center;
+  align-items: center;
+  width: 80vh;
+  margin: auto;
 }
 
-#browse-trips {
-    display: block;
-    text-align: right;
+.auth__content {
+  /*margin: auto;*/
+  padding: 15px;
+  text-align: center;
 }
+
+.auth__content h2 {color: #fff;}
 
 .list__trips {
     display: grid;
@@ -230,12 +237,20 @@ header nav {grid-column: 2;}*/
 .footer {
   text-align: center;
   background-color: #ededed;
-  padding: 10px 15px;
+  /*padding: 10px 15px;*/
+  height: 5rem;
+  bottom: 0;
+  /*position: absolute;*/
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+
 }
 
 /*------------- Sign up page ---------*/
 input {
-    width: 80vh;
+    width: 70vh;
     border-radius: 5px;
     padding: 1rem;
     margin-top: .75rem;
@@ -269,6 +284,7 @@ input, input::placeholder {
 .navigation__list {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .navigation__item {
@@ -280,24 +296,162 @@ input, input::placeholder {
 }
 
 /*---------- Trip detail ------------*/
-.wrapper {
-    min-height: calc(100vh - 165px);
-    /* 80px header + 55px footer*/
+.summary__booking {
+  color: #fff;
+}
+
+.summary__booking .sub__title{
+  font-weight: bold;
+}
+.wrapper__trip {
+  display: flex;
+ /* grid-template-columns: 1fr 3fr;*/
+ flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.trip__entry {
+  min-height: 75vh;
+}
+
+.wrapper__trip aside {
+  width: 15%;
+}
+
+.wrapper__trip section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 75%;
+}
+
+.card__trip {
+  border-radius: 16px;
+  box-shadow: 0 1pt 4pt rgba(0,0,0,0.16), 0 2pt 8pt rgba(0,0,0,0.08);
+  min-width: 15rem;
+  height: 15rem;
+  margin-bottom: 35px;
+}
+
+.card__trip:hover {
+  box-shadow: none;
+}
+
+.card__trip__bloc1 {
+  height: 50%;
+  border-bottom: 1px solid #00AFF5;
+}
+
+.card__trip__txt {
+  text-align: center;
+}
+
+.card__trip__txt[type='button'], td p[type='button']  {
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
+  color: #ffffff;
+  border-radius: 5px;
+  background: #00AFF5;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+td p[type='button'] {
+ text-align: center;
+ width: 100%;
+}
+
+/* ----- Modal ------*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+.modal-body {
+  text-align: center;
+  /*margin-left: auto;
+  margin-right: auto;*/
+}
+
+.modal-header {
+  text-align: center;
+  background: #00AFF5;
+  color: #fff;
+  padding: 5px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.card__trip__txt[type='button'] {
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
+  color: #ffffff;
+  border-radius: 5px;
+  background: #00AFF5;
+  text-transform: uppercase;
+  padding: 10px;
+}
+.title__trip {
+  text-align: center;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  padding: 10px;
+  text-transform: uppercase;
+  color: #00AFF5;
+  background-color: #fff;
+  border: .125rem solid transparent;
 }
 
 .trip-detail {
   width: 60%;
-  display: grid;
+  min-height: 75vh;
+}
+
+.bookings {
   margin-left: auto;
   margin-right: auto;
 }
 
 .book-now {
-    grid-template-columns: 25% 70%;
-    grid-gap: 15px;
-    margin-bottom: 15px;
-    margin-top: 30px;
-    text-align: center;
+  grid-template-columns: 25% 70%;
+  grid-gap: 15px;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  text-align: center;
 }
 
 .book-now section {
@@ -358,10 +512,17 @@ input, input::placeholder {
 }
 
 /*--------- Booked trips -----------*/
+.bookings section {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
 table  {
   width: 100%;
   margin-bottom: 25px;
 }
+
 table, th, td  {
   border: 1px solid #00AFF5;
   border-collapse: collapse;
@@ -375,14 +536,85 @@ th, td {
 table tr:nth-child(even) {
   background-color: #eee;
 }
+
 table tr:nth-child(odd) {
  background-color: #fff;
 }
+
 table th {
   background-color: #00AFF5;
   color: #fff;
 }
+
+table .card__trip__bloc1 {
+  color: #fff;
+  text-align: center;
+}
+
 /*---------- Responsive -------------*/
+/* For purpose of my responsive site I stick on the same breakpoints
+as defined by Bootstrap*/
+
+@media all and (max-width: 1140px)  { /* Extra Large */
+  #main-entry-bckgrnd {
+    min-height: 120vh;
+  }
+
+  h1 {
+    font-size: 7rem;
+    padding-bottom: 3rem;
+  }
+
+  .nav-content {
+    font-size: 5rem;
+  }
+
+  .main p {
+    font-size: 4rem;
+    font-weight: 200;
+  }
+}
+
+@media all and (max-width: 992px)  { /* Large */
+  #main-entry-bckgrnd {
+    min-height: 80vh;
+  }
+
+  h1 {
+    font-size: 5rem;
+    padding-bottom: 2rem;
+  }
+
+  .nav-content {
+    font-size: 2rem;
+  }
+
+  .main p {
+    font-size: 3rem;
+    font-weight: 200;
+  }
+}
+
+@media all and (max-width: 768px)  { /* Medium */
+  #main-entry-bckgrnd {
+    min-height: 80vh;
+  }
+
+}
+
+@media all and (max-width: 540px)  { /* Small */
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .main p {
+    font-size: .7rem;
+  }
+
+
+}
+
 @media (max-width: 284px) {
     .list__trips {
         grid-template-columns: 1fr;
@@ -395,7 +627,7 @@ table th {
         text-align: center;
     }
 
-    .main {
+    .main, #main-entry-bckgrnd {
         height: fit-content;
     }
 

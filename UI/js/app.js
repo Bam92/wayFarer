@@ -120,3 +120,71 @@ if (hide) {
     hide.innerHTML = 'View all trips';
   });
 }
+
+const getTripCards = document.querySelectorAll('.card__trip__bloc1');
+if (getTripCards) {
+
+  for (let i = 0; i < getTripCards.length; i += 1) {
+    console.log(getTripCards[i])
+    getTripCards[i].style.background = `url("../images/trips/${i+1}.jpg")`;
+    getTripCards[i].style.backgroundSize = 'cover';
+    getTripCards[i].style.backgroundPosition = 'center';
+    getTripCards[i].style.backgroundRepeat = 'no-repeat';
+  }
+}
+
+// Modal
+const modal = document.getElementById('modal');
+const openModal1 = document.getElementById('modal__call1');
+const openModal2 = document.getElementById('modal__call2');
+const openModal3 = document.getElementById('modal__call3');
+const openModal4 = document.getElementById('modal__call4');
+const openModal5 = document.getElementById('modal__call5');
+const openModal6 = document.getElementById('modal__call6');
+const closeModal = document.getElementsByClassName('close')[0];
+
+if (openModal1) {
+  openModal1.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+}
+
+if (openModal2) {
+  openModal2.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+}
+
+if (openModal3) {
+  openModal3.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+}
+
+if (openModal4) {
+  openModal4.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+}
+
+if (openModal5) {
+  openModal5.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+}
+
+if (openModal6) {
+  openModal6.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+}
+
+if (closeModal) {
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+}
+
+window.addEventListener('click', e => {
+  if (e.target === modal) modal.style.display = 'none';
+});
