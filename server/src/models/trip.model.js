@@ -2,6 +2,11 @@ import trips from '../db/trips';
 
 const findAllTrips = () => trips;
 const findTrip = id => trips.find(x => x.id === id);
+const tripExists = (from, to) => {
+  trips.find(trip => trip.origin === from && trip.destination === to);
+};
+
+console.log('test at modal', tripExists('Kisangani', 'Makiso'))
 const addTrip = (capacity, origin, destination, date, fare) => {
   const newTrip = {
     trip_id: trips.length + 1,
@@ -17,4 +22,4 @@ const addTrip = (capacity, origin, destination, date, fare) => {
   return newTrip;
 };
 
-export default { findAllTrips, findTrip, addTrip };
+export default { findAllTrips, findTrip, addTrip, tripExists };

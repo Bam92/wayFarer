@@ -1,16 +1,18 @@
 import chaiHttp from 'chai-http';
 import chai from 'chai';
 import app from '../app';
+//import { verifyToken, verifyAdmin, generateToken } from '../src/middleware/middlewares';
+//import privateKey from '../config';
 
 const { expect } = chai;
 chai.use(chaiHttp);
 
-const baseUrl = '/api/v1/';
-
+const baseUrl = '/api/v1';
+/*
 describe ('/GET TRIPS', () => {
   it('getTrips() should respond with 201 and return a list of all trips', (done) => {
     chai.request(app)
-      .get(`${baseUrl}trips`)
+      .get(`${baseUrl}/trips`)
       .end((err, res) => {
         expect('Content-Type', /json/);
         expect(res).to.have.status(201);
@@ -75,3 +77,4 @@ describe ('/POST TRIP', () => {
       });
   });
 });
+*/

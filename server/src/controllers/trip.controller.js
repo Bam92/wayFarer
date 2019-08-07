@@ -1,5 +1,4 @@
 import tripModel from '../models/trip.model';
-import { stat } from 'fs';
 
 class TripController {
   /**
@@ -32,9 +31,10 @@ createTrip(req, res) {
     fare: req.body.fare,
   };
 
-  const id = req.id;
+  console.log(tripModel.tripExists(req.body.origin, req.body.destination))
+  console.log(tripModel.findTrip(2))
 
-  if (tripModel.findTrip(id)) {
+  if (tripModel.tripExists(req.body.origin, req.body.destination)) {
     const status = 401;
     return res.status(status).send({
       status,
@@ -46,7 +46,7 @@ createTrip(req, res) {
 
   if (createdTrip) {
     const status = 201;
-    return res.status(201).send({
+    return res.status(status).send({
       status,
       message: 'Trip successfully added',
       data: createdTrip
@@ -104,8 +104,6 @@ cancelTrip(req, res) {
 getTrip(req, res) {
   const id = req.params.id;
   const trip = tripModel.findTrip(parseInt(id))
-
-console.log('tttt', tripModel.findTrip(id), 'id: ', id);
 
   if (!trip) {
     const status = 404;

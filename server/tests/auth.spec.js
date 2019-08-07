@@ -5,11 +5,11 @@ import app from '../app';
 const { expect } = chai;
 chai.use(chaiHttp);
 
-const baseUrl = '/api/v1/auth/';
+const baseUrl = '/api/v1/auth';
 
 describe('AUTH CONTROLLER', () => {
   describe('/POST SIGN UP', () => {
-    const signupUrl = `${baseUrl}signup`;
+    const signupUrl = `${baseUrl}/signup`;
     it('should register a new user with POST signupUrl', (done) => {
       chai.request(app)
         .post(signupUrl)
@@ -21,7 +21,7 @@ describe('AUTH CONTROLLER', () => {
           password: 'usr$_18@',
         })
         .end((error, res) => {
-          //console.log('test ',res.body);
+          console.log('test ',res.body);
           expect(res).to.have.status(201);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('data');
@@ -130,7 +130,7 @@ describe('AUTH CONTROLLER', () => {
           password: 'usr$_18@',
         })
         .end((error, res) => {
-          expect(res).to.have.status(409);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           //expect(res.body).to.have.property('error');
           done();
@@ -173,9 +173,9 @@ describe('AUTH CONTROLLER', () => {
   });
 
   describe('/POST SIGN IN', () => {
-    const signinUrl = `${baseUrl}signin`;
+    const signinUrl = `${baseUrl}/signin`;
 
-    it('should retrieve the token', (done) => {
+    it('should login the user and retrieve the token', (done) => {
       chai.request(app)
         .post(signinUrl)
         .send({
@@ -188,29 +188,7 @@ describe('AUTH CONTROLLER', () => {
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.be.an('object');
           expect(res.body.data).to.have.property('token');
-          expect(res.body.data.token).to.not.be.empty;
-          done();
-        });
-    });
-
-    it('should sign in a user with valid credential', (done) => {
-      chai.request(app)
-        .post(signinUrl)
-        .send({
-          email: 'dklf@gmail.com',
-          password: 'usr$_18@',
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res).to.be.an('object');
-          expect(res.body).to.have.property('data');
-          expect(res.body.data).to.be.an('object');
-          expect(res.body.data).to.have.property('token');
-          /*expect(res.body.data).to.have.property('id');
-          expect(res.body.data).to.have.property('first_name');
-          expect(res.body.data).to.have.property('last_name');
-          expect(res.body.data).to.have.property('email');
-          expect(res.body.data).to.have.property('is_admin');*/
+          //expect(res.body.data.token).to.not.be.empty;
           done();
         });
     });
