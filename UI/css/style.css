@@ -415,6 +415,16 @@ td p[type='button'] {
   cursor: pointer;
 }
 
+.card__trip__txt[type='button'] {
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
+  color: #ffffff;
+  border-radius: 5px;
+  background: #00AFF5;
+  text-transform: uppercase;
+  padding: 10px;
+}
 .title__trip {
   text-align: center;
   margin-top: 35px;
@@ -424,16 +434,10 @@ td p[type='button'] {
   color: #00AFF5;
   background-color: #fff;
   border: .125rem solid transparent;
-  /*box-shadow: 0 1pt 4pt rgba(0,0,0,0.16), 0 2pt 8pt rgba(0,0,0,0.08);
-  width: 100px;*/
 }
 
 .trip-detail {
   width: 60%;
-
-  /*margin-left: auto;
-  margin-right: auto;*/
-
   min-height: 75vh;
 }
 
@@ -569,8 +573,6 @@ as defined by Bootstrap*/
     font-size: 4rem;
     font-weight: 200;
   }
-
-
 }
 
 @media all and (max-width: 992px)  { /* Large */
@@ -591,8 +593,6 @@ as defined by Bootstrap*/
     font-size: 3rem;
     font-weight: 200;
   }
-
-
 }
 
 @media all and (max-width: 768px)  { /* Medium */
