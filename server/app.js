@@ -1,7 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import UserController from './src/controllers/user.controller';
-import TripController from './src/controllers/trip.controller';
+import morgan from 'morgan';
+import auth from './src/routes/auth';
+import trip from './src/routes/trip';
 
 // set up the express app
 const app = express();
@@ -10,11 +11,24 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const baseUrl = '/api/v1/';
+app.use(morgan('dev'));
+const baseUrl = '/api/v1';
 
-app.post(`${baseUrl}auth/signup`, UserController.signUpUser);
-app.post(`${baseUrl}auth/signin`, UserController.logInUser);
-app.get(`${baseUrl}trips`, TripController.getTrips);
-app.get(`${baseUrl}trips/:id`, TripController.getTrip);
+app.use(`${baseUrl}/auth`, auth);
+app.use(baseUrl, trip);
+
+// / HANDLE SOME ERRORS ///
+
+// 404
+app.use((req, res) => res.status(404).send({
+  status: 404,
+  message: `Oh! I am sorry the Route ${req.url} couldn't be found in this Andela server. Contact Emmanuel or Eric`,
+}));
+
+// 500 or any
+app.use((err, req, res) => res.status(500).send({
+  status: 500,
+  message: `Your request returned with a server error ${err}`,
+}));
 
 export default app;
