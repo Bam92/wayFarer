@@ -12,8 +12,8 @@ export const verifyToken = (req, res, next) => {
   const headerToken = authorization.split(' ')[1] || '';
   if (!headerToken) {
     return res.status(403).json({
-      status: 'error',
-      error: 'No token provided',
+      status: 403,
+      message: 'No token provided',
     });
   }
   jwt.verify(headerToken, privateKey, (err, decoded) => {
@@ -35,10 +35,15 @@ export const verifyAdmin = (req, res, next) => {
 
   if (!currentUser.is_admin) {
     return res.status(403).json({
-      status: 'error',
-      error: 'Only admin',
+      status: 403,
+      message: 'Only admin can proceed this action',
     });
   }
 
   next();
 };
+
+export const getuser = (req) => {
+  const { currentUser } = req;
+  return currentUser;
+}
