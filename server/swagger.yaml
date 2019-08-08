@@ -1,0 +1,188 @@
+openapi: 3.0.0
+info:
+  title: Way Farer
+  description: WayFarer is a public bus transportation booking service.
+  version: 0.1.9
+servers:
+  - url: http://localhost:9000/api/v1
+
+basePath: "/api/v1"
+tags:
+- name: "auth"
+  description: "Access to protected ressources"
+- name: "trip"
+  description: "Access to trip ressources"
+schemes:
+- "https"
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  JWT_Token_Admin:
+    type: apiKey
+    in: header
+    name: Authorization
+  JWT_Token_User:
+    type: apiKey
+    in: header
+    name: Authorization
+
+paths:
+  /auth/signup:
+    post:
+      tags:
+      - "auth"
+      summary: Creates a user.
+      operationId: authSignup
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created user object"
+          required: true
+          schema:
+            $ref: "#/definitions/UserSignup"
+      responses:
+        '201':
+          description: User created
+
+  /auth/signin:
+    post:
+      tags:
+      - "auth"
+      summary: Logs in a user.
+      operationId: authSignin
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Signed in a user object"
+          required: true
+          schema:
+            $ref: "#/definitions/UserSignin"
+      responses:
+        '200':
+          description: OK
+
+  /trips:
+    post:
+      security:
+      - JWT_Token_Admin: []
+      tags:
+      - "trip"
+      summary: Create a new trip.
+      operationId: createTrip
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "New trip object created"
+          required: true
+          schema:
+            $ref: "#/definitions/TripCreate"
+      responses:
+        '200':
+          description: OK
+    get:
+      security:
+      - JWT_Token_User: []
+      tags:
+      - "trip"
+      summary: Get all trips.
+      operationId: getTrip
+      parameters:
+        - in: "header"
+          name: "token"
+          description: "New trip object created"
+          required: true
+          schema:
+            $ref: "#/definitions/TripList"
+      responses:
+        '200':
+          description: OK
+  /trips/{id}:
+    get:
+      security:
+      - JWT_Token_User: []
+      tags:
+      - "trip"
+      summary: Get a specif trip.
+      operationId: tripId
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "Information about one trip"
+          required: true
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+        - in: "header"
+          name: "token"
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/TripList"
+
+
+definitions:
+  UserSignup:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+      password:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+        exemple: Mbula
+    required:
+      - email
+      - password
+      - first_name
+      - last_name
+  UserSignin:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+      password:
+        type: string
+    required:
+      - email
+      - password
+  TripCreate:
+    type: object
+    properties:
+      token:
+        type: string
+      seating_capacity:
+        type: string
+      origin:
+        type: string
+      destination:
+        type: string
+      trip_date:
+        type: string
+      fare:
+        type: string
+  TripList:
+    type: object
+    properties:
+      id:
+        type: integer
+      seating_capacity:
+        type: string
+      origin:
+         type: string
+      destination:
+         type: string
+      trip_date:
+         type: string
+      fare:
+         type: string
