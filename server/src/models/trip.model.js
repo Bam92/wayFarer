@@ -3,7 +3,7 @@ import trips from '../db/trips';
 const findAllTrips = () => trips;
 const findTrip = id => trips.find(x => x.id === id);
 const tripExists = (from, to) => {
-  trips.find(trip => trip.origin === from && trip.destination === to);
+  return trips.find(trip => trip.origin === from && trip.destination === to);
 };
 
 console.log('test at modal', tripExists('Kisangani', 'Makiso'))
