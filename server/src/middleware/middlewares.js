@@ -8,8 +8,8 @@ export const generateToken = playload => jwt.sign(playload, privateKey);
 // Authorization: Andela <access_token>
 
 export const verifyToken = (req, res, next) => {
-  const { authorization = '' } = req.headers;
-  const headerToken = authorization.split(' ')[1] || '';
+  const { token: headerToken = '' } = req.headers;
+  console.log('tttt', headerToken)
   if (!headerToken) {
     return res.status(403).json({
       status: 403,
@@ -19,11 +19,18 @@ export const verifyToken = (req, res, next) => {
   jwt.verify(headerToken, privateKey, (err, decoded) => {
     if (err) {
       return res.status(403).json({
-        status: 'error',
+        status: 403,
         error: err.message || 'Invalid token or token expired',
       });
     }
     const currentUser = user.findUserById(decoded.id);
+
+    if (!currentUser) {
+      return res.status(403).json({
+        status: 403,
+        error: 'Invalid token or token expired',
+      });
+    }
     console.log('test: ', decoded)
     req.currentUser = currentUser;
     return next();

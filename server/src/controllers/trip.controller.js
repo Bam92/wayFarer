@@ -31,14 +31,11 @@ createTrip(req, res) {
     fare: req.body.fare,
   };
 
-  console.log(tripModel.tripExists(req.body.origin, req.body.destination))
-  console.log(tripModel.findTrip(2))
-
   if (tripModel.tripExists(req.body.origin, req.body.destination)) {
     const status = 401;
     return res.status(status).send({
       status,
-      message: 'Trip already exists!'
+      message: 'Trip already exists!',
     });
   }
 
