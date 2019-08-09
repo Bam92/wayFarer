@@ -7,8 +7,6 @@ import bookingData from '../src/db/booking';
 const { expect } = chai;
 chai.use(chaiHttp);
 
-const baseUrl = '/api/v1';
-
 describe('App basic tests', () => {
   it('App should exists', () => {
     expect(app).to.be.a('function');

@@ -1,6 +1,10 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+
+
 import auth from './src/routes/auth';
 import trip from './src/routes/trip';
 import booking from './src/routes/booking';
@@ -8,16 +12,30 @@ import booking from './src/routes/booking';
 // set up the express app
 const app = express();
 
+const swaggerDocument = YAML.load('server/swagger.yaml')
+
 // Parse incoming requests data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(morgan('dev'));
+
 const baseUrl = '/api/v1';
 
+//  / ROUTES ///
 app.use(`${baseUrl}/auth`, auth);
 app.use(baseUrl, trip);
+<<<<<<< HEAD
+
+//  / SWAGGER ///
+const options = {
+  customCss: '.swagger-ui .topbar { display: none }'
+};
+
+app.use('/docs', swaggerUi.serve, swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+
+=======
 app.use(baseUrl, booking);
+>>>>>>> develop
 // / HANDLE SOME ERRORS ///
 
 // 404
