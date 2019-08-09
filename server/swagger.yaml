@@ -4,13 +4,14 @@ info:
   description: WayFarer is a public bus transportation booking service.
   version: 0.1.9
 servers:
+  - url: https://way-farer-andela.herokuapp.com/api/v1
+    description: Main (production) server
   - url: http://localhost:9000/api/v1
-
-basePath: "/api/v1"
+    description: Testing (local) server
 tags:
-- name: "auth"
+- name: "User authentification"
   description: "Access to protected ressources"
-- name: "trip"
+- name: "Trip operations"
   description: "Access to trip ressources"
 schemes:
 - "https"
@@ -22,17 +23,17 @@ securityDefinitions:
   JWT_Token_Admin:
     type: apiKey
     in: header
-    name: Authorization
+    name: token
   JWT_Token_User:
     type: apiKey
     in: header
-    name: Authorization
+    name: token
 
 paths:
   /auth/signup:
     post:
       tags:
-      - "auth"
+      - "User authentification"
       summary: Creates a user.
       operationId: authSignup
       parameters:
@@ -49,7 +50,7 @@ paths:
   /auth/signin:
     post:
       tags:
-      - "auth"
+      - "User authentification"
       summary: Logs in a user.
       operationId: authSignin
       parameters:
@@ -66,12 +67,14 @@ paths:
   /trips:
     post:
       security:
-      - JWT_Token_Admin: []
+        - JWT_Token_Admin: []
       tags:
-      - "trip"
+        - "Trip operations"
       summary: Create a new trip.
       operationId: createTrip
       parameters:
+        - in: "header"
+          name: "token"
         - in: "body"
           name: "body"
           description: "New trip object created"
@@ -83,9 +86,9 @@ paths:
           description: OK
     get:
       security:
-      - JWT_Token_User: []
+        - JWT_Token_User: []
       tags:
-      - "trip"
+        - "Trip operations"
       summary: Get all trips.
       operationId: getTrip
       parameters:
@@ -101,9 +104,9 @@ paths:
   /trips/{id}:
     get:
       security:
-      - JWT_Token_User: []
+        - JWT_Token_User: []
       tags:
-      - "trip"
+        - "Trip operations"
       summary: Get a specif trip.
       operationId: tripId
       parameters:
@@ -124,6 +127,52 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/TripList"
+  /trips/{id}/cancel:
+    patch:
+      security:
+        - JWT_Token_Admin: []
+      tags:
+        - "Trip operations"
+      summary: Change the status of a trip.
+      operationId: tripCancel
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "Information about one trip"
+          required: true
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+        - in: "header"
+          name: "token"
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+  /bookings:
+    post:
+      security:
+        - JWT_Token_User: []
+      tags:
+        - "Booking operations"
+      summary: Book a trip.
+      operationId: bookId
+      parameters:
+        - in: "header"
+          name: "token"
+          required: true
+          type: string
+        - in: "body"
+          name: "body"
+          description: "tip id"
+          required: true
+          schema:
+            $ref: "#/definitions/Booking"
+      responses:
+        '200':
+          description: OK
 
 
 definitions:
@@ -186,3 +235,8 @@ definitions:
          type: string
       fare:
          type: string
+  Booking:
+    type: object
+    properties:
+      trip_id:
+        typpe: integer
