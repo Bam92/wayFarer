@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import auth from './src/routes/auth';
 import trip from './src/routes/trip';
+import booking from './src/routes/booking';
 
 // set up the express app
 const app = express();
@@ -16,7 +17,7 @@ const baseUrl = '/api/v1';
 
 app.use(`${baseUrl}/auth`, auth);
 app.use(baseUrl, trip);
-
+app.use(baseUrl, booking);
 // / HANDLE SOME ERRORS ///
 
 // 404
