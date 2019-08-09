@@ -7,6 +7,7 @@ import morgan from 'morgan';
 
 import auth from './src/routes/auth';
 import trip from './src/routes/trip';
+import booking from './src/routes/booking';
 
 // set up the express app
 const app = express();
@@ -23,6 +24,7 @@ const baseUrl = '/api/v1';
 //  / ROUTES ///
 app.use(`${baseUrl}/auth`, auth);
 app.use(baseUrl, trip);
+<<<<<<< HEAD
 
 //  / SWAGGER ///
 const options = {
@@ -31,6 +33,9 @@ const options = {
 
 app.use('/docs', swaggerUi.serve, swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
+=======
+app.use(baseUrl, booking);
+>>>>>>> develop
 // / HANDLE SOME ERRORS ///
 
 // 404
