@@ -22,7 +22,7 @@ class BookingController {
   delBooking(req, res) {
     const { id } = req.params;
   if (isNaN(id)) {
-    const status = 404;
+    const status = 409;
     return res.status(status).send({
       status,
       message: 'ID must be a number',
