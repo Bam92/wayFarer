@@ -50,8 +50,6 @@ const findById = id => booking.find(book => book.id === id);
 const checkTrip = trip_id => booking.find(tripBooking => tripBooking.id === trip_id);
 const findTrip = id => trip.find(t => t.id === id);
 
-console.log('trip 1', findTrip(1));
-
 const delBooking = (id) => {
   const bookingIndex = booking.indexOf(findById(id));
   return booking.splice(bookingIndex, 1);
@@ -67,7 +65,6 @@ const bookNow = (trip, user) => {
 
   booking.push(newBook);
 
-  //trip.find(busLicence => )
   return newBook;
 };
 
