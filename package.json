@@ -10,7 +10,8 @@
     "start": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --",
     "dev": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --",
     "test": "mocha --timeout 10000 --require babel-core/register ./server/tests",
-    "test:coverage": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./server/tests"
+    "test:coverage": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./server/tests",
+    "create": "node ./server/db.js createTables"
   },
   "repository": {
     "type": "git",
@@ -47,8 +48,10 @@
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
     "jsonwebtoken": "^8.5.1",
+    "make-runnable": "^1.3.6",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1",
+    "pg": "^7.12.1",
     "swagger-ui-express": "^4.0.7",
     "uid": "0.0.2",
     "yamljs": "^0.3.0"
