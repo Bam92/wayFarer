@@ -74,7 +74,6 @@ if (!exists) {
 
 const bookNow = model.bookNow(trip_id, currentUser.id);
 const tripInfo = model.findTrip(parseInt(trip_id));
-console.log('trip info ', tripInfo);
 
 if (bookNow) {
   delete bookNow.trip_id;
