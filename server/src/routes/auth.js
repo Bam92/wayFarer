@@ -29,6 +29,6 @@ router.post(
 );
 
 // POST Signin
-router.post('/signin', controller.login);
+//router.post('/signin', controller.login);
 
 export default router;
