@@ -6,7 +6,6 @@ const tripExists = (from, to) => {
   return trips.find(trip => trip.origin === from && trip.destination === to);
 };
 
-console.log('test at modal', tripExists('Kisangani', 'Makiso'))
 const addTrip = (capacity, origin, destination, date, fare) => {
   const newTrip = {
     trip_id: trips.length + 1,
