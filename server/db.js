@@ -1,9 +1,7 @@
-//import { Pool } from 'pg';
 //import pg from 'pg';
 const pg = require('pg');
 //import dotenv from 'dotenv';
 const dotenv = require('dotenv');
-//import make-runnabl from 'make-runnabl';
 
 dotenv.config();
 
@@ -17,9 +15,6 @@ const config = {
 };
 
 const pool = new pg.Pool(config);
-  //{
-  //connectionString: process.env.DATATBASE_URL,
-//});
 
 pool.on('connect', () => {
   console.log('Successfully connected to the data base');
@@ -30,13 +25,13 @@ pool.on('connect', () => {
  */
 const createTables = () => {
   const userTable = `CREATE TABLE IF NOT EXISTS
-  user(
-    id UUID PRIMARY KEY,
+  users(
+    id SERIAL PRIMARY KEY,
     email VARCHAR(128) NOT NULL,
     first_name VARCHAR(128) NOT NULL,
     last_name VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL,
-    is_admin VARCHAR(128) NOT NULL,
+    is_admin VARCHAR(128) NOT NULL
   )`;
 
   pool.query(userTable)
