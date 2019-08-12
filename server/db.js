@@ -27,7 +27,7 @@ const createTables = () => {
   const userTable = `CREATE TABLE IF NOT EXISTS
   users(
     id SERIAL PRIMARY KEY,
-    email VARCHAR(128) NOT NULL,
+    email VARCHAR(128) UNIQUE NOT NULL,
     first_name VARCHAR(128) NOT NULL,
     last_name VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL,
@@ -49,7 +49,7 @@ const createTables = () => {
  * Drop Tables
  */
 const dropTables = () => {
-  const queryText = 'DROP TABLE IF EXISTS user';
+  const queryText = 'DROP TABLE IF EXISTS users';
   pool.query(queryText)
     .then((res) => {
       console.log(res);
@@ -69,4 +69,4 @@ pool.on('remove', () => {
 
 module.exports = { createTables, pool, dropTables };
 
-require('make-runnable')
+require('make-runnable');
