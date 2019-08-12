@@ -1,6 +1,9 @@
 import chaiHttp from 'chai-http';
 import chai from 'chai';
+
 import app from '../app';
+import { runQuery } from '../db';
+import Helper from '../src/middleware/Helper';
 
 const { expect } = chai;
 chai.use(chaiHttp);
@@ -8,13 +11,26 @@ chai.use(chaiHttp);
 const baseUrl = '/api/v1/auth';
 
 describe('AUTH CONTROLLER', () => {
+  beforeEach(async () => {
+    const delUser = 'DELETE FROM users WHERE email = $1';
+    const createUser = 'INSERT INTO users(email, first_name, last_name, password, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *';
+    const hashedpassword = Helper.hashPassword('@dminTest');
+    const values = ['test@wayfarer.cd', 'Test', 'Last', hashedpassword, false];
+
+    await runQuery(delUser, ['sarah.test@gmail.com']);
+    await runQuery(delUser, ['test@wayfarer.cd']);
+    await runQuery(createUser, values);
+
+
+  });
+
   describe('/POST SIGN UP', () => {
     const signupUrl = `${baseUrl}/signup`;
     it('should register a new user', (done) => {
       chai.request(app)
         .post(signupUrl)
         .send({
-          email: 'sarah@gmail.com',
+          email: 'sarah.test@gmail.com',
           first_name: 'Sarah',
           last_name: 'Lifaefi',
           password: 'usr$_18@',
@@ -62,7 +78,7 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
+          expect(res.body).to.have.property('success').to.be.equal(false);
           done();
         });
     });
@@ -96,7 +112,7 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
+          expect(res.body).to.have.property('success').to.be.equal(false);
           done();
         });
     });
@@ -113,27 +129,27 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
+          expect(res.body).to.have.property('success').to.be.equal(false);
           done();
         });
     });
 
-    /*it('should not register a user with same email twice', (done) => {
+    it('should not register a user with same email twice', (done) => {
       chai.request(app)
         .post(signupUrl)
         .send({
-          email: 'sarah@gmail.com', // email already exist
-          first_name: 'Sarah',
-          last_name: 'Lifaefi',
-          password: 'usr$_18@',
+          email: 'test@wayfarer.cd', // email already exists
+          first_name: 'Test',
+          last_name: 'Last',
+          password: '@dminTest',
         })
         .end((error, res) => {
-          expect(res).to.have.status(403);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
+          expect(res.body).to.have.property('success').to.be.equal(false);
           done();
         });
-    });*/
+    });
 
     it('should not register a user with password less than 8 characters', (done) => {
       chai.request(app)
@@ -147,7 +163,7 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
+          expect(res.body).to.have.property('success').to.be.equal(false);
           done();
         });
     });
@@ -164,21 +180,38 @@ describe('AUTH CONTROLLER', () => {
         .end((error, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
+          expect(res.body).to.have.property('success').to.be.equal(false);
           done();
         });
     });
+
+    /*it('should not register a user with a weak password', (done) => {
+      chai.request(app)
+        .post(signupUrl)
+        .send({
+          email: 'sarah@gmail.com',
+          first_name: 'Sarah',
+          last_name: 'Lifaefi',
+          password: 'abellifa', // weak password
+        })
+        .end((error, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('success').to.be.equal(false);
+          done();
+        });
+    });*/
   });
 
-/*  describe('/POST SIGN IN', () => {
+  describe('/POST SIGN IN', () => {
     const signinUrl = `${baseUrl}/signin`;
 
     it('should login the user and retrieve the token', (done) => {
       chai.request(app)
         .post(signinUrl)
         .send({
-          email: 'dklf@gmail.com',
-          password: 'usr$_18@',
+          email: 'test@wayfarer.cd',
+          password: '@dminTest',
         })
         .end((err, res) => {
           expect(res).to.have.status(201);
@@ -199,7 +232,7 @@ describe('AUTH CONTROLLER', () => {
           password: 'usr$_18@',
         })
         .end((err, res) => {
-          expect(res).to.have.status(404);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           //expect(res.body).to.have.property('error');
           done();
@@ -236,7 +269,7 @@ describe('AUTH CONTROLLER', () => {
         });
     });
 
-    it('should not sign in a user with non existanting email', (done) => {
+    it('should not sign in a user with non existing email', (done) => {
       chai.request(app)
         .post(signinUrl)
         .send({
@@ -244,11 +277,26 @@ describe('AUTH CONTROLLER', () => {
           password: 'usr$_18@',
         })
         .end((err, res) => {
-          expect(res).to.have.status(404);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           //expect(res.body).to.have.property('error');
           done();
         });
     });
-  });*/
+
+    it('should not sign in a user with existing email and wrong password', (done) => {
+      chai.request(app)
+        .post(signinUrl)
+        .send({
+          email: 'sarah.test@gmail.com', //valid email
+          password: 'usr$_18@', //wrong password
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an('object');
+          //expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+  });
 });

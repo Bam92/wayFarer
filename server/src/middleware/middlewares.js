@@ -4,12 +4,8 @@ import user from '../models/user.model';
 
 export const generateToken = playload => jwt.sign(playload, privateKey);
 
-// FORMAT OF TOKEN
-// Authorization: Andela <access_token>
-
 export const verifyToken = (req, res, next) => {
   const { token: headerToken = '' } = req.headers;
-  console.log('tttt', headerToken)
   if (!headerToken) {
     return res.status(403).json({
       status: 403,
@@ -49,8 +45,3 @@ export const verifyAdmin = (req, res, next) => {
 
   next();
 };
-
-export const getuser = (req) => {
-  const { currentUser } = req;
-  return currentUser;
-}
