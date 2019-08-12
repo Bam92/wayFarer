@@ -13,7 +13,7 @@ const Auth = {
     let success = false;
     let status = 400;
 
-    const { email, first_name, last_name, password, is_admin } = req.body;
+    const { email, first_name, last_name, password } = req.body;
 
     /* ----- manuel validation -----*/
     if (!email) return res.status(status).send({ status, success, message: 'email is required' });
@@ -41,8 +41,8 @@ const Auth = {
     const hashedpassword = Helper.hashPassword(password);
 
     const text = 'INSERT INTO users(email, first_name, last_name, password, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *';
-    let values = [email, first_name, last_name, hashedpassword, true];
-    if (is_admin === undefined || is_admin === null) values = [email, first_name, last_name, hashedpassword, false];
+    const values = [email, first_name, last_name, hashedpassword, false];
+    //if (is_admin === undefined || is_admin === null) values = [email, first_name, last_name, hashedpassword, false];
 
     try {
       const { rows } = await runQuery(text, values);
