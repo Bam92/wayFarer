@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --",
     "dev": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --",
-    "test": "mocha --timeout 10000 --require babel-core/register ./server/tests",
+    "test": "mocha --timeout 10000 --require babel-core/register ./server/tests/*",
     "test:coverage": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./server/tests",
     "create": "node ./server/db.js createTables"
   },

@@ -20,8 +20,7 @@ describe('App basic tests', () => {
   });
 
   it('bookNow() should add data on booking db', () => {
-    const add = bookingModel.bookNow(1, 'td93sm0jm9')
+    bookingModel.bookNow(1, 'td93sm0jm9');
     expect(bookingData.length).to.be.equal(4); // because one test delete on booking
-
   });
 });
