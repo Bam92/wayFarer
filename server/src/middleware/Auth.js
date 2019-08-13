@@ -23,13 +23,13 @@ const Auth = {
 
     try {
       const decoded = await jwt.verify(headerToken, privateKey);
-      if (!decoded) return res.status(400).json({ status: 400, error: 'The token you provided is invalid' });
+      if (!decoded) return res.status(401).json({ status: 401, error: 'The token you provided is invalid' });
 
-      const text = 'SELECT * FROM users WHERE id = $1';
-      const { rows } = await runQuery(text, [decoded.userId]);
+      const text = 'SELECT * FROM users WHERE email = $1';
+      const { rows } = await runQuery(text, [decoded.email]);
 
       if (!rows[0]) {
-        return res.status(400).json({ status: 400, error: 'The token you provided is invalid' });
+        return res.status(401).json({ status: 401, error: 'The token you provided is invalid NOT FOUND', decoded });
       }
 
       req.currentUser = rows[0];
@@ -52,8 +52,8 @@ const Auth = {
 
     console.log('current user not admin', currentUser.is_admin);
     if (currentUser.is_admin === 'false') {
-      return res.status(403).json({
-        status: 403,
+      return res.status(401).json({
+        status: 401,
         message: 'Only admin can proceed this action',
       });
     }

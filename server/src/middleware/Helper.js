@@ -53,12 +53,12 @@ const Helper = {
 
   /**
    * Gnerate Token
-   * @param {string} id
+   * @param {string} email
    * @returns {string} token
    */
-  generateToken(id) {
+  generateToken(email) {
     const token = jwt.sign({
-      userId: id,
+      email,
     }, privateKey);
 
     return token;
@@ -69,7 +69,7 @@ const Helper = {
    * @param {string} origin
    * @returns {string} destination
    */
-  VerifyTrip(from, to) {
+  verifyTrip(from, to) {
     console.log('dest: ', from, 'or: ', to)
     const text = 'SELECT * FROM trips WHERE origin = $1 AND destination = $2';
     const row = runQuery(text, [from, to]);

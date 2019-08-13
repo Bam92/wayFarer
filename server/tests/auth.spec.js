@@ -197,7 +197,7 @@ describe('AUTH CONTROLLER', () => {
           password: '@dminTest',
         })
         .end((err, res) => {
-          expect(res).to.have.status(201);
+          expect(res).to.have.status(200);
           expect(res).to.be.an('object');
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.be.an('object');

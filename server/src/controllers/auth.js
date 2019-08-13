@@ -46,7 +46,7 @@ const Auth = {
 
     try {
       const { rows } = await runQuery(text, values);
-      rows[0].token = Helper.generateToken(rows[0].id);
+      rows[0].token = Helper.generateToken(rows[0].email);
       delete rows[0].password;
       success = true;
       status = 201;
@@ -74,18 +74,17 @@ const Auth = {
     if (!password) return res.status(status).json({ status, success, error: 'password is required' });
 
     const text = 'SELECT * FROM users WHERE email = $1';
-    const getUsers = 'SELECT * FROM users'
-console.log('liste user', await getAll(getUsers))
+
     try {
       const { rows } = await runQuery(text, [email]);
 
       if (!rows[0]) return res.status(status).json({ status, success, error: 'Sorry, user with this login does not exist, register first' });
       if (!Helper.comparePassword(rows[0].password, password)) return res.status(status).json({ status, success, message: 'Sorry, password is incorrect. Check again.' });
 
-      rows[0].token = Helper.generateToken(rows[0].id);
+      rows[0].token = Helper.generateToken(rows[0].email);
       delete rows[0].password;
       success = true;
-      status = 201;
+      status = 200;
 
       return res.status(status).json({
         status, success, message: 'User Logged in successfully', data: rows[0],

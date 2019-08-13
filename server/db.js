@@ -82,7 +82,7 @@ const createTripTable = () => {
  * Drop User Tables
  */
 const dropUserTable = () => {
-  const queryText = 'DROP TABLE IF EXISTS users returning *';
+  const queryText = 'DROP TABLE IF EXISTS users';
   pool.query(queryText)
     .then((res) => {
       console.log(res);
@@ -100,7 +100,7 @@ const dropUserTable = () => {
  * Drop Trip Tables
  */
 const dropTripTable = () => {
-  const queryText = 'DROP TABLE IF EXISTS trips returning *';
+  const queryText = 'DROP TABLE IF EXISTS trips';
   pool.query(queryText)
     .then((res) => {
       console.log(res);

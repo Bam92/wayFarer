@@ -8,13 +8,14 @@ chai.use(chaiHttp);
 const baseUrl = '/api/v1';
 
 describe('/GET TRIPS', () => {
-  it('should respond with 201 and return a list of all trips', (done) => {
-    const validToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgyMCwiaWF0IjoxNTY1NzIzMDM4fQ.xeYw00lZSn6P0TjC2GznrNvOgomP4BtMg_ImQ4NLp6s';
+  it('should respond with 200 and return a list of all trips', (done) => {
+    const validToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluLnRlc3RAd2F5ZmFyZXIuY2QiLCJpYXQiOjE1NjU3Mjc3MzN9.ngAoJHOefRps0oPT3bs5dfpoXN_hWXFiiHAGqhP5SYs';
     chai.request(app)
       .get(`${baseUrl}/trips`)
       .set('token', validToken)
       .end((err, res) => {
-        expect('Content-Type', /json/);
+        console.log("response: ", res.body)
+        console.log("Token ", validToken);
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
         done();
@@ -37,8 +38,6 @@ describe('/GET TRIPS', () => {
 });
 
 describe('/POST TRIP', () => {
-
-
   it('it should return error 400 if no token is provided', (done) => {
     chai.request(app).post(`${baseUrl}/trips`)
       .set('Header', '')
@@ -67,16 +66,17 @@ describe('/POST TRIP', () => {
   });
 
   it('it should not post if valid token provided is not for admin', (done) => {
-    const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ4NSwiaWF0IjoxNTY1NjkzODgzfQ.dBKoBcJeOd7c_OxidpqQz6P5AiJ2eZX7y59wx5dexDo';
+    const token = 'eyJhbGciOiUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluLnRlc3RAd2F5ZmFyZXIuY2QiLCJpYXQiOjE1NjU3Mjc3MzN9.ngAoJHOefRps0oPT3bs5dfpoXN_hWXFiiHAGqhP5SYs';
 
     chai.request(app).post(`${baseUrl}/trips`)
-      .set('token', userToken)
+      .set('token', token)
       .then((res) => {
-        expect(res).to.have.status(403);
+        expect(res).to.have.status(401);
         done();
       })
       .catch((err) => {
         console.log(err.message);
+        done()
       });
   });
 

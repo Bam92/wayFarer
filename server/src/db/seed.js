@@ -33,12 +33,10 @@ const createAdmin = () => {
 
   pool.query(queryText, ['admin.test@wayfarer.cd', 'Admin', 'User', hashedpassword, true])
     .then((res) => {
-      console.log(res);
       pool.end();
       process.exit(0);
     })
     .catch((err) => {
-      console.log(err);
       pool.end();
       process.exit(1);
     });
