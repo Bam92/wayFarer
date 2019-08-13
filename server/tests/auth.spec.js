@@ -184,23 +184,6 @@ describe('AUTH CONTROLLER', () => {
           done();
         });
     });
-
-    /*it('should not register a user with a weak password', (done) => {
-      chai.request(app)
-        .post(signupUrl)
-        .send({
-          email: 'sarah@gmail.com',
-          first_name: 'Sarah',
-          last_name: 'Lifaefi',
-          password: 'abellifa', // weak password
-        })
-        .end((error, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('success').to.be.equal(false);
-          done();
-        });
-    });*/
   });
 
   describe('/POST SIGN IN', () => {
@@ -219,7 +202,6 @@ describe('AUTH CONTROLLER', () => {
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.be.an('object');
           expect(res.body.data).to.have.property('token');
-          //expect(res.body.data.token).to.not.be.empty;
           done();
         });
     });
@@ -234,7 +216,6 @@ describe('AUTH CONTROLLER', () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -249,7 +230,6 @@ describe('AUTH CONTROLLER', () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -264,7 +244,6 @@ describe('AUTH CONTROLLER', () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -279,7 +258,6 @@ describe('AUTH CONTROLLER', () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -294,7 +272,6 @@ describe('AUTH CONTROLLER', () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
-          //expect(res.body).to.have.property('error');
           done();
         });
     });
