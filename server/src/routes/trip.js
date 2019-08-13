@@ -9,7 +9,7 @@ const router = express.Router();
 // / TRIPS ROUTES ///
 
 // GET list of all trip
-//router.get('/trips', verifyToken, controller.getTrips);
+router.get('/trips', Auth.verifyToken, controller.getAll);
 
 // POST create a new trip by admin only
 router.post('/trips', Auth.verifyToken, Auth.verifyAdmin, controller.create);

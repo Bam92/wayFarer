@@ -158,6 +158,21 @@ const runQuery = (text, params) => new Promise((resolve, reject) => {
     });
 });
 
+const getAll = query => new Promise((resolve, reject) => {
+  pool.query(query)
+    .then((res) => {
+      resolve(res);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
+/*const getAll = q => pool.query(q, (err, res) => {
+  console.log(err, res)
+  pool.end();
+});*/
+
 
 module.exports = {
   createUserTable,
@@ -168,6 +183,7 @@ module.exports = {
   dropAllTables,
   pool,
   runQuery,
+  getAll,
 };
 
 require('make-runnable');

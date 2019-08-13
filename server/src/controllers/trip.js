@@ -1,4 +1,4 @@
-import { runQuery } from '../../db';
+import { runQuery, getAll } from '../../db';
 import Helper from '../middleware/Helper';
 
 const Trip = {
@@ -42,6 +42,25 @@ console.log('verify trip', Helper.VerifyTrip(origin, destination))
       status = 201;
 
       return res.status(status).send({ status, success, message: 'Trip successfully created', data: rows[0] });
+    } catch (error) {
+      return res.status(status).send({ status, success, message: 'There was something wrong. Try again', error });
+    }
+  },
+
+  async getAll(req, res) {
+    let success = false;
+    let status = 400;
+
+    const query = 'SELECT * FROM trips';
+
+    try {
+      const { rows } = await getAll(query);
+
+      console.log('row', rows)
+      success = true;
+      status = 201;
+
+      return res.status(status).send({ status, success, message: 'You can view all trips', data: rows });
     } catch (error) {
       return res.status(status).send({ status, success, message: 'There was something wrong. Try again', error });
     }
