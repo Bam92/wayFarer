@@ -6,6 +6,7 @@ cache:
     - "node_modules"
 script:
   - "npm run table:create"
+  - "npm run seed:admin"
   - "npm run coverage"
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 

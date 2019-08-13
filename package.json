@@ -11,7 +11,9 @@
     "dev": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --",
     "test": "mocha --timeout 10000 --require babel-core/register ./server/tests/* --exit",
     "coverage": "nyc npm run test",
-    "table:create": "babel-node ./server/db.js createAllTables"
+    "table:create": "babel-node ./server/db.js createAllTables",
+    "seed:admin": "babel-node ./server/src/db/seed.js createAdmin",
+    "table:drop": "babel-node ./server/db.js dropAllTables"
   },
   "repository": {
     "type": "git",
