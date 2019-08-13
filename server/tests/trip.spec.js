@@ -54,10 +54,10 @@ describe ('/GET TRIPS', () => {
         done();
       });
   });
-});
+});*/
 
 describe ('/POST TRIP', () => {
-  it('admin should create a new trip', (done) => {
+/*  it('admin should create a new trip', (done) => {
     chai.request(app)
       .post(`${baseUrl}trip`)
       .end((err, res) => {
@@ -76,5 +76,31 @@ describe ('/POST TRIP', () => {
         done();
       });
   });
-});
 */
+  it('it should return error 400 if no token is provided', (done) => {
+      chai.request(app).post(`${baseUrl}/trips`)
+      .set('Header', '')
+      .then(res => {
+        expect(res).to.have.status(403);
+        expect(res.body.message).to.be.equal('No token provided');
+        done();
+      }).catch(err => {
+        console.log(err.message);
+      });;
+    });
+
+    it('it should throw error if no valid token is provided', (done) => {
+      const inValidToken = 'eyJhiOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im03dmtxaW5tNCIsImlhdCI6MTU2NTMyODI5M30.MV80v4kB25rub0RVV4EE0eEn7pX1QMnwN1pTfZKfMwA';
+
+      chai.request(app).post(`${baseUrl}/trips`)
+      .set('token', inValidToken)
+      .then(res => {
+        expect(res).to.have.status(400);
+        //expect(res.body).to.be.an('object');
+        done();
+      }).catch(err => {
+        console.log(err.message);
+      });;
+    });
+});
+

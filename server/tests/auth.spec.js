@@ -17,7 +17,7 @@ describe('AUTH CONTROLLER', () => {
     const hashedpassword = Helper.hashPassword('@dminTest');
     const values = ['test@wayfarer.cd', 'Test', 'Last', hashedpassword, false];
 
-    await runQuery(delUser, ['sarah.test@gmail.com']);
+    await runQuery(delUser, ['sarah.test@gmail.rw']);
     await runQuery(delUser, ['test@wayfarer.cd']);
     await runQuery(createUser, values);
 
@@ -30,7 +30,7 @@ describe('AUTH CONTROLLER', () => {
       chai.request(app)
         .post(signupUrl)
         .send({
-          email: 'sarah.test@gmail.com',
+          email: 'sarah.test@gmail.rw',
           first_name: 'Sarah',
           last_name: 'Lifaefi',
           password: 'usr$_18@',
@@ -289,7 +289,7 @@ describe('AUTH CONTROLLER', () => {
         .post(signinUrl)
         .send({
           email: 'sarah.test@gmail.com', //valid email
-          password: 'usr$_18@', //wrong password
+          password: 'usr$_18pp@', //wrong password
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
