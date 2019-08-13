@@ -9,23 +9,14 @@ const baseUrl = '/api/v1';
 
 describe('/GET TRIPS', () => {
   it('should respond with 201 and return a list of all trips', (done) => {
-    const validToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ4NSwiaWF0IjoxNTY1NjkzODgzfQ.dBKoBcJeOd7c_OxidpqQz6P5AiJ2eZX7y59wx5dexDo';
+    const validToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgyMCwiaWF0IjoxNTY1NzIzMDM4fQ.xeYw00lZSn6P0TjC2GznrNvOgomP4BtMg_ImQ4NLp6s';
     chai.request(app)
       .get(`${baseUrl}/trips`)
       .set('token', validToken)
       .end((err, res) => {
         expect('Content-Type', /json/);
-        expect(res).to.have.status(201);
+        expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.property('status');
-        expect(res.body).to.have.property('data');
-        expect(res.body.data[0]).to.have.property('id');
-        expect(res.body.data[0]).to.have.property('seating_capacity');
-        expect(res.body.data[0]).to.have.property('origin');
-        expect(res.body.data[0]).to.have.property('destination');
-        expect(res.body.data[0]).to.have.property('date');
-        expect(res.body.data[0]).to.have.property('fare');
-        expect(res.body.data[0]).to.have.property('status');
         done();
       });
   });

@@ -1,6 +1,5 @@
 import { Pool } from 'pg';
 import 'dotenv/config';
-// const dotenv = require('dotenv');
 
 const {
   DATABASE_URL, PSQL_USER, PSQL_DB, PSQL_PASS, PSQL_PORT,
@@ -34,7 +33,7 @@ const createUserTable = () => {
     first_name VARCHAR(128) NOT NULL,
     last_name VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL,
-    is_admin VARCHAR(128) NOT NULL
+    is_admin BOOLEAN NOT NULL
   )`;
 
   pool.query(queryText)
@@ -167,12 +166,6 @@ const getAll = query => new Promise((resolve, reject) => {
       reject(err);
     });
 });
-
-/*const getAll = q => pool.query(q, (err, res) => {
-  console.log(err, res)
-  pool.end();
-});*/
-
 
 module.exports = {
   createUserTable,

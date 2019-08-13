@@ -23,19 +23,20 @@ const Auth = {
 
     try {
       const decoded = await jwt.verify(headerToken, privateKey);
+      if (!decoded) return res.status(400).json({ status: 400, error: 'The token you provided is invalid' });
+
       const text = 'SELECT * FROM users WHERE id = $1';
       const { rows } = await runQuery(text, [decoded.userId]);
-      console.log('decoded id is ', rows[0].is_admin);
+
       if (!rows[0]) {
-        return res.status(400).send({ 'message': 'The token you provided is invalid' });
+        return res.status(400).json({ status: 400, error: 'The token you provided is invalid' });
       }
 
-   req.currentUser = rows[0];
+      req.currentUser = rows[0];
 
-      console.log('current usr ', req.currentUser)
       next();
-    } catch(error) {
-      return res.status(400).send(error);
+    } catch (error) {
+      return res.status(400).json({ status: 400, error: error.message });
     }
   },
 
@@ -49,7 +50,7 @@ const Auth = {
   async verifyAdmin(req, res, next) {
     const { currentUser } = req;
 
-    console.log('current user not admin', currentUser.is_admin)
+    console.log('current user not admin', currentUser.is_admin);
     if (currentUser.is_admin === 'false') {
       return res.status(403).json({
         status: 403,

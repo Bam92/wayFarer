@@ -1,6 +1,5 @@
 import Helper from '../middleware/Helper';
-
-import { runQuery } from '../../db';
+import { runQuery, getAll } from '../../db';
 
 const Auth = {
   /**
@@ -13,7 +12,9 @@ const Auth = {
     let success = false;
     let status = 400;
 
-    const { email, first_name, last_name, password } = req.body;
+    const {
+      email, first_name, last_name, password,
+    } = req.body;
 
     /* ----- manuel validation -----*/
     if (!email) return res.status(status).send({ status, success, message: 'email is required' });
@@ -23,7 +24,7 @@ const Auth = {
     if (!first_name || !last_name) return res.status(status).send({ status, success, message: 'first name or last name is required' });
 
     if (!Helper.isValidString(first_name) || !Helper.isValidString(last_name)) {
-      return res.status(status).send({ status, success, message: 'first name or last name contains invalid charactor(s)'});
+      return res.status(status).send({ status, success, message: 'first name or last name contains invalid charactor(s)' });
     }
 
     if (first_name.length < 2 || last_name.length < 2) {
@@ -42,7 +43,6 @@ const Auth = {
 
     const text = 'INSERT INTO users(email, first_name, last_name, password, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *';
     const values = [email, first_name, last_name, hashedpassword, false];
-    //if (is_admin === undefined || is_admin === null) values = [email, first_name, last_name, hashedpassword, false];
 
     try {
       const { rows } = await runQuery(text, values);
@@ -51,10 +51,12 @@ const Auth = {
       success = true;
       status = 201;
 
-      return res.status(status).send({ status, success, message: 'User signed up successfully', data: rows[0] });
+      return res.status(status).send({
+        status, success, message: 'User signed up successfully', data: rows[0],
+      });
     } catch (error) {
-      if (error.routine === '_bt_check_unique') return res.status(status).send({ status, success, message: 'User with this email already exists.' });
-      return res.status(status).send({ status, success, message: 'There was something wrong. Try again', error });
+      if (error.routine === '_bt_check_unique') return res.status(status).send({ status, success, error: 'User with this email already exists.' });
+      return res.status(status).send({ status, success, error: error.message });
     }
   },
 
@@ -65,29 +67,34 @@ const Auth = {
     const { email, password } = req.body;
 
     /* ----- manuel validation -----*/
-    if (!email) return res.status(status).send({ status, success, message: 'email is required' });
+    if (!email) return res.status(status).json({ status, success, error: 'email is required' });
 
     const emailRegex = /.+@.+\..+/;
-    if (!emailRegex.test(email)) return res.status(status).send({ status, success, message: 'email is invalid' });
-    if (!password) return res.status(status).send({ status, success, message: 'password is required' });
+    if (!emailRegex.test(email)) return res.status(status).json({ status, success, error: 'email is invalid' });
+    if (!password) return res.status(status).json({ status, success, error: 'password is required' });
 
     const text = 'SELECT * FROM users WHERE email = $1';
-
+    const getUsers = 'SELECT * FROM users'
+console.log('liste user', await getAll(getUsers))
     try {
       const { rows } = await runQuery(text, [email]);
 
-      if (!rows[0]) return res.status(status).send({ status, success, message: 'Sorry, user with this login does not exist, register first' });
-      if (!Helper.comparePassword(rows[0].password, password)) return res.status(status).send({ status, success, message: 'Sorry, password is incorrect. Check again.' });
+      if (!rows[0]) return res.status(status).json({ status, success, error: 'Sorry, user with this login does not exist, register first' });
+      if (!Helper.comparePassword(rows[0].password, password)) return res.status(status).json({ status, success, message: 'Sorry, password is incorrect. Check again.' });
 
       rows[0].token = Helper.generateToken(rows[0].id);
       delete rows[0].password;
       success = true;
       status = 201;
 
-      return res.status(status).send({ status, success, message: 'User Logged in successfully', data: rows[0] });
+      return res.status(status).json({
+        status, success, message: 'User Logged in successfully', data: rows[0],
+      });
     } catch (error) {
-      console.log('someting wrong', error)
-      return res.status(status).send({ status, success, message: 'There was something wrong. Try again', error });
+      console.log('someting wrong', error);
+      return res.status(status).json({
+        status, success, error: error.message,
+      });
     }
   },
 };
