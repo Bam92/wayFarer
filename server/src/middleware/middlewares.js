@@ -27,7 +27,7 @@ export const verifyToken = (req, res, next) => {
         error: 'Invalid token or token expired',
       });
     }
-    console.log('test: ', decoded)
+    console.log('test: ', decoded);
     req.currentUser = currentUser;
     return next();
   });

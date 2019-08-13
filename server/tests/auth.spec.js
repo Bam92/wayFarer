@@ -2,7 +2,7 @@ import chaiHttp from 'chai-http';
 import chai from 'chai';
 
 import app from '../app';
-import db from '../src/models/index';
+import { runQuery } from '../db';
 import Helper from '../src/middleware/Helper';
 
 const { expect } = chai;
@@ -11,17 +11,19 @@ chai.use(chaiHttp);
 const baseUrl = '/api/v1/auth';
 
 describe('AUTH CONTROLLER', () => {
-  beforeEach((done) => {
+  beforeEach(async () => {
     const delUser = 'DELETE FROM users WHERE email = $1';
     const createUser = 'INSERT INTO users(email, first_name, last_name, password, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *';
     const hashedpassword = Helper.hashPassword('@dminTest');
     const values = ['test@wayfarer.cd', 'Test', 'Last', hashedpassword, false];
 
-    db.query(delUser, ['sarah.test@gmail.com']);
-    db.query(createUser, values);
+    await runQuery(delUser, ['sarah.test@gmail.com']);
+    await runQuery(delUser, ['test@wayfarer.cd']);
+    await runQuery(createUser, values);
 
-    done();
+
   });
+
   describe('/POST SIGN UP', () => {
     const signupUrl = `${baseUrl}/signup`;
     it('should register a new user', (done) => {

@@ -1,24 +1,33 @@
-//import pg from 'pg';
-const pg = require('pg');
-//import dotenv from 'dotenv';
-const dotenv = require('dotenv');
+import { Pool } from 'pg';
+// const pg = require('pg');
+import 'dotenv/config';
+// const dotenv = require('dotenv');
 
-dotenv.config();
+const {
+ DATABASE_URL, PSQL_USER, PSQL_DB, PSQL_PASS, PSQL_PORT
+} = process.env;
 
-const config = {
-  user: 'andela9',
-  database: 'wayfarer_db',
-  password: 'andela',
-  port: 5432,
-  max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 30000,
-};
+let config;
 
-const pool = new pg.Pool(config);
+if (PSQL_USER) {
+  config = {
+    user: PSQL_USER,
+    database: PSQL_DB,
+    password: PSQL_PASS,
+    port: PSQL_PORT,
+  };
+} else {
+  config = {
+    connctionString: DATABASE_URL,
+  };
+}
+console.log('user', PSQL_USER);
+console.log('CONFIG: ', config);
 
-pool.on('connect', () => {
-  console.log('Successfully connected to the data base');
-});
+
+console.log('env: ', DATABASE_URL);
+const pool = new Pool(config);
+
 
 /**
  * Create Tables
@@ -36,12 +45,14 @@ const createTables = () => {
 
   pool.query(userTable)
     .then((res) => {
-    console.log(res);
+      console.log(res);
       pool.end();
+      process.exit(0);
     })
     .catch((err) => {
-    console.log(err);
+      console.log(err);
       pool.end();
+      process.exit(1);
     });
 };
 
@@ -54,19 +65,45 @@ const dropTables = () => {
     .then((res) => {
       console.log(res);
       pool.end();
+      process.exit(0);
     })
     .catch((err) => {
       console.log(err);
       pool.end();
+      process.exit(1);
     });
 };
 
 
-pool.on('remove', () => {
-  console.log('client removed');
-  process.exit(0);
+pool.connect()
+  .then(() => {
+    console.info('Postgress connected');
+  })
+  .catch((err) => {
+    console.log(err);
+    const error = 'Postgress could not connect';
+    console.error(error);
+  });
+
+/**
+     * DB Query
+     * @param {string} text
+     * @param {Array} params
+     * @returns {object} object
+     */
+const runQuery = (text, params) => new Promise((resolve, reject) => {
+  pool.query(text, params)
+    .then((res) => {
+      resolve(res);
+    })
+    .catch((err) => {
+      reject(err);
+    });
 });
 
-module.exports = { createTables, pool, dropTables };
+
+module.exports = {
+  createTables, pool, dropTables, runQuery,
+};
 
 require('make-runnable');

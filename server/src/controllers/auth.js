@@ -1,6 +1,6 @@
 import Helper from '../middleware/Helper';
 
-import db from '../models/index';
+import { runQuery } from '../../db';
 
 const Auth = {
   /**
@@ -13,7 +13,7 @@ const Auth = {
     let success = false;
     let status = 400;
 
-    const { email, first_name, last_name, password, is_admin } = req.body;
+    const { email, first_name, last_name, password } = req.body;
 
     /* ----- manuel validation -----*/
     if (!email) return res.status(status).send({ status, success, message: 'email is required' });
@@ -41,11 +41,11 @@ const Auth = {
     const hashedpassword = Helper.hashPassword(password);
 
     const text = 'INSERT INTO users(email, first_name, last_name, password, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *';
-    let values = [email, first_name, last_name, hashedpassword, true];
-    if (is_admin === undefined || is_admin === null) values = [email, first_name, last_name, hashedpassword, false];
+    const values = [email, first_name, last_name, hashedpassword, false];
+    //if (is_admin === undefined || is_admin === null) values = [email, first_name, last_name, hashedpassword, false];
 
     try {
-      const { rows } = await db.query(text, values);
+      const { rows } = await runQuery(text, values);
       rows[0].token = Helper.generateToken(rows[0].id);
       delete rows[0].password;
       success = true;
@@ -74,7 +74,7 @@ const Auth = {
     const text = 'SELECT * FROM users WHERE email = $1';
 
     try {
-      const { rows } = await db.query(text, [email]);
+      const { rows } = await runQuery(text, [email]);
 
       if (!rows[0]) return res.status(status).send({ status, success, message: 'Sorry, user with this login does not exist, register first' });
       if (!Helper.comparePassword(rows[0].password, password)) return res.status(status).send({ status, success, message: 'Sorry, password is incorrect. Check again.' });
@@ -86,58 +86,10 @@ const Auth = {
 
       return res.status(status).send({ status, success, message: 'User Logged in successfully', data: rows[0] });
     } catch (error) {
+      console.log('someting wrong', error)
       return res.status(status).send({ status, success, message: 'There was something wrong. Try again', error });
     }
   },
 };
 
 export default Auth;
-
-/*
- * Sign in a user
- * @param {object} req
- * @param {object} res
-
-  async login(req, res) {
-    let success = false;
-    let status = 201;
-
-    const { email, password } = req.body;
-
-    if (!email) {
-      status = 400;
-      return res.status(status).send({ status, success, message: 'email is required' });
-    }
-
-    if (!password) {
-      status = 400;
-      return res.status(status).send({ status, success, message: 'passord is required' });
-    }
-
-    const foundUser = user.findUserByEmail(email);
-
-
-    if (!foundUser) {
-      status = 404;
-      return res.status(status).send({ status, success, message: 'user with this login does not exist, register first' });
-    }
-
-    const UserToken = generateToken({ id: foundUser.id });
-    const comparePass = bcrypt.compareSync(password, foundUser.password);
-
-    if (!comparePass) {
-      status = 400;
-      return res.status(status).json({ status, success, message: 'Your password is not correct' });
-    }
-
-    foundUser.token = UserToken;
-    success = true;
-    delete foundUser.password;
-    return res.status(status).send({ status, success, message: 'User successfully logged in', data: foundUser });
-
-  }
-}
-
-const auth = new Auth();
-export default auth;
-*/
