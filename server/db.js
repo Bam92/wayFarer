@@ -1,10 +1,9 @@
 import { Pool } from 'pg';
-// const pg = require('pg');
 import 'dotenv/config';
 // const dotenv = require('dotenv');
 
 const {
- DATABASE_URL, PSQL_USER, PSQL_DB, PSQL_PASS, PSQL_PORT
+  DATABASE_URL, PSQL_USER, PSQL_DB, PSQL_PASS, PSQL_PORT,
 } = process.env;
 
 let config;
@@ -21,19 +20,14 @@ if (PSQL_USER) {
     connctionString: DATABASE_URL,
   };
 }
-console.log('user', PSQL_USER);
-console.log('CONFIG: ', config);
 
-
-console.log('env: ', DATABASE_URL);
 const pool = new Pool(config);
 
-
 /**
- * Create Tables
+ * Create User Table
  */
-const createTables = () => {
-  const userTable = `CREATE TABLE IF NOT EXISTS
+const createUserTable = () => {
+  const queryText = `CREATE TABLE IF NOT EXISTS
   users(
     id SERIAL PRIMARY KEY,
     email VARCHAR(128) UNIQUE NOT NULL,
@@ -43,7 +37,7 @@ const createTables = () => {
     is_admin VARCHAR(128) NOT NULL
   )`;
 
-  pool.query(userTable)
+  pool.query(queryText)
     .then((res) => {
       console.log(res);
       pool.end();
@@ -57,10 +51,21 @@ const createTables = () => {
 };
 
 /**
- * Drop Tables
+ * Create Trip Table
  */
-const dropTables = () => {
-  const queryText = 'DROP TABLE IF EXISTS users';
+const createTripTable = () => {
+  const queryText = `CREATE TABLE IF NOT EXISTS
+  trips(
+    id SERIAL PRIMARY KEY,
+    seating_capacity INT NOT NULL,
+    bus_license_number VARCHAR(128) NOT NULL,
+    origin VARCHAR(128) NOT NULL,
+    destination VARCHAR(128) NOT NULL,
+    date TIMESTAMP,
+    fare VARCHAR(128) NOT NULL,
+    status VARCHAR(128) NOT NULL
+  )`;
+
   pool.query(queryText)
     .then((res) => {
       console.log(res);
@@ -72,6 +77,58 @@ const dropTables = () => {
       pool.end();
       process.exit(1);
     });
+};
+
+/**
+ * Drop User Tables
+ */
+const dropUserTable = () => {
+  const queryText = 'DROP TABLE IF EXISTS users returning *';
+  pool.query(queryText)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+      process.exit(0);
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+      process.exit(1);
+    });
+};
+
+/**
+ * Drop Trip Tables
+ */
+const dropTripTable = () => {
+  const queryText = 'DROP TABLE IF EXISTS trips returning *';
+  pool.query(queryText)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+      process.exit(0);
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+      process.exit(1);
+    });
+};
+
+/**
+ * Create All Tables
+ */
+const createAllTables = () => {
+  createUserTable();
+  createTripTable();
+};
+
+/**
+ * Drop All Tables
+ */
+const dropAllTables = () => {
+  dropUserTable();
+  dropTripTable();
 };
 
 
@@ -103,7 +160,14 @@ const runQuery = (text, params) => new Promise((resolve, reject) => {
 
 
 module.exports = {
-  createTables, pool, dropTables, runQuery,
+  createUserTable,
+  createTripTable,
+  createAllTables,
+  dropUserTable,
+  dropTripTable,
+  dropAllTables,
+  pool,
+  runQuery,
 };
 
 require('make-runnable');

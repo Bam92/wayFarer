@@ -2,6 +2,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import privateKey from '../config';
 
+import { runQuery } from '../../db';
+
 const Helper = {
   /**
    * Hash Password Method
@@ -55,9 +57,26 @@ const Helper = {
    * @returns {string} token
    */
   generateToken(id) {
-    const token = jwt.sign(id, privateKey);
+    const token = jwt.sign({
+      userId: id,
+    }, privateKey);
+
     return token;
   },
+
+   /**
+   * Verify a Trip
+   * @param {string} origin
+   * @returns {string} destination
+   */
+  VerifyTrip(from, to) {
+    console.log('dest: ', from, 'or: ', to)
+    const text = 'SELECT * FROM trips WHERE origin = $1 AND destination = $2';
+    const row = runQuery(text, [from, to]);
+    if (row[0]) return true;
+    return false;
+  },
+
 };
 
 export default Helper;
