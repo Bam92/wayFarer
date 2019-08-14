@@ -50,11 +50,28 @@ const Auth = {
   async verifyAdmin(req, res, next) {
     const { currentUser } = req;
 
-    console.log('current user not admin', currentUser.is_admin);
-    if (currentUser.is_admin === 'false') {
+    if (currentUser.is_admin === 'false' || currentUser.is_admin === false) {
       return res.status(401).json({
         status: 401,
         message: 'Only admin can proceed this action',
+      });
+    }
+    next();
+  },
+
+  /**
+   * Verify User
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   * @returns {object|void} response object
+   */
+  async verifyUser(req, res, next) {
+    const { currentUser } = req;
+    if (currentUser.is_admin === 'true' || currentUser.is_admin === true) {
+      return res.status(401).json({
+        status: 401,
+        message: 'Sorry, but Admin can not book a trip!',
       });
     }
     next();

@@ -79,36 +79,72 @@ const createTripTable = () => {
 };
 
 /**
- * Drop User Tables
+ * Create Booking Table
  */
-const dropUserTable = () => {
-  const queryText = 'DROP TABLE IF EXISTS users';
+const createBookingTable = () => {
+  const queryText = `CREATE TABLE IF NOT EXISTS
+  bookings(
+    id SERIAL NOT NULL,
+    trip_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    created_on TIMESTAMP,
+    PRIMARY KEY(trip_id, user_id)
+  )`;
+
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
       process.exit(0);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
       process.exit(1);
     });
 };
 
 /**
- * Drop Trip Tables
+ * Drop User Table
+ */
+const dropUserTable = () => {
+  const queryText = 'DROP TABLE IF EXISTS users';
+  pool.query(queryText)
+    .then(() => {
+      pool.end();
+      process.exit(0);
+    })
+    .catch(() => {
+      pool.end();
+      process.exit(1);
+    });
+};
+
+/**
+ * Drop Trip Table
  */
 const dropTripTable = () => {
   const queryText = 'DROP TABLE IF EXISTS trips';
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
       process.exit(0);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
+      pool.end();
+      process.exit(1);
+    });
+};
+
+/**
+ * Drop Booking Table
+ */
+const dropBookingTable = () => {
+  const queryText = 'DROP TABLE IF EXISTS bookings';
+  pool.query(queryText)
+    .then(() => {
+      pool.end();
+      process.exit(0);
+    })
+    .catch(() => {
       pool.end();
       process.exit(1);
     });
@@ -120,6 +156,7 @@ const dropTripTable = () => {
 const createAllTables = () => {
   createUserTable();
   createTripTable();
+  createBookingTable();
 };
 
 /**
@@ -128,25 +165,22 @@ const createAllTables = () => {
 const dropAllTables = () => {
   dropUserTable();
   dropTripTable();
+  dropBookingTable();
 };
 
 
 pool.connect()
   .then(() => {
-    console.info('Postgress connected');
   })
-  .catch((err) => {
-    console.log(err);
-    const error = 'Postgress could not connect';
-    console.error(error);
+  .catch(() => {
   });
 
 /**
-     * DB Query
-     * @param {string} text
-     * @param {Array} params
-     * @returns {object} object
-     */
+   * DB Query
+   * @param {string} text
+   * @param {Array} params
+   * @returns {object} object
+   */
 const runQuery = (text, params) => new Promise((resolve, reject) => {
   pool.query(text, params)
     .then((res) => {
@@ -156,7 +190,10 @@ const runQuery = (text, params) => new Promise((resolve, reject) => {
       reject(err);
     });
 });
-
+const runq = (text, params) => {
+  const row = pool.query(text, params);
+  return row;
+};
 const getAll = query => new Promise((resolve, reject) => {
   pool.query(query)
     .then((res) => {
@@ -173,10 +210,13 @@ module.exports = {
   createAllTables,
   dropUserTable,
   dropTripTable,
+  dropBookingTable,
   dropAllTables,
   pool,
   runQuery,
+  runq,
   getAll,
+  createBookingTable,
 };
 
 require('make-runnable');

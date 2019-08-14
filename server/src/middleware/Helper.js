@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import privateKey from '../config';
 
-import { runQuery } from '../../db';
+import { runQuery, runq } from '../../db';
 
 const Helper = {
   /**
@@ -64,18 +64,46 @@ const Helper = {
     return token;
   },
 
-   /**
+  /**
    * Verify a Trip
    * @param {string} origin
    * @returns {string} destination
    */
   verifyTrip(from, to) {
-    console.log('dest: ', from, 'or: ', to)
+    console.log('dest: ', from, 'or: ', to);
     const text = 'SELECT * FROM trips WHERE origin = $1 AND destination = $2';
     const row = runQuery(text, [from, to]);
     if (row[0]) return true;
     return false;
   },
+
+  /**
+   * Verify if a Trip exists
+   * @param {integer} id
+   * @returns {bool}
+   */
+  async tripExist(id) {
+
+    const tripId = parseInt(id, 10);
+    const text = `SELECT * FROM trips WHERE id = ${tripId}`;
+    const row = await runQuery(text);
+
+    if (row.rowCount === 0) return false;
+    if (row.rowCount === 1) return true;
+  },
+
+  /**
+   * Get one Trip
+   * @param {integer} id
+   * @returns
+   */
+  async getTrip(id) {;
+    const text = 'SELECT * FROM trips WHERE id = $1';
+    const row = await runQuery(text, [id]);
+
+    return row.rows[0];
+  },
+
 
 };
 

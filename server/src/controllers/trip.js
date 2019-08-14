@@ -1,6 +1,5 @@
 import { runQuery, getAll } from '../../db';
 import Helper from '../middleware/Helper';
-import trips from '../db/trips';
 
 const Trip = {
   /**
@@ -47,11 +46,11 @@ const Trip = {
       success = true;
       status = 201;
 
-      return res.status(status).send({
+      return res.status(status).json({
         status, success, message: 'Trip successfully created', data: rows[0],
       });
     } catch (error) {
-      return res.status(status).send({
+      return res.status(status).json({
         status, success, error: error.message,
       });
     }
