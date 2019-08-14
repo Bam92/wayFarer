@@ -14,8 +14,6 @@ describe('/GET TRIPS', () => {
       .get(`${baseUrl}/trips`)
       .set('token', validToken)
       .end((err, res) => {
-        console.log("response: ", res.body)
-        console.log("Token ", validToken);
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
         done();
@@ -45,9 +43,6 @@ describe('/POST TRIP', () => {
         expect(res).to.have.status(403);
         expect(res.body.message).to.be.equal('No token provided');
         done();
-      })
-      .catch((err) => {
-        console.log(err.message);
       });
   });
 
@@ -59,9 +54,6 @@ describe('/POST TRIP', () => {
       .then((res) => {
         expect(res).to.have.status(400);
         done();
-      })
-      .catch((err) => {
-        console.log(err.message);
       });
   });
 
@@ -74,9 +66,8 @@ describe('/POST TRIP', () => {
         expect(res).to.have.status(401);
         done();
       })
-      .catch((err) => {
-        console.log(err.message);
-        done()
+      .catch(() => {
+        done();
       });
   });
 
@@ -93,6 +84,43 @@ describe('/POST TRIP', () => {
       .end((error, res) => {
         expect(res).to.have.status(403);
         expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('Cancel a trip', () => {
+  it('it should return error 403 if no token is provided', (done) => {
+    chai.request(app).patch(`${baseUrl}/trips/:id/cancel`)
+      .set('Header', '')
+      .then((res) => {
+        expect(res).to.have.status(403);
+        expect(res.body.message).to.be.equal('No token provided');
+        done();
+      });
+  });
+
+  it('it should throw error if no valid token is provided', (done) => {
+    const inValidToken = 'eyJhiOiJIUzI1NiIsInR5cCI6IkpJ9.eyJpZCI6Im03dmtxaW5tNCIsImlhdCI6MTU2NTMyODI5M30.MV80v4kB25rub0RVV4EE0eEn7pX1QMnwN1pTfZKfMwA';
+
+    chai.request(app).patch(`${baseUrl}/trips/:id/cancel`)
+      .set('token', inValidToken)
+      .then((res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+
+  it('it should not cncel if valid token provided is not for admin', (done) => {
+    const token = 'eyJhbGciOiUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluLnRlc3RAd2F5ZmFyZXIuY2QiLCJpYXQiOjE1NjU3Mjc3MzN9.ngAoJHOefRps0oPT3bs5dfpoXN_hWXFiiHAGqhP5SYs';
+
+    chai.request(app).patch(`${baseUrl}/trips/:id/cancel`)
+      .set('token', token)
+      .then((res) => {
+        expect(res).to.have.status(401);
+        done();
+      })
+      .catch(() => {
         done();
       });
   });

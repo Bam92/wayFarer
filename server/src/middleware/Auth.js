@@ -29,7 +29,7 @@ const Auth = {
       const { rows } = await runQuery(text, [decoded.email]);
 
       if (!rows[0]) {
-        return res.status(401).json({ status: 401, error: 'The token you provided is invalid NOT FOUND', decoded });
+        return res.status(401).json({ status: 401, error: 'The token you provided is invalid' });
       }
 
       req.currentUser = rows[0];

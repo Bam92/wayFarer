@@ -14,7 +14,7 @@ router.get('/trips', Auth.verifyToken, controller.getAll);
 // POST create a new trip by admin only
 router.post('/trips', Auth.verifyToken, Auth.verifyAdmin, controller.create);
 
-/*router.patch('/trips/:id/cancel', verifyToken, verifyAdmin, controller.cancelTrip);*/
+router.patch('/trips/:id/cancel', Auth.verifyToken, Auth.verifyAdmin, controller.cancel);
 router.get('/trips/:id', Auth.verifyToken, controller.getOne);
 
 export default router;
