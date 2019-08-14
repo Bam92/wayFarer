@@ -1,5 +1,6 @@
 import { runQuery, getAll } from '../../db';
 import Helper from '../middleware/Helper';
+import trips from '../db/trips';
 
 const Trip = {
   /**
@@ -40,7 +41,7 @@ const Trip = {
     // verify if the trip does not exist already
 
     // if (Helper.VerifyTrip(origin, destination) === false) return res.status(400).send({ status: 400, success: false, message: 'Trip already exists', });
-    console.log('verify trip', Helper.VerifyTrip(origin, destination));
+    console.log('verify trip', Helper.verifyTrip(origin, destination));
     try {
       const { rows } = await runQuery(text, values);
       success = true;
@@ -51,7 +52,7 @@ const Trip = {
       });
     } catch (error) {
       return res.status(status).send({
-        status, success, message: 'There was something wrong. Try again', error,
+        status, success, error: error.message,
       });
     }
   },
@@ -84,7 +85,7 @@ const Trip = {
   },
 
   /**
-   * Get a list trip
+   * Get detail of a specific trip
    * @param {object} req
    * @param {object} res
    * @returns {object} trip object
@@ -110,6 +111,46 @@ const Trip = {
       return res.status(status).json({
 
         status, success, message: `Here is the detail for trip ${id}`, data: rows[0],
+      });
+    } catch (error) {
+      return res.status(status).send({ status, success, error: error.message });
+    }
+  },
+
+   /**
+   * Cancel a specific trip
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} trip object
+   */
+  async cancel(req, res) {
+    let success = false;
+    let status = 400;
+
+    const { id } = req.params;
+
+    if (isNaN(id)) return res.status(status).json({ status, success, error: 'ID must be a integer' });
+
+    const text = 'SELECT * FROM trips WHERE id = $1';
+
+    try {
+      const { rows } = await runQuery(text, [id]);
+
+      if (!rows[0]) return res.status(status).json({ status, success, error: 'Sorry, the trip you are looking for does not exist' });
+      if (rows[0].status === 'cancelled') return res.status(status).json({ status, success, error: `Sorry, the trip ${id} is already cancelled` });
+
+      const cancelQuery = 'UPDATE trips SET status = \'cancelled\' WHERE id = $1';
+
+      await runQuery(cancelQuery, [id]);
+
+      success = true;
+      status = 201;
+
+      rows[0].status = 'cancelled';
+
+      return res.status(status).json({
+
+        status, success, message: `Trip ${id} was cancelled successfully`, data: rows[0],
       });
     } catch (error) {
       return res.status(status).send({ status, success, error: error.message });
