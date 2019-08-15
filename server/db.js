@@ -1,26 +1,12 @@
 import { Pool } from 'pg';
 import 'dotenv/config';
 
-const {
-  DATABASE_URL, PSQL_USER, PSQL_DB, PSQL_PASS, PSQL_PORT,
-} = process.env;
+const { DATABASE_URL } = process.env;
 
-let config;
 
-if (PSQL_USER) {
-  config = {
-    user: PSQL_USER,
-    database: PSQL_DB,
-    password: PSQL_PASS,
-    port: PSQL_PORT,
-  };
-} else {
-  config = {
-    connctionString: DATABASE_URL,
-  };
-}
-
-const pool = new Pool(config);
+const pool = new Pool({
+  connectionString: DATABASE_URL,
+});
 
 /**
  * Create User Table
@@ -45,7 +31,7 @@ const createUserTable = () => {
     .catch((err) => {
       console.log(err);
       pool.end();
-      process.exit(1);
+      process.exit(0);
     });
 };
 
@@ -74,7 +60,7 @@ const createTripTable = () => {
     .catch((err) => {
       console.log(err);
       pool.end();
-      process.exit(1);
+      process.exit(0);
     });
 };
 
@@ -96,9 +82,10 @@ const createBookingTable = () => {
       pool.end();
       process.exit(0);
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       pool.end();
-      process.exit(1);
+      process.exit(0);
     });
 };
 
@@ -114,7 +101,7 @@ const dropUserTable = () => {
     })
     .catch(() => {
       pool.end();
-      process.exit(1);
+      process.exit(0);
     });
 };
 
@@ -130,7 +117,7 @@ const dropTripTable = () => {
     })
     .catch(() => {
       pool.end();
-      process.exit(1);
+      process.exit(0);
     });
 };
 
