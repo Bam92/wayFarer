@@ -37,13 +37,11 @@ const createUserTable = () => {
   )`;
 
   pool.query(queryText)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       pool.end();
       process.exit(0);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
       process.exit(1);
     });
@@ -71,8 +69,7 @@ const createTripTable = () => {
       pool.end();
       process.exit(0);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       pool.end();
       process.exit(1);
     });

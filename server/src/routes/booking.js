@@ -8,8 +8,8 @@ const router = express.Router();
 
 // / BOOKING ROUTES ///
 
-/*router.get('/bookings', verifyToken, controller.getBookings);
-router.delete('/bookings/:id', verifyToken, controller.delBooking);*/
+/*router.get('/bookings', verifyToken, controller.getBookings);*/
+router.delete('/bookings/:id', Auth.verifyToken, Auth.verifyUser, controller.delete);
 router.post('/bookings', Auth.verifyToken, Auth.verifyUser, controller.book);
 
 export default router;

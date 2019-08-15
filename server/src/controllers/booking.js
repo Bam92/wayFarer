@@ -1,6 +1,5 @@
-import { runQuery, getAll } from '../../db';
+import { runQuery } from '../../db';
 import Helper from '../middleware/Helper';
-import Trip from '../controllers/trip';
 
 const Booking = {
   /**
@@ -56,7 +55,36 @@ const Booking = {
     }
   },
 
+  async delete(req, res) {
+    let success = false;
+    let status = 400;
 
+    const { id } = req.params;
+    const user = req.currentUser.id;
+
+    /* ----- manuel validation -----*/
+    if (!id) return res.status(status).json({ status, success, error: 'Booking ID is required RRRR' });
+    if (isNaN(id)) return res.status(status).json({ status, success, error: 'Booking ID must be an integer' });
+
+    if (!await Helper.bookingExist(id, user)) return res.status(status).json({ status, success, error: 'Sorry, you don\'t have this booking' });
+    /* ----- end validation -------*/
+
+    const text = 'DELETE FROM bookings WHERE id = $1';
+
+    try {
+      await runQuery(text, [id]);
+      success = true;
+      status = 201;
+
+      return res.status(status).json({
+        status, success, message: 'Booking deleted successfully',
+      });
+    } catch (error) {
+      return res.status(status).json({
+        status, success, error: error.message,
+      });
+    }
+  },
 };
 
 export default Booking;
