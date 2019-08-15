@@ -1,13 +1,10 @@
-openapi: 3.0.0
+swagger: 2.0.0
 info:
   title: Way Farer
   description: WayFarer is a public bus transportation booking service.
   version: 0.1.9
-servers:
-  - url: https://way-farer-andela.herokuapp.com/api/v1
-    description: Main (production) server
-  - url: http://localhost:9000/api/v1
-    description: Testing (local) server
+host: "way-farer-andela.herokuapp.com"
+basePath: "/api/v1"
 tags:
 - name: "User authentification"
   description: "Access to protected ressources"
@@ -34,7 +31,7 @@ paths:
     post:
       tags:
       - "User authentification"
-      summary: Creates a user.
+      summary: Creates a user..
       operationId: authSignup
       parameters:
         - in: "body"
@@ -70,14 +67,11 @@ paths:
         - JWT_Token_Admin: []
       tags:
         - "Trip operations"
-      summary: Create a new trip.
+      summary: Create a new trips.
       operationId: createTrip
       parameters:
-        - in: "header"
-          name: "token"
-        - in: "body"
-          name: "body"
-          description: "New trip object created"
+        - name: "token"
+          in: "header"
           required: true
           schema:
             $ref: "#/definitions/TripCreate"

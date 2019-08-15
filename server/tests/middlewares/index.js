@@ -19,4 +19,16 @@ describe('Middleware tests', () => {
     expect(Helper.generateToken).to.be.a('function');
   });
 
+  it('Helper.isValidEmail should exists', () => {
+    expect(Helper.isValidEmail).to.be.a('function');
+  });
+
+  it('Helper.isValidPassword should exists', () => {
+    expect(Helper.isValidPassword).to.be.a('function');
+  });
+
+  it('Helper.isValidString should exists', () => {
+    expect(Helper.isValidEmail).to.be.a('function');
+  });
+
 });

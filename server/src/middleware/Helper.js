@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import privateKey from '../config';
 
-import { runQuery, runq } from '../../db';
+import { runQuery } from '../../db';
 
 const Helper = {
   /**
@@ -39,7 +39,7 @@ const Helper = {
    * @returns {Boolean} True or False
    */
   isValidString(name) {
-    return /^[0-9a-zA-Z]+$/.test(name);
+    return /^[a-zA-Z]+$/.test(name);
   },
 
   /**
@@ -69,12 +69,12 @@ const Helper = {
    * @param {string} origin
    * @returns {string} destination
    */
-  verifyTrip(from, to) {
-    console.log('dest: ', from, 'or: ', to);
-    const text = 'SELECT * FROM trips WHERE origin = $1 AND destination = $2';
-    const row = runQuery(text, [from, to]);
-    if (row[0]) return true;
-    return false;
+  async verifyTrip(licenseNumber) {
+    const text = 'SELECT * FROM trips WHERE bus_license_number = $1';
+    const row = await runQuery(text, [licenseNumber]);
+
+    if (row.rowCount === 0) return false;
+    if (row.rowCount === 1) return true;
   },
 
   /**
@@ -103,8 +103,6 @@ const Helper = {
     try {
       const row = await runQuery(text, value);
 
-      console.log('booking exists: ', row[0]);
-
       if (row.rowCount === 0) return false;
       if (row.rowCount === 1) return true;
     } catch (error) {
@@ -120,7 +118,29 @@ const Helper = {
   async getTrip(id) {
     const text = 'SELECT * FROM trips WHERE id = $1';
     const row = await runQuery(text, [id]);
+    return row.rows;
+  },
+
+  /**
+   * Get one User
+   * @param {integer} id
+   * @returns
+   */
+  async getUser(id) {
+    const text = 'SELECT * FROM users WHERE id = $1';
+    const row = await runQuery(text, [id]);
     return row.rows[0];
+  },
+
+  /**
+   * Get all bookings
+   * @returns bookings
+   */
+  async getBookings() {
+    const text = 'SELECT * FROM bookings RETURNING *';
+    const row = await runQuery(text);
+
+    return row.rows;
   },
 };
 

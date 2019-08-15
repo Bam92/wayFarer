@@ -16,7 +16,7 @@ if (PSQL_USER) {
   };
 } else {
   config = {
-    connctionString: DATABASE_URL,
+    connectionString: DATABASE_URL,
   };
 }
 

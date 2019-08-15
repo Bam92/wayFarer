@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --",
+    "start": "npm run table:create && npm run seed:admin && npm run dev",
     "dev": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --",
     "test": "mocha --timeout 10000 --require babel-core/register ./server/tests/* --exit",
     "coverage": "nyc npm run test",
@@ -47,6 +47,7 @@
     "babel-register": "^6.26.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
