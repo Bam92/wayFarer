@@ -18,9 +18,4 @@ describe('App basic tests', () => {
       done();
     });
   });
-
-  it('bookNow() should add data on booking db', () => {
-    bookingModel.bookNow(1, 'td93sm0jm9');
-    expect(bookingData.length).to.be.equal(4); // because one test delete on booking
-  });
 });

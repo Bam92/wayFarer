@@ -51,12 +51,12 @@ const Auth = {
       success = true;
       status = 201;
 
-      return res.status(status).send({
+      return res.status(status).json({
         status, success, message: 'User signed up successfully', data: rows[0],
       });
     } catch (error) {
-      if (error.routine === '_bt_check_unique') return res.status(status).send({ status, success, error: 'User with this email already exists.' });
-      return res.status(status).send({ status, success, error: error.message });
+      if (error.routine === '_bt_check_unique') return res.status(status).json({ status, success, error: 'User with this email already exists.' });
+      return res.status(status).json({ status, success, error: error.message });
     }
   },
 
