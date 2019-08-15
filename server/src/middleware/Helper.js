@@ -83,7 +83,6 @@ const Helper = {
    * @returns {bool}
    */
   async tripExist(id) {
-
     const tripId = parseInt(id, 10);
     const text = `SELECT * FROM trips WHERE id = ${tripId}`;
     const row = await runQuery(text);
@@ -93,18 +92,36 @@ const Helper = {
   },
 
   /**
+   * Verify if a booking exists for a given user
+   * @param {integer} id
+   * @returns {bool}
+   */
+  async bookingExist(book_id, user_id) {
+    const text = 'SELECT * FROM bookings WHERE id = $1 AND user_id = $2';
+    const value = [book_id, parseInt(user_id)];
+
+    try {
+      const row = await runQuery(text, value);
+
+      console.log('booking exists: ', row[0]);
+
+      if (row.rowCount === 0) return false;
+      if (row.rowCount === 1) return true;
+    } catch (error) {
+      return error.message;
+    }
+  },
+
+  /**
    * Get one Trip
    * @param {integer} id
    * @returns
    */
-  async getTrip(id) {;
+  async getTrip(id) {
     const text = 'SELECT * FROM trips WHERE id = $1';
     const row = await runQuery(text, [id]);
-
     return row.rows[0];
   },
-
-
 };
 
 export default Helper;
