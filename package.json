@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --",
+    "start": "npm run table:create && npm run seed:admin && npm run dev",
     "dev": "node_modules/.bin/nodemon ./server/server.js --exec babel-node --",
     "test": "mocha --timeout 10000 --require babel-core/register ./server/tests/* --exit",
     "coverage": "nyc npm run test",
