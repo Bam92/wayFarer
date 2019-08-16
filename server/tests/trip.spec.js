@@ -136,7 +136,7 @@ describe('/POST TRIP', () => {
         fare: 750,
       })
       .end((error, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(400);
         expect(res.body).to.be.an('object');
         done();
       });
