@@ -3,26 +3,12 @@ import 'dotenv/config';
 
 import Helper from '../middleware/Helper';
 
-const {
-  DATABASE_URL, PSQL_USER, PSQL_DB, PSQL_PASS, PSQL_PORT,
-} = process.env;
+const { DATABASE_URL } = process.env;
 
-let config;
 
-if (PSQL_USER) {
-  config = {
-    user: PSQL_USER,
-    database: PSQL_DB,
-    password: PSQL_PASS,
-    port: PSQL_PORT,
-  };
-} else {
-  config = {
-    connctionString: DATABASE_URL,
-  };
-}
-
-const pool = new Pool(config);
+const pool = new Pool({
+  connectionString: DATABASE_URL,
+});
 
 /**
  * Create Admin User
