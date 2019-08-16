@@ -118,7 +118,7 @@ const Helper = {
   async getTrip(id) {
     const text = 'SELECT * FROM trips WHERE id = $1';
     const row = await runQuery(text, [id]);
-    return row.rows;
+    return row.rows[0];
   },
 
   /**
