@@ -20,8 +20,6 @@ describe('AUTH CONTROLLER', () => {
     await runQuery(delUser, ['sarah.test@gmail.rw']);
     await runQuery(delUser, ['test@wayfarer.cd']);
     await runQuery(createUser, values);
-
-
   });
 
   describe('/POST SIGN UP', () => {
@@ -100,6 +98,23 @@ describe('AUTH CONTROLLER', () => {
         });
     });
 
+    it('should not register a user with numbers in first_name or last_name', (done) => {
+      chai.request(app)
+        .post(signupUrl)
+        .send({
+          email: 'sarah@gmail.com',
+          first_name: 'Sarah',
+          last_name: 'L889aikd', // name must not contain numbers
+          password: 'usr$_18@',
+        })
+        .end((error, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('success').to.be.equal(false);
+          done();
+        });
+    });
+
     it('should not register a user with invalid email', (done) => {
       chai.request(app)
         .post(signupUrl)
@@ -144,7 +159,7 @@ describe('AUTH CONTROLLER', () => {
           password: '@dminTest',
         })
         .end((error, res) => {
-          expect(res).to.have.status(400);
+          expect(res).to.have.status(409);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('success').to.be.equal(false);
           done();
@@ -256,7 +271,7 @@ describe('AUTH CONTROLLER', () => {
           password: 'usr$_18@',
         })
         .end((err, res) => {
-          expect(res).to.have.status(400);
+          expect(res).to.have.status(404);
           expect(res.body).to.be.an('object');
           done();
         });
@@ -270,7 +285,7 @@ describe('AUTH CONTROLLER', () => {
           password: 'usr$_18pp@', //wrong password
         })
         .end((err, res) => {
-          expect(res).to.have.status(400);
+          expect(res).to.have.status(404);
           expect(res.body).to.be.an('object');
           done();
         });

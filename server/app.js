@@ -2,7 +2,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import bodyParser from 'body-parser';
-//import expressValidator from 'express-validator';
+import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
@@ -18,12 +18,14 @@ const app = express();
 
 const swaggerDocument = YAML.load('server/swagger.yaml');
 
+app.use(cors());
+
 // Parse incoming requests data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(morgan('dev'));
-//app.use(expressValidator());
+
 
 const baseUrl = '/api/v1';
 

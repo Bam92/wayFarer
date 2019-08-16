@@ -20,17 +20,21 @@ const Trip = {
     } = req.body;
 
     /* ----- manuel validation -----*/
-    if (!seating_capacity) return res.status(status).send({ status, success, message: 'seating capacity is required' });
+    if (!seating_capacity) return res.status(status).send({ status, success, error: 'seating capacity is required' });
+
+    if (isNaN(seating_capacity)) return res.status(status).send({ status, success, error: 'seating capacity must be a valid number' });
 
     if (!bus_license_number) return res.status(status).json({ status, success, error: 'bus_license_number is required' });
 
-    if (!origin) return res.status(status).send({ status, success, message: 'origin is required' });
+    if (!origin) return res.status(status).send({ status, success, error: 'origin is required' });
 
-    if (!destination) return res.status(status).json({ status, success, message: 'destination is required' });
+    if (!Helper.isValidString(origin)) return res.status(status).send({ status, success, error: 'origin must be a string without numbers' });
 
-    if (!fare) return res.status(status).json({ status, success, message: 'fare is required' });
+    if (!destination) return res.status(status).json({ status, success, error: 'destination is required' });
 
-    if (isNaN(fare)) return res.status(status).json({ status, success, message: 'fare can\'t be a string' });
+    if (!fare) return res.status(status).json({ status, success, error: 'fare is required' });
+
+    if (isNaN(fare)) return res.status(status).json({ status, success, error: 'fare can\'t be a string' });
     /* ----- end validation -------*/
 
 
@@ -39,8 +43,8 @@ const Trip = {
 
     // verify if the trip does not exist already
 
-    // if (Helper.VerifyTrip(origin, destination) === false) return res.status(400).send({ status: 400, success: false, message: 'Trip already exists', });
-    console.log('verify trip', Helper.verifyTrip(origin, destination));
+    if (await Helper.verifyTrip(bus_license_number) === true) return res.status(409).send({ status: 409, success: false, message: 'Trip already exists' });
+
     try {
       const { rows } = await runQuery(text, values);
       success = true;
@@ -102,7 +106,7 @@ const Trip = {
     try {
       const { rows } = await runQuery(text, [id]);
 
-      if (!rows[0]) return res.status(status).json({ status, success, error: 'Sorry, the trip you are looking for does not exist' });
+      if (!rows[0]) return res.status(404).json({ status: 404, success, error: 'Sorry, the trip you are looking for does not exist' });
 
       success = true;
       status = 200;
@@ -116,7 +120,7 @@ const Trip = {
     }
   },
 
-   /**
+  /**
    * Cancel a specific trip
    * @param {object} req
    * @param {object} res
@@ -135,7 +139,7 @@ const Trip = {
     try {
       const { rows } = await runQuery(text, [id]);
 
-      if (!rows[0]) return res.status(status).json({ status, success, error: 'Sorry, the trip you are looking for does not exist' });
+      if (!rows[0]) return res.status(404).json({ status: 404, success, error: 'Sorry, the trip you are looking for does not exist' });
       if (rows[0].status === 'cancelled') return res.status(status).json({ status, success, error: `Sorry, the trip ${id} is already cancelled` });
 
       const cancelQuery = 'UPDATE trips SET status = \'cancelled\' WHERE id = $1';

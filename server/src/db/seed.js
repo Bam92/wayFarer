@@ -18,11 +18,11 @@ const createAdmin = () => {
   const queryText = 'INSERT INTO users(email, first_name, last_name, password, is_admin)  VALUES ($1, $2, $3, $4, $5)';
 
   pool.query(queryText, ['admin.test@wayfarer.cd', 'Admin', 'User', hashedpassword, true])
-    .then((res) => {
+    .then(() => {
       pool.end();
       process.exit(0);
     })
-    .catch((err) => {
+    .catch(() => {
       pool.end();
       process.exit(0);
     });

@@ -1,7 +1,6 @@
 # Way Farer
 [![Build Status](https://travis-ci.com/Bam92/wayFarer.svg?branch=develop)](https://travis-ci.com/Bam92/wayFarer)
 [![Coverage Status](https://coveralls.io/repos/github/Bam92/wayFarer/badge.png?branch=develop)](https://coveralls.io/github/Bam92/wayFarer?branch=develop)
-[![Known Vulnerabilities](https://snyk.io/test/github/Bam92/wayFarer/develop/badge.svg)](https://snyk.io/test/github/Bam92/wayFarer/develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8b1822f148d1ea914930/maintainability)](https://codeclimate.com/github/Bam92/wayFarer/maintainability)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -10,6 +9,7 @@ a quick and easy public bus transportation booking service in [Kisangani](https:
 * UI template: https://bam92.github.io/wayFarer/UI/
 * API: https://way-farer-andela.herokuapp.com/
 * docs: https://way-farer-andela.herokuapp.com/docs/
+* Pivotal Tracker: https://www.pivotaltracker.com/n/projects/2361805
 
 # Get Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -58,5 +58,4 @@ We use [SemVer](http://semver.org/) for versioning.
 Code and documentation copyright 2019 Abel and Andela. Code released under the [MIT License](https://github.com/twbs/bootstrap/blob/master/LICENSE). Docs released under [Creative Commons](https://github.com/twbs/bootstrap/blob/master/docs/LICENSE).
 
 # Acknowledgments
-* [Oesukam](https://www.oesukam.me)
-* [Eric]()
+* All team mates and bootcampers for cycle 9

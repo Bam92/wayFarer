@@ -15,8 +15,8 @@ const Auth = {
     const { token: headerToken = '' } = req.headers;
 
     if (!headerToken) {
-      return res.status(403).json({
-        status: 403,
+      return res.status(401).json({
+        status: 401,
         message: 'No token provided',
       });
     }
@@ -51,8 +51,8 @@ const Auth = {
     const { currentUser } = req;
 
     if (currentUser.is_admin === 'false' || currentUser.is_admin === false) {
-      return res.status(401).json({
-        status: 401,
+      return res.status(403).json({
+        status: 403,
         message: 'Only admin can proceed this action',
       });
     }
@@ -69,9 +69,9 @@ const Auth = {
   async verifyUser(req, res, next) {
     const { currentUser } = req;
     if (currentUser.is_admin === 'true' || currentUser.is_admin === true) {
-      return res.status(401).json({
-        status: 401,
-        message: 'Sorry, but Admin can not book a trip!',
+      return res.status(403).json({
+        status: 403,
+        message: 'Sorry, but this is not an Admin action!',
       });
     }
     next();

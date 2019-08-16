@@ -8,6 +8,7 @@ const pool = new Pool({
   connectionString: DATABASE_URL,
 });
 
+
 /**
  * Create User Table
  */
